@@ -23,9 +23,11 @@ class ComicFinder{
                 if(item.contains(".cbz")){
                     let fileName = item.split(separator: ".")[0]
                     try Zip.unzipFile(URL(fileURLWithPath: documentsPath.path  + "/" + item), destination: tempPath, overwrite: true, password: nil) // Unzip
-                    let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/")
+                    let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
                     
                     var comicPages = [Data]()
+                    
+                    
                     
                     for page in comicPagesPath {
                         if(page.contains(".jpg") || page.contains(".png")){

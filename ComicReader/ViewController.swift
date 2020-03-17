@@ -17,7 +17,9 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewComic))
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewComic))
+        navigationItem.title = "My Comics"
+        
         
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(gesture(_:)))
@@ -45,7 +47,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         cell.ComicName.text = comic.name
         
         
-        cell.ComicImage.image = UIImage(named: comic.path)
+        cell.ComicImage.image = UIImage(data: comic.comicsPages![0])
         
         cell.ComicImage.layer.borderColor = UIColor(white: 0, alpha: 0.3).cgColor
         cell.ComicImage.layer.borderWidth = 2
