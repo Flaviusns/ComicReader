@@ -12,11 +12,13 @@ import Zip
 class ViewController: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     var comics = [Comic]()
+    var selectedComic : Comic? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewComic))
+        
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(gesture(_:)))
         tap.numberOfTapsRequired = 1
@@ -53,13 +55,30 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         collectionView.reloadData()
     }
     
+
+    
     @IBAction func gesture(_ sender: UITapGestureRecognizer) {
         let point = sender.location(in: collectionView)
         if let indexPath = collectionView?.indexPathForItem(at: point) {
-            print(comics[indexPath[1]].name)
-            performSegue(withIdentifier: "ViewComicSegue", sender: self)
+            selectedComic = comics[indexPath[1]]
+            if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
+                nextVC.comic = selectedComic
+                navigationController?.pushViewController(nextVC, animated: true)
+                
+            }
+
         }
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        if let nextVC = segue.destination as? ComicLecture {
+            nextVC.comic = self.selectedComic
+        }
+    }
+    
     
     
     

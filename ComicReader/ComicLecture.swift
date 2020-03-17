@@ -11,11 +11,21 @@ import UIKit
 class ComicLecture: UIViewController {
     
     var comic: Comic? = nil
-
+    
+    @IBOutlet var ComicPage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        print("My comic is: " + (comic?.name ?? "Nulo"))
+        
+        ComicPage.image = UIImage(named: comic?.path ?? "P2")
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        ComicPage.image = UIImage(named: comic?.path ?? "P2")
     }
     
 
