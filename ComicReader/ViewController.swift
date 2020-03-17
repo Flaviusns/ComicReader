@@ -25,6 +25,10 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         tap.numberOfTouchesRequired = 1
         tap.delegate = self
         collectionView?.addGestureRecognizer(tap)
+        
+        let comicsCollection = ComicFinder.getStorageComics()
+        comics = comicsCollection
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -80,7 +84,10 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     }
     
     
-    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
     
     
 

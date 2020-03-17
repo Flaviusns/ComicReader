@@ -20,14 +20,11 @@ class ComicLecture: UIViewController {
         // Do any additional setup after loading the view.
         print("My comic is: " + (comic?.name ?? "Nulo"))
         
-        ComicPage.image = UIImage(named: comic?.path ?? "P2")
+        ComicPage.image = UIImage(named: "P2")
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        ComicPage.image = UIImage(named: comic?.path ?? "P2")
-    }
-    
+   
 
     /*
     // MARK: - Navigation
