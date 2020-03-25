@@ -20,8 +20,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         ComicPage.isUserInteractionEnabled = true
-        // Do any additional setup after loading the view.
-        print("My comic is: " + (comic?.name ?? "Nulo"))
+        
         
         ComicPage.image = UIImage(data: (comic?.comicsPages![0])!)
         
@@ -50,8 +49,6 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         scrollView.maximumZoomScale = 4.0
         scrollView.zoomScale = 1.0
         
-        scrollView.addGestureRecognizer(rigth)
-        scrollView.addGestureRecognizer(left)
         
 
     }
@@ -66,6 +63,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     
     @objc func nextPage(){
+       
         if(currentPage < (comic?.comicsPages!.count)! - 1){
             currentPage+=1
             ComicPage.image = UIImage(data: (comic?.comicsPages![currentPage])!)
@@ -92,6 +90,17 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return ComicPage
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+                
+        if (scrollView.contentOffset.x < -50.0) {
+            lastPage()
+        }else if (scrollView.contentOffset.x > 150.0) {
+            nextPage()
+        }
+        
     }
 
     /*

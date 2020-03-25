@@ -31,6 +31,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         let comicsCollection = ComicFinder.getStorageComics()
         comics = comicsCollection
         
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
