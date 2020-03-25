@@ -46,7 +46,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         scrollView.addGestureRecognizer(tap)
         
         scrollView.delegate = self
-        scrollView.minimumZoomScale = 0.3
+        scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 4.0
         scrollView.zoomScale = 1.0
         
