@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ComicLecture: UIViewController {
+class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     var comic: Comic? = nil
     var currentPage = 0
+    var hideNavBar = false
     
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var ComicPage: UIImageView!
     
     override func viewDidLoad() {
@@ -22,16 +24,44 @@ class ComicLecture: UIViewController {
         print("My comic is: " + (comic?.name ?? "Nulo"))
         
         ComicPage.image = UIImage(data: (comic?.comicsPages![0])!)
+        
+        
+        navigationItem.title = comic?.name ?? "Nulo"
+        
+        prepareScrollView()
+        
+    }
+    
+    func prepareScrollView(){
+        
+        
         let left = UISwipeGestureRecognizer(target : self, action : #selector(nextPage))
         left.direction = .left
         let rigth = UISwipeGestureRecognizer(target : self, action : #selector(lastPage))
         rigth.direction = .right
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(startZooming(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideNavigationItem))
         
-        ComicPage.addGestureRecognizer(left)
-        ComicPage.addGestureRecognizer(rigth)
-        ComicPage.addGestureRecognizer(pinchGesture)
+        scrollView.addGestureRecognizer(rigth)
+        scrollView.addGestureRecognizer(left)
+        scrollView.addGestureRecognizer(tap)
         
+        scrollView.delegate = self
+        scrollView.minimumZoomScale = 0.3
+        scrollView.maximumZoomScale = 4.0
+        scrollView.zoomScale = 1.0
+        
+        scrollView.addGestureRecognizer(rigth)
+        scrollView.addGestureRecognizer(left)
+        
+
+    }
+    
+    func imageHeight() -> CGFloat{
+        return ComicPage.image?.size.height ?? CGFloat(1200)
+    }
+    
+    func imageWidth() -> CGFloat{
+        return ComicPage.image?.size.width ?? CGFloat(1200)
     }
     
     
@@ -49,15 +79,20 @@ class ComicLecture: UIViewController {
         }
     }
     
+    @objc func hideNavigationItem(){
         
-    @objc
-    private func startZooming(_ sender: UIPinchGestureRecognizer) {
-        let scaleResult = sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale)
-        guard let scale = scaleResult, scale.a > 1, scale.d > 1 else { return }
-        sender.view?.transform = scale
-        sender.scale = 1
+        hideNavBar.toggle()
+        navigationController?.setNavigationBarHidden(hideNavBar, animated: true)
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return hideNavBar
+    }
+    
    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return ComicPage
+    }
 
     /*
     // MARK: - Navigation

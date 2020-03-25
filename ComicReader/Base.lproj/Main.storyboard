@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ym6-6K-UKS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ym6-6K-UKS">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -83,22 +83,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="P1" translatesAutoresizingMaskIntoConstraints="NO" id="yrE-XM-rfK">
-                                <rect key="frame" x="20" y="88" width="374" height="774"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqV-mV-SC4">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="P1" translatesAutoresizingMaskIntoConstraints="NO" id="yrE-XM-rfK">
+                                        <rect key="frame" x="0.0" y="-88" width="414" height="896"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <viewLayoutGuide key="contentLayoutGuide" id="HkD-UH-tUN"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="b8R-rL-gga"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="yrE-XM-rfK" firstAttribute="bottom" secondItem="mCi-TV-sdW" secondAttribute="bottom" id="5u0-cr-Eje"/>
-                            <constraint firstItem="yrE-XM-rfK" firstAttribute="top" secondItem="mCi-TV-sdW" secondAttribute="top" id="TJY-Wa-wkn"/>
-                            <constraint firstItem="mCi-TV-sdW" firstAttribute="trailing" secondItem="yrE-XM-rfK" secondAttribute="trailing" constant="20" id="WvQ-0h-B47"/>
-                            <constraint firstItem="yrE-XM-rfK" firstAttribute="leading" secondItem="mCi-TV-sdW" secondAttribute="leading" constant="20" id="zVW-rf-DmV"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mCi-TV-sdW"/>
                     </view>
                     <navigationItem key="navigationItem" id="RuN-TV-gek"/>
                     <connections>
                         <outlet property="ComicPage" destination="yrE-XM-rfK" id="fNC-Xf-2UF"/>
+                        <outlet property="scrollView" destination="qqV-mV-SC4" id="Ssr-yJ-lid"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="11F-v9-0zN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
