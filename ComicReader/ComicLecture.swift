@@ -40,15 +40,28 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         rigth.direction = .right
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideNavigationItem))
         
-        scrollView.addGestureRecognizer(rigth)
-        scrollView.addGestureRecognizer(left)
+        //scrollView.addGestureRecognizer(rigth)
+        //scrollView.addGestureRecognizer(left)
         scrollView.addGestureRecognizer(tap)
         
         scrollView.delegate = self
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 4.0
         scrollView.zoomScale = 1.0
+        let width = self.view.bounds.width
+        let height = self.view.bounds.height
+        
+        scrollView.contentSize = CGSize(width: width * CGFloat((comic?.comicsPages!.count)!), height: height)
+        scrollView.isPagingEnabled = true
 
+    }
+    
+    func loadPages(){
+        for i in 0...(comic?.comicsPages!.count)!{
+            let imageView = UIImageView(frame: self.view.frame)
+            imageView.image = UIImage(data: (comic?.comicsPages![i])!)
+            scrollView.addSubview(imageView)
+        }
     }
     
     func imageHeight() -> CGFloat{
