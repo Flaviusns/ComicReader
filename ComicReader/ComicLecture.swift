@@ -48,8 +48,6 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 4.0
         scrollView.zoomScale = 1.0
-        
-        
 
     }
     
@@ -92,26 +90,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         return ComicPage
     }
     
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-                
-        if (scrollView.contentOffset.x < -50.0) {
-            lastPage()
-        }else if (scrollView.contentOffset.x > 150.0) {
-            nextPage()
-        }
-        
-    }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
