@@ -53,12 +53,14 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         scrollView.contentSize = CGSize(width: width * CGFloat((comic?.comicsPages!.count)!), height: height)
         scrollView.isPagingEnabled = true
+        
+        loadPages()
 
     }
     
     func loadPages(){
         for i in 0...(comic?.comicsPages!.count)!{
-            let imageView = UIImageView(frame: self.view.frame)
+            let imageView = UIImageView(frame: CGRect(x: self.view.bounds.size.width * CGFloat(i), y: self.view.frame.origin.y, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             imageView.image = UIImage(data: (comic?.comicsPages![i])!)
             scrollView.addSubview(imageView)
         }
