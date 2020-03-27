@@ -26,12 +26,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         prepareScrollView()
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        scrollView.pinchGestureRecognizer?.isEnabled = false
-//        scrollView.panGestureRecognizer.isEnabled = false
-    }
-    
+      
     func prepareScrollView(){
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideNavigationItem))
@@ -72,12 +67,10 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
             imageView.contentMode = .scaleToFill
             
             pageScroll.addSubview(imageView)
-            
             scrollView.addSubview(pageScroll)
         }
     }
     
-
     @objc func hideNavigationItem(){
         
         hideNavBar.toggle()
