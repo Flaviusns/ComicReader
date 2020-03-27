@@ -78,24 +78,6 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     }
     
 
-    
-
-    /*
-    @objc func nextPage(){
-       
-        if(currentPage < (comic?.comicsPages!.count)! - 1){
-            currentPage+=1
-            ComicPage.image = UIImage(data: (comic?.comicsPages![currentPage])!)
-        }
-    }
-    
-    @objc func lastPage(){
-        if(currentPage > 0){
-            currentPage-=1
-            ComicPage.image = UIImage(data: (comic?.comicsPages![currentPage])!)
-        }
-    }*/
-    
     @objc func hideNavigationItem(){
         
         hideNavBar.toggle()
