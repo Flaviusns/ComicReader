@@ -27,20 +27,23 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        scrollView.pinchGestureRecognizer?.isEnabled = false
+//        scrollView.panGestureRecognizer.isEnabled = false
+    }
+    
     func prepareScrollView(){
-        
-        
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideNavigationItem))
         
-        //scrollView.addGestureRecognizer(rigth)
-        //scrollView.addGestureRecognizer(left)
+        
         scrollView.addGestureRecognizer(tap)
         
         scrollView.delegate = self
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 4.0
         scrollView.zoomScale = 1.0
+        
                 
         let width = self.view.bounds.width
         let height = self.view.bounds.height
@@ -48,32 +51,34 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         scrollView.contentSize = CGSize(width: totalWidth, height: height)
         scrollView.isPagingEnabled = true
         
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(startZooming(_:)))
+        scrollView.addGestureRecognizer(pinchGesture)
+        
+        
         loadPages()
 
     }
     
     func loadPages(){
-        /*
+        
         for i in 0...((comic?.comicsPages!.count)! - 1){
+            
             let pageScroll = Page(frame: CGRect(x: self.view.bounds.size.width * CGFloat(i), y: self.view.frame.origin.y, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-            let imageView = UIImageView(image: UIImage(data: (comic?.comicsPages![i])!))
-            imageView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
-            //pageScroll.contentSize = CGSize(width: (imageView.image?.size.width)!, height: (imageView.image?.size.height)!)
-            //pageScroll.frame.size.width = self.view.frame.width
-            //pageScroll.frame.size.height = self.view.frame.height
+            
             pageScroll.minimumZoomScale = 1.0
             pageScroll.maximumZoomScale = 4.0
             pageScroll.zoomScale = 1.0
             pageScroll.isUserInteractionEnabled = true
-            imageView.isUserInteractionEnabled = true
+            
+            
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            imageView.image = UIImage(data: (comic?.comicsPages![i])!)
             imageView.contentMode = .scaleToFill
+            
             pageScroll.addSubview(imageView)
+            
             scrollView.addSubview(pageScroll)
-        }*/
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-        imageView.image = UIImage(data: (comic?.comicsPages![0])!)
-        imageView.contentMode = .scaleToFill
-        scrollView.addSubview(imageView)
+        }
     }
     
 
@@ -106,9 +111,12 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        print("I'm here")
+        
         if(self.scrollView.subviews.count > 0){
-                return self.scrollView.subviews[0]
+            print("Im here")
+            let imageView = self.scrollView.subviews[currentPage] as! Page
+            let image = imageView.viewForZooming(in: scrollView)
+            return image
         }
         return nil
     }
@@ -122,6 +130,17 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
                 print(currentPage)
             }
         }
+    }
+    
+    @objc
+    private func startZooming(_ sender: UIPinchGestureRecognizer)-> UIView? {
+        if(self.scrollView.subviews.count > 0){
+            print("Im here")
+            let imageView = self.scrollView.subviews[currentPage] as! Page
+            let image = imageView.viewForZooming(in: scrollView)
+            return image
+        }
+        return nil
     }
 }
 

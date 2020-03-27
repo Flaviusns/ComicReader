@@ -18,8 +18,10 @@ class Page: UIScrollView {
     }
     */
     
+    
+    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        print("I'm here")
+        print("I'm here 2")
         return self.subviews[0]
     }
     
