@@ -51,10 +51,6 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         scrollView.contentSize = CGSize(width: totalWidth, height: height)
         scrollView.isPagingEnabled = true
         
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(startZooming(_:)))
-        scrollView.addGestureRecognizer(pinchGesture)
-        
-        
         loadPages()
 
     }
@@ -63,13 +59,13 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         for i in 0...((comic?.comicsPages!.count)! - 1){
             
-            let pageScroll = Page(frame: CGRect(x: self.view.bounds.size.width * CGFloat(i), y: self.view.frame.origin.y, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            let pageScroll = UIScrollView(frame: CGRect(x: self.view.bounds.size.width * CGFloat(i), y: self.view.frame.origin.y, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             
             pageScroll.minimumZoomScale = 1.0
             pageScroll.maximumZoomScale = 4.0
             pageScroll.zoomScale = 1.0
             pageScroll.isUserInteractionEnabled = true
-            
+            pageScroll.delegate = self
             
             let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             imageView.image = UIImage(data: (comic?.comicsPages![i])!)
@@ -112,11 +108,8 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         
-        if(self.scrollView.subviews.count > 0){
-            print("Im here")
-            let imageView = self.scrollView.subviews[currentPage] as! Page
-            let image = imageView.viewForZooming(in: scrollView)
-            return image
+        if(scrollView.subviews.count > 0){
+            return scrollView.subviews[0]
         }
         return nil
     }
@@ -130,17 +123,6 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
                 print(currentPage)
             }
         }
-    }
-    
-    @objc
-    private func startZooming(_ sender: UIPinchGestureRecognizer)-> UIView? {
-        if(self.scrollView.subviews.count > 0){
-            print("Im here")
-            let imageView = self.scrollView.subviews[currentPage] as! Page
-            let image = imageView.viewForZooming(in: scrollView)
-            return image
-        }
-        return nil
     }
 }
 

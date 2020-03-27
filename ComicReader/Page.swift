@@ -17,13 +17,7 @@ class Page: UIScrollView {
         // Drawing code
     }
     */
-    
-    
-    
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        print("I'm here 2")
-        return self.subviews[0]
-    }
+
     
 
 }
