@@ -18,6 +18,8 @@
 		75627F3824211A830006D08A /* ComicMiniature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75627F3724211A830006D08A /* ComicMiniature.swift */; };
 		75627F3A24211C3F0006D08A /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75627F3924211C3F0006D08A /* Comic.swift */; };
 		75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75627F3B242124FC0006D08A /* ComicLecture.swift */; };
+		75868DF3242F9FC100CCD43D /* ComicCoverInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75868DF2242F9FC100CCD43D /* ComicCoverInfo.swift */; };
+		759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */; };
 		75BF07A6242D2591000FF24D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF07A5242D2591000FF24D /* Page.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +38,8 @@
 		75627F3724211A830006D08A /* ComicMiniature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicMiniature.swift; sourceTree = "<group>"; };
 		75627F3924211C3F0006D08A /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		75627F3B242124FC0006D08A /* ComicLecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicLecture.swift; sourceTree = "<group>"; };
+		75868DF2242F9FC100CCD43D /* ComicCoverInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicCoverInfo.swift; sourceTree = "<group>"; };
+		759B393E242F98F300D73586 /* ComicReaderModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ComicReaderModel.xcdatamodel; sourceTree = "<group>"; };
 		75BF07A5242D2591000FF24D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		D845FF0C777E8DF3A65703EF /* libPods-ComicReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ComicReader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -94,6 +98,8 @@
 				75627F3B242124FC0006D08A /* ComicLecture.swift */,
 				751D9A7924214DDF00BBAC10 /* ComicFinder.swift */,
 				75BF07A5242D2591000FF24D /* Page.swift */,
+				759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */,
+				75868DF2242F9FC100CCD43D /* ComicCoverInfo.swift */,
 			);
 			path = ComicReader;
 			sourceTree = "<group>";
@@ -203,10 +209,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */,
 				75627F3824211A830006D08A /* ComicMiniature.swift in Sources */,
 				75627F28242118D40006D08A /* ViewController.swift in Sources */,
 				75BF07A6242D2591000FF24D /* Page.swift in Sources */,
 				75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */,
+				75868DF3242F9FC100CCD43D /* ComicCoverInfo.swift in Sources */,
 				75627F3A24211C3F0006D08A /* Comic.swift in Sources */,
 				751D9A7A24214DDF00BBAC10 /* ComicFinder.swift in Sources */,
 				75627F24242118D40006D08A /* AppDelegate.swift in Sources */,
@@ -286,7 +294,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -340,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -412,6 +420,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				759B393E242F98F300D73586 /* ComicReaderModel.xcdatamodel */,
+			);
+			currentVersion = 759B393E242F98F300D73586 /* ComicReaderModel.xcdatamodel */;
+			path = ComicReaderModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 75627F18242118D30006D08A /* Project object */;
 }

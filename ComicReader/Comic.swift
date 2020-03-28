@@ -19,4 +19,16 @@ class Comic :NSObject{
         self.path = path
         self.comicsPages = comicsPages
     }
+    
+    init(name:String,path:String,cover:Data){
+        self.name = name
+        self.path = path
+        self.comicsPages = [cover]
+    }
+    
+    init(name:String,path:String,cover:[Data]){
+        self.name = name
+        self.path = path
+        self.comicsPages = cover
+    }
 }

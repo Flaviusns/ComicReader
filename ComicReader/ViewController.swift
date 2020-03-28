@@ -7,28 +7,59 @@
 //
 
 import UIKit
-import Zip
+import CoreData
 
 class ViewController: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     var comics = [Comic]()
     var selectedComic : Comic? = nil
+    lazy var persistentContainer: NSPersistentContainer = {
+        /*
+         The persistent container for the application. This implementation
+         creates and returns a container, having loaded the store for the
+         application to it. This property is optional since there are legitimate
+         error conditions that could cause the creation of the store to fail.
+         */
+        let container = NSPersistentContainer(name: "ComicReaderModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewComic))
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
+        ]
         navigationItem.title = "My Comics"
         
         
-        
+                
         let tap = UITapGestureRecognizer(target: self, action: #selector(gesture(_:)))
         tap.numberOfTapsRequired = 1
         tap.numberOfTouchesRequired = 1
         tap.delegate = self
         collectionView?.addGestureRecognizer(tap)
-        
-        let comicsCollection = ComicFinder.getStorageComics()
+        let comicsFinder = ComicFinder(container: persistentContainer)
+        comicsFinder.updateStorageComics()
+        let comicsCollection = comicsFinder.getSavedComics()
         comics = comicsCollection
         
         
@@ -71,7 +102,6 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
                 nextVC.comic = selectedComic
                 navigationController?.pushViewController(nextVC, animated: true)
-                
             }
 
         }
@@ -92,6 +122,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         return paths[0]
     }
     
+
     
 
 }
