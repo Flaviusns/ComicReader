@@ -24,7 +24,7 @@ class ComicFinder{
         do {
             let fileManager = FileManager.default
             let documentsPath = getDocumentsDirectory()
-            let tempPath = getTempDirectory()
+            let tempPath = ComicFinder.getTempDirectory()
             let savedComics = getNameofSavedComics()
             
             let fileURLs = try fileManager.contentsOfDirectory(atPath: documentsPath.path)
@@ -49,7 +49,7 @@ class ComicFinder{
                         
                         
                         
-                        let newComic = Comic(name: String(fileName),path: cbzPath + "/",cover: comicPages)
+                        let newComic = Comic(name: String(fileName),path: cbzPath,cover: comicPages)
                         
                                                
                         saveNewComic(comicToSave: newComic)
@@ -72,7 +72,6 @@ class ComicFinder{
     }
     
     
-    
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         print(paths[0])
@@ -81,7 +80,7 @@ class ComicFinder{
     
     
     
-    private func getTempDirectory() -> URL{
+    private static func getTempDirectory() -> URL{
         return FileManager.default.temporaryDirectory
     }
     
@@ -109,6 +108,18 @@ class ComicFinder{
         return savedComics
     }
     
+    static func removeTempComic(fileName: String){
+        
+        //Remove the comic from the temp directory
+        do{
+            
+            try FileManager.default.removeItem(at: URL(fileURLWithPath: getTempDirectory().path + "/" + fileName))
+            
+        } catch {
+            print("Unable to delete the temp folder")
+        }
+    }
+    
     private func getNameofSavedComics() -> [String]{
         
         var savedComics = [String]()
@@ -133,6 +144,30 @@ class ComicFinder{
         }
         
         return savedComics
+    }
+    
+    static func getComicPages(path: URL, fileName: String)-> [Data]{
+        
+        var comicPages = [Data]()
+        let fileManager = FileManager.default
+        let tempPath = getTempDirectory()
+        print(path.absoluteString)
+        do {
+            try Zip.unzipFile(path, destination: tempPath, overwrite: true, password: nil) // Unzip
+            let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
+            
+            
+            for page in comicPagesPath {
+                if(page.contains(".jpg") || page.contains(".png")){
+                    comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
+                }
+            }
+        } catch let error{
+            print("Unable to get the comic pages" + error.localizedDescription)
+        }
+        
+        return comicPages
+        
     }
     
     private func saveNewComic(comicToSave: Comic){

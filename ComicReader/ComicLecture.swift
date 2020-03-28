@@ -23,10 +23,16 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         navigationItem.title = comic?.name ?? "Nulo"
         
+        comic?.comicsPages = ComicFinder.getComicPages(path: URL(fileURLWithPath: comic!.path), fileName: comic!.name)
+        
         prepareScrollView()
         
     }
-      
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        ComicFinder.removeTempComic(fileName: comic!.name)
+    }
+    
     func prepareScrollView(){
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideNavigationItem))
