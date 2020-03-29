@@ -23,7 +23,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         navigationItem.title = comic?.name ?? "Nulo"
         
-        comic?.comicsPages = ComicFinder.getComicPages(path: URL(fileURLWithPath: comic!.path), fileName: comic!.name)
+        comic?.comicsPages = ComicFinder.getComicPages(fileName: comic!.name)
         
         prepareScrollView()
         

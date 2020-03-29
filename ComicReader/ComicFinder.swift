@@ -23,7 +23,7 @@ class ComicFinder{
         
         do {
             let fileManager = FileManager.default
-            let documentsPath = getDocumentsDirectory()
+            let documentsPath = ComicFinder.getDocumentsDirectory()
             let tempPath = ComicFinder.getTempDirectory()
             let savedComics = getNameofSavedComics()
             
@@ -72,9 +72,8 @@ class ComicFinder{
     }
     
     
-    private func getDocumentsDirectory() -> URL {
+    private static func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        print(paths[0])
         return paths[0]
     } 
     
@@ -146,16 +145,17 @@ class ComicFinder{
         return savedComics
     }
     
-    static func getComicPages(path: URL, fileName: String)-> [Data]{
+    static func getComicPages(fileName: String)-> [Data]{
         
         var comicPages = [Data]()
         let fileManager = FileManager.default
         let tempPath = getTempDirectory()
-        print(path.absoluteString)
+        let docPath = getDocumentsDirectory()
+        let completePath = docPath.path + "/" + fileName + ".cbz"
+        
         do {
-            try Zip.unzipFile(path, destination: tempPath, overwrite: true, password: nil) // Unzip
+            try Zip.unzipFile(URL(fileURLWithPath: completePath), destination: tempPath, overwrite: true, password: nil) // Unzip
             let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
-            
             
             for page in comicPagesPath {
                 if(page.contains(".jpg") || page.contains(".png")){
