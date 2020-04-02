@@ -24,7 +24,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         navigationItem.title = comic?.name ?? "Nulo"
         
         comic?.comicsPages = ComicFinder.getComicPages(fileName: comic!.name)
-        
+
         prepareScrollView()
         
     }
@@ -52,15 +52,22 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         scrollView.contentSize = CGSize(width: totalWidth, height: height)
         scrollView.isPagingEnabled = true
         
-        loadPages()
+        loadPages(width: self.view.bounds.size.width, heigth: self.view.bounds.size.height)
 
     }
     
-    func loadPages(){
+    func loadPages(width: CGFloat,heigth: CGFloat){
+        
+        for view in scrollView.subviews{
+            for subView in view.subviews{
+                subView.removeFromSuperview()
+            }
+            view.removeFromSuperview()
+        }
         
         for i in 0...((comic?.comicsPages!.count)! - 1){
             
-            let pageScroll = UIScrollView(frame: CGRect(x: self.view.bounds.size.width * CGFloat(i), y: self.view.frame.origin.y, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            let pageScroll = UIScrollView(frame: CGRect(x: width * CGFloat(i), y: self.view.frame.origin.y, width: width, height: heigth))
             
             pageScroll.minimumZoomScale = 1.0
             pageScroll.maximumZoomScale = 4.0
@@ -68,9 +75,9 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
             pageScroll.isUserInteractionEnabled = true
             pageScroll.delegate = self
             
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: heigth))
             imageView.image = UIImage(data: (comic?.comicsPages![i])!)
-            imageView.contentMode = .scaleToFill
+            imageView.contentMode = .scaleAspectFit
             
             pageScroll.addSubview(imageView)
             scrollView.addSubview(pageScroll)
@@ -93,6 +100,15 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
             return scrollView.subviews[0]
         }
         return nil
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.orientation.isLandscape {
+            loadPages(width: size.width, heigth: size.height)
+        } else {
+            loadPages(width: size.width, heigth: size.height)
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
