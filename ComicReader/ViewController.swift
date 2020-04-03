@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class ViewController: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     
     var comics = [Comic]()
     var selectedComic : Comic? = nil
@@ -24,6 +24,11 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         })
         return container
     }()
+    
+    var filtered:[Comic] = []
+    var searchActive : Bool = false
+    let searchController = UISearchController(searchResultsController: nil)
+
     
     
     override func viewDidLoad() {
@@ -52,10 +57,30 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             self.comics = comicsFinder.getSavedComics()
         }
         
+        self.searchController.searchResultsUpdater = self
+        self.searchController.delegate = self
+        self.searchController.searchBar.delegate = self
+        
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search for comics"
+        searchController.searchBar.sizeToFit()
+        
+        searchController.searchBar.becomeFirstResponder()
+        
+        self.navigationItem.titleView = searchController.searchBar
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return comics.count
+        
+        if searchActive {
+            return filtered.count
+        }
+        else
+        {
+            return comics.count
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -109,6 +134,46 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
+    }
+    
+    //MARK: Search Bar
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func updateSearchResults(for searchController: UISearchController)
+    {
+        let searchString = searchController.searchBar.text
+        
+        filtered = comics.filter({ (item) -> Bool in
+            let comicName: NSString = item.name as NSString
+            
+            return (comicName.range(of: searchString!, options: NSString.CompareOptions.caseInsensitive).location) != NSNotFound
+        })
+        
+        collectionView.reloadData()
+        
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true
+        collectionView.reloadData()
+    }
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+        collectionView.reloadData()
+    }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        if !searchActive {
+            searchActive = true
+            collectionView.reloadData()
+        }
+        
+        searchController.searchBar.resignFirstResponder()
     }
     
 
