@@ -14,3 +14,5 @@ class ComicMiniature: UICollectionViewCell {
     @IBOutlet var ComicName: UILabel!
     
 }
+
+

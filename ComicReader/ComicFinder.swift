@@ -34,7 +34,7 @@ class ComicFinder{
                     
                     if !savedComics.contains(String(fileName)){
                         let cbzPath = documentsPath.path  + "/" + item
-                        
+                        print(fileManager.fileExists(atPath: cbzPath))                                                                
                         try Zip.unzipFile(URL(fileURLWithPath: cbzPath), destination: tempPath, overwrite: true, password: nil) // Unzip
                         let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
                         
@@ -46,8 +46,6 @@ class ComicFinder{
                                 break
                             }
                         }
-                        
-                        
                         
                         let newComic = Comic(name: String(fileName),path: cbzPath,cover: comicPages)
                         

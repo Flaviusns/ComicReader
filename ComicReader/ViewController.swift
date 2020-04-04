@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+
 class ViewController: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     
     var comics = [Comic]()
@@ -25,9 +26,12 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         return container
     }()
     
+    var comicsFinder :ComicFinder!
+    
     var filtered:[Comic] = []
     var searchActive : Bool = false
     let searchController = UISearchController(searchResultsController: nil)
+    var refresher:UIRefreshControl!
 
     
     
@@ -47,31 +51,41 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         tap.numberOfTouchesRequired = 1
         tap.delegate = self
         collectionView?.addGestureRecognizer(tap)
-        let comicsFinder = ComicFinder(container: persistentContainer)
+        comicsFinder = ComicFinder(container: persistentContainer)
         
         comics = comicsFinder.getSavedComics()
         
         
         DispatchQueue.global(qos: .background).async {
-            comicsFinder.updateStorageComics()
-            self.comics = comicsFinder.getSavedComics()
+            self.comicsFinder.updateStorageComics()
+            self.comics = self.comicsFinder.getSavedComics()
         }
+        
+        
         
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
         self.searchController.searchBar.delegate = self
         
-        self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.hidesNavigationBarDuringPresentation = true
+        self.searchController.obscuresBackgroundDuringPresentation = true
         searchController.searchBar.placeholder = "Search for comics"
         searchController.searchBar.sizeToFit()
         
         searchController.searchBar.becomeFirstResponder()
         
-        self.navigationItem.titleView = searchController.searchBar
+        self.navigationItem.searchController = searchController
+        
+        refresher = UIRefreshControl()
+        collectionView!.alwaysBounceVertical = true
+        
+        refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        collectionView.refreshControl = refresher
+        collectionView.addSubview(refresher)
+        
         
     }
-    
+       
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if searchActive {
@@ -98,7 +112,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         cell.ComicImage.layer.borderColor = UIColor(white: 0, alpha: 0.3).cgColor
         cell.ComicImage.layer.borderWidth = 2
         cell.ComicImage.layer.cornerRadius = 3
-                
+        
+
         return cell
     }
     
@@ -108,6 +123,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     }
     
 
+    
+    
     
     @IBAction func gesture(_ sender: UITapGestureRecognizer) {
         let point = sender.location(in: collectionView)
@@ -176,9 +193,12 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         searchController.searchBar.resignFirstResponder()
     }
     
-
-    
-
+    @objc func loadData() {
+        self.comicsFinder.updateStorageComics()
+        self.comics = self.comicsFinder.getSavedComics()
+        collectionView.reloadData()
+        collectionView.refreshControl?.endRefreshing()
+    }
 }
 extension ViewController: UIGestureRecognizerDelegate {
     
@@ -190,6 +210,43 @@ extension ViewController: UIGestureRecognizerDelegate {
         }
         
         return false
+    }
+    
+    @available(iOS 13.0, *)
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
+            
+            // "puppers" is the array backing the collection view
+            return self.makeContextMenu(comic: self.comics[indexPath.row])
+        })
+    }
+    /*
+    @available(iOS 13.0, *)
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
+            
+            return self.makeContextMenu()
+        })
+    }*/
+    @available(iOS 13.0, *)
+    func makeContextMenu(comic: Comic) -> UIMenu {
+        
+        // Create a UIAction for sharing
+        let share = UIAction(title: "Share Comic", image: UIImage(systemName: "square.and.arrow.up")) { action in
+            // Show system share sheet
+        }
+        
+        let deleted = UIAction(title: "Delete Comic", image: UIImage(systemName: "trash")) { action in
+            // Show system share sheet
+            let index = self.comics.firstIndex(of: comic)!
+            self.comics.remove(at: index)
+            self.collectionView.reloadData()
+        }
+        
+        // Create and return a UIMenu with the share action
+        return UIMenu(title: "Main Menu", children: [share,deleted])
     }
 }
 
