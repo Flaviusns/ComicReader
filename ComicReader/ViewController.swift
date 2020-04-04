@@ -221,28 +221,26 @@ extension ViewController: UIGestureRecognizerDelegate {
             return self.makeContextMenu(comic: self.comics[indexPath.row])
         })
     }
-    /*
-    @available(iOS 13.0, *)
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
-            
-            return self.makeContextMenu()
-        })
-    }*/
+
     @available(iOS 13.0, *)
     func makeContextMenu(comic: Comic) -> UIMenu {
         
         // Create a UIAction for sharing
-        let share = UIAction(title: "Share Comic", image: UIImage(systemName: "square.and.arrow.up")) { action in
+        let share = UIAction(title: "Add to favorites", image: UIImage(systemName: "heart")) { action in
             // Show system share sheet
         }
         
         let deleted = UIAction(title: "Delete Comic", image: UIImage(systemName: "trash")) { action in
             // Show system share sheet
-            let index = self.comics.firstIndex(of: comic)!
-            self.comics.remove(at: index)
-            self.collectionView.reloadData()
+            if(!self.comicsFinder.removeComic(comicToRemove: comic)){
+                let alert = UIAlertController(title: "Unable to delete the comic", message: "The app cannot delete the comic.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }else{
+                let index = self.comics.firstIndex(of: comic)!
+                self.comics.remove(at: index)
+                self.collectionView.reloadData()
+            }
         }
         
         // Create and return a UIMenu with the share action

@@ -165,7 +165,19 @@ class ComicFinder{
         }
         
         return comicPages
-        
+    }
+    
+    func removeComic(comicToRemove: Comic) -> Bool{
+        let docPath = ComicFinder.getDocumentsDirectory()
+        let comicFile = comicToRemove.name + ".cbz"
+        do {
+            removeComicFromDataBase(comicToRemove: comicToRemove)
+            try FileManager.default.removeItem(atPath: docPath.path + "/" + comicFile)
+            return true
+        } catch let error{
+            print("Unable to get the comic pages" + error.localizedDescription)
+            return false
+        }
     }
     
     private func saveNewComic(comicToSave: Comic){
@@ -181,11 +193,34 @@ class ComicFinder{
         do {
             try managedContext.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
+    }
+    
+    private func removeComicFromDataBase(comicToRemove: Comic){
+        let managedContext = container.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicEntity")
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "name = %@", comicToRemove.name)
+        
+        do {
+            let result = try managedContext.fetch(request)
+            if result.isEmpty{
+                print("Empty Result")
+            }
+            else{
+                guard let entity = result[0] as? NSManagedObject else{
+                    fatalError("Unresolved error")
+                }
+                managedContext.delete(entity)
+                try managedContext.save()
+            }
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+
     }
     
     
