@@ -14,6 +14,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     
     var comics = [Comic]()
     var selectedComic : Comic? = nil
+    var selectedComics = [String]()
     lazy var persistentContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "ComicReaderModel")
@@ -32,7 +33,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     var searchActive : Bool = false
     let searchController = UISearchController(searchResultsController: nil)
     var refresher:UIRefreshControl!
-
+    var editMode = false
     
     
     override func viewDidLoad() {
@@ -83,11 +84,14 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         collectionView.refreshControl = refresher
         collectionView.addSubview(refresher)
         
+        let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(entryEditMode))
+        navigationItem.leftBarButtonItem = edit
         
     }
+    
+    
        
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         if searchActive {
             return filtered.count
         }
@@ -113,6 +117,22 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         cell.ComicImage.layer.borderWidth = 2
         cell.ComicImage.layer.cornerRadius = 3
         
+        let button = UIButton(frame: CGRect(x: 0, y: 10, width: 50, height: 20))
+        
+        if #available(iOS 13.0, *) {
+            let configuration = UIImage.SymbolConfiguration(weight: .bold)
+            button.setImage(UIImage(systemName: "circle",withConfiguration: configuration), for: .normal)
+            
+            
+        } else {
+            // Fallback on earlier versions
+             
+        }
+        
+        button.addTarget(self, action: #selector(addToSelection), for: .touchUpInside)
+        
+        
+        cell.addSubview(button)
 
         return cell
     }
@@ -122,7 +142,56 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         collectionView.reloadData()
     }
     
-
+    @objc func addToSelection(_ sender: UIButton){
+        print("Tapped")
+        
+        guard let comic = sender.superview as? ComicMiniature else{
+            fatalError("Unable to convert the comic")
+        }
+        if #available(iOS 13.0, *) {
+            if(selectedComics.contains(comic.ComicName.text!)){
+                let configuration = UIImage.SymbolConfiguration(weight: .bold)
+                sender.setImage(UIImage(systemName: "circle",withConfiguration: configuration), for: .normal)
+                let index = selectedComics.firstIndex(of: comic.ComicName.text!)!
+                selectedComics.remove(at: index)
+            }else{
+                let configuration = UIImage.SymbolConfiguration(weight: .bold)
+                selectedComics.append(comic.ComicName.text!)
+                sender.setImage(UIImage(systemName: "circle.fill",withConfiguration: configuration), for: .normal)
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    @objc func entryEditMode(){
+        if(!editMode){
+            let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(entryEditMode))
+            let trash = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeSelection))
+            navigationItem.rightBarButtonItem = done
+            navigationItem.leftBarButtonItem = trash
+        }else{
+            let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(entryEditMode))
+            navigationItem.leftBarButtonItem = edit
+            navigationItem.setRightBarButtonItems(nil, animated: true)
+        }
+        editMode.toggle()
+    }
+    
+    @objc func removeSelection(){
+        for comicName in selectedComics {
+            if(comicsFinder.removeComic(comicToRemoveName: comicName)){
+                for comic in comics{
+                    if comic.name == comicName{
+                        let index = self.comics.firstIndex(of: comic)!
+                        self.comics.remove(at: index)
+                    }
+                }
+            }
+        }
+        
+        self.collectionView.reloadData()
+    }
     
     
     
@@ -244,7 +313,7 @@ extension ViewController: UIGestureRecognizerDelegate {
         }
         
         // Create and return a UIMenu with the share action
-        return UIMenu(title: "Main Menu", children: [share,deleted])
+        return UIMenu(title: comic.name, children: [share,deleted])
     }
 }
 

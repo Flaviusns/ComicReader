@@ -70,7 +70,7 @@ class ComicFinder{
     }
     
     
-    private static func getDocumentsDirectory() -> URL {
+    public static func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     } 
@@ -180,6 +180,19 @@ class ComicFinder{
         }
     }
     
+    func removeComic(comicToRemoveName: String) -> Bool{
+        let docPath = ComicFinder.getDocumentsDirectory()
+        let comicFile = comicToRemoveName + ".cbz"
+        do {
+            removeComicFromDataBase(comicToRemoveName: comicToRemoveName)
+            try FileManager.default.removeItem(atPath: docPath.path + "/" + comicFile)
+            return true
+        } catch let error{
+            print("Unable to get the comic pages" + error.localizedDescription)
+            return false
+        }
+    }
+    
     private func saveNewComic(comicToSave: Comic){
         
         let managedContext = container.viewContext
@@ -221,6 +234,31 @@ class ComicFinder{
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
 
+    }
+    
+    private func removeComicFromDataBase(comicToRemoveName: String){
+        let managedContext = container.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicEntity")
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "name = %@", comicToRemoveName)
+        
+        do {
+            let result = try managedContext.fetch(request)
+            if result.isEmpty{
+                print("Empty Result")
+            }
+            else{
+                guard let entity = result[0] as? NSManagedObject else{
+                    fatalError("Unresolved error")
+                }
+                managedContext.delete(entity)
+                try managedContext.save()
+            }
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        
     }
     
     

@@ -47,6 +47,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        
+        for item in URLContexts{
+            let name = item.url.lastPathComponent
+            let documentsPath = ComicFinder.getDocumentsDirectory()
+            let pathToSave = documentsPath.appendingPathComponent(name)
+            
+            if !FileManager.default.fileExists(atPath: pathToSave.path){
+                do {
+                    //try data?.write(to: documentsPath)
+                    try FileManager.default.moveItem(at: item.url, to: pathToSave)
+                    if !FileManager.default.fileExists(atPath: pathToSave.path){
+                        print("File not saved")
+                    }
+                } catch {
+                    print("Unable to save the comic: " + error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    
 
 
 }
