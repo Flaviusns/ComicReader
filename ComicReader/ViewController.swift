@@ -184,24 +184,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 }
             }
         }
-        
         self.collectionView.reloadData()
     }
-    
-    
-    
-    @IBAction func gesture(_ sender: UITapGestureRecognizer) {
-        let point = sender.location(in: collectionView)
-        if let indexPath = collectionView?.indexPathForItem(at: point) {
-            selectedComic = comics[indexPath[1]]
-            if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
-                nextVC.comic = selectedComic
-                navigationController?.pushViewController(nextVC, animated: true)
-            }
-
-        }
-    }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
@@ -272,15 +256,26 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 nextVC.comic = selectedComic
                 navigationController?.pushViewController(nextVC, animated: true)
             }
-        default:
-            print("Default")
+        case .edit:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComicMin", for: indexPath) as? ComicMiniature else {
+                fatalError("Unable to dequeue PersonCell.")
+            }
+            cell.isSelected = true
+            selectedComics.append(cell.ComicName.text!)
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         switch viewM {
-        case .view:
-            print("No Select")
+        case .edit:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComicMin", for: indexPath) as? ComicMiniature else {
+                fatalError("Unable to dequeue PersonCell.")
+            }
+            cell.isSelected = false
+            if selectedComics.contains(cell.ComicName.text!){
+                let pos = selectedComics.firstIndex(of: cell.ComicName.text!)!
+                selectedComics.remove(at: pos)
+            }
         default:
             print("Default")
         }
