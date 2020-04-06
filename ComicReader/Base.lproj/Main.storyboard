@@ -44,21 +44,43 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8e1-e8-JYX">
+                                            <rect key="frame" x="19" y="10" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="DKM-Ej-xoh"/>
+                                                <constraint firstAttribute="height" constant="25" id="KQI-vq-cut"/>
+                                            </constraints>
+                                            <state key="normal" image="Unselected"/>
+                                        </button>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHH-Hn-fsb">
+                                            <rect key="frame" x="109" y="10" width="28" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="28" id="CJs-gD-VY9"/>
+                                                <constraint firstAttribute="height" constant="25" id="jgt-n5-kgF"/>
+                                            </constraints>
+                                            <state key="normal" image="FavUnselected"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="B4f-sx-vag" secondAttribute="bottom" constant="4" id="6qB-gy-2qW"/>
+                                        <constraint firstItem="8e1-e8-JYX" firstAttribute="top" secondItem="Dhz-Qe-yoM" secondAttribute="top" constant="10" id="AxL-Cn-55u"/>
                                         <constraint firstItem="B4f-sx-vag" firstAttribute="leading" secondItem="Dhz-Qe-yoM" secondAttribute="leading" constant="14" id="EeU-vZ-1JQ"/>
                                         <constraint firstItem="B4f-sx-vag" firstAttribute="top" secondItem="5Fx-45-pGJ" secondAttribute="bottom" constant="8" id="UkM-8c-Ji2"/>
+                                        <constraint firstItem="8e1-e8-JYX" firstAttribute="leading" secondItem="Dhz-Qe-yoM" secondAttribute="leading" constant="19" id="WlY-Se-xXI"/>
                                         <constraint firstAttribute="trailing" secondItem="B4f-sx-vag" secondAttribute="trailing" constant="14" id="Yd1-cY-V4h"/>
                                         <constraint firstAttribute="trailing" secondItem="5Fx-45-pGJ" secondAttribute="trailing" constant="14" id="ahm-jO-clG"/>
                                         <constraint firstItem="5Fx-45-pGJ" firstAttribute="leading" secondItem="Dhz-Qe-yoM" secondAttribute="leading" constant="14" id="djy-Cy-OUm"/>
+                                        <constraint firstAttribute="trailing" secondItem="AHH-Hn-fsb" secondAttribute="trailing" constant="16" id="ebj-7W-Hwn"/>
                                         <constraint firstItem="5Fx-45-pGJ" firstAttribute="top" secondItem="Dhz-Qe-yoM" secondAttribute="top" constant="8" id="pqM-dI-Mbs"/>
+                                        <constraint firstItem="AHH-Hn-fsb" firstAttribute="top" secondItem="Dhz-Qe-yoM" secondAttribute="top" constant="10" id="yKz-3R-1lp"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="153" height="204"/>
                                 <connections>
                                     <outlet property="ComicImage" destination="5Fx-45-pGJ" id="uVU-yr-lbc"/>
                                     <outlet property="ComicName" destination="B4f-sx-vag" id="jJl-0P-WMg"/>
+                                    <outlet property="FavButton" destination="AHH-Hn-fsb" id="Rrp-bJ-KKU"/>
+                                    <outlet property="SelectedButton" destination="8e1-e8-JYX" id="vYT-tt-Lao"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -122,4 +144,8 @@
             <point key="canvasLocation" x="1734.7826086956522" y="117.85714285714285"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="FavUnselected" width="50" height="45"/>
+        <image name="Unselected" width="51" height="51"/>
+    </resources>
 </document>

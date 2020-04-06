@@ -26,7 +26,7 @@ class ComicFinder{
             let documentsPath = ComicFinder.getDocumentsDirectory()
             let tempPath = ComicFinder.getTempDirectory()
             let savedComics = getNameofSavedComics()
-            
+            print(documentsPath.path)
             let fileURLs = try fileManager.contentsOfDirectory(atPath: documentsPath.path)
             for item in fileURLs {
                 if(item.contains(".cbz")){

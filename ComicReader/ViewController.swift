@@ -33,25 +33,44 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     var searchActive : Bool = false
     let searchController = UISearchController(searchResultsController: nil)
     var refresher:UIRefreshControl!
-    var editMode = false
+    lazy var done: UIBarButtonItem = {
+        UIBarButtonItem.init(barButtonSystemItem: .done, target: self, action: #selector(entryEditMode))
+    }()
+    lazy var trash : UIBarButtonItem = {
+        UIBarButtonItem.init(barButtonSystemItem: .trash, target: self, action: #selector(removeSelection))
+    }()
+    lazy var edit : UIBarButtonItem = {
+        UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(entryEditMode))
+    }()
     
+    enum viewMode {
+        case view
+        case edit
+    }
+    
+    var viewM: viewMode = .view {
+        didSet{
+            switch viewM {
+            case .view:
+                navigationItem.rightBarButtonItem = nil
+                navigationItem.leftBarButtonItem = edit
+                collectionView.allowsMultipleSelection = false
+            case .edit:
+                navigationItem.rightBarButtonItem = done
+                navigationItem.leftBarButtonItem = trash
+                collectionView.allowsMultipleSelection = true
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        //navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewComic))
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
         navigationItem.title = "My Comics"
         
-        
-                
-        let tap = UITapGestureRecognizer(target: self, action: #selector(gesture(_:)))
-        tap.numberOfTapsRequired = 1
-        tap.numberOfTouchesRequired = 1
-        tap.delegate = self
-        collectionView?.addGestureRecognizer(tap)
+        collectionView.allowsSelection = true
         comicsFinder = ComicFinder(container: persistentContainer)
         
         comics = comicsFinder.getSavedComics()
@@ -84,9 +103,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         collectionView.refreshControl = refresher
         collectionView.addSubview(refresher)
         
-        let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(entryEditMode))
-        navigationItem.leftBarButtonItem = edit
-        
+        viewM = .view
+    
     }
     
     
@@ -117,33 +135,18 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         cell.ComicImage.layer.borderWidth = 2
         cell.ComicImage.layer.cornerRadius = 3
         
-        let button = UIButton(frame: CGRect(x: 0, y: 10, width: 50, height: 20))
-        
-        if #available(iOS 13.0, *) {
-            let configuration = UIImage.SymbolConfiguration(weight: .bold)
-            button.setImage(UIImage(systemName: "circle",withConfiguration: configuration), for: .normal)
-            
-            
-        } else {
-            // Fallback on earlier versions
-             
+        if viewM == .edit{
+            cell.FavButton.isHidden = false
+            cell.SelectedButton.isHidden = false
+        }else{
+            cell.FavButton.isHidden = true
+            cell.SelectedButton.isHidden = true
         }
         
-        button.addTarget(self, action: #selector(addToSelection), for: .touchUpInside)
-        
-        
-        cell.addSubview(button)
-
         return cell
     }
-    
-    @objc func addNewComic(){
-        comics.append(Comic(name: "Spiderman", path: "P1", comicsPages: nil))
-        collectionView.reloadData()
-    }
-    
+        
     @objc func addToSelection(_ sender: UIButton){
-        print("Tapped")
         
         guard let comic = sender.superview as? ComicMiniature else{
             fatalError("Unable to convert the comic")
@@ -165,18 +168,10 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     }
     
     @objc func entryEditMode(){
-        if(!editMode){
-            let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(entryEditMode))
-            let trash = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeSelection))
-            navigationItem.rightBarButtonItem = done
-            navigationItem.leftBarButtonItem = trash
-        }else{
-            let edit = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(entryEditMode))
-            navigationItem.leftBarButtonItem = edit
-            navigationItem.setRightBarButtonItems(nil, animated: true)
-        }
-        editMode.toggle()
+        viewM = viewM == .view ? .edit : .view
+        collectionView.reloadData()
     }
+    
     
     @objc func removeSelection(){
         for comicName in selectedComics {
@@ -268,6 +263,29 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         collectionView.reloadData()
         collectionView.refreshControl?.endRefreshing()
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch viewM {
+        case .view:
+            selectedComic = comics[indexPath[1]]
+            if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
+                nextVC.comic = selectedComic
+                navigationController?.pushViewController(nextVC, animated: true)
+            }
+        default:
+            print("Default")
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        switch viewM {
+        case .view:
+            print("No Select")
+        default:
+            print("Default")
+        }
+    }
+    
 }
 extension ViewController: UIGestureRecognizerDelegate {
     
