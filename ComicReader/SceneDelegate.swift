@@ -62,6 +62,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     if !FileManager.default.fileExists(atPath: pathToSave.path){
                         print("File not saved")
                     }
+                    
+                    
+                    
                 } catch {
                     print("Unable to save the comic: " + error.localizedDescription)
                 }

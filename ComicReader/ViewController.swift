@@ -180,6 +180,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                     if comic.name == comicName{
                         let index = self.comics.firstIndex(of: comic)!
                         self.comics.remove(at: index)
+                        break
                     }
                 }
             }
@@ -257,11 +258,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 navigationController?.pushViewController(nextVC, animated: true)
             }
         case .edit:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComicMin", for: indexPath) as? ComicMiniature else {
-                fatalError("Unable to dequeue PersonCell.")
-            }
-            cell.isSelected = true
-            selectedComics.append(cell.ComicName.text!)
+            let name = comics[indexPath[0]].name
+            selectedComics.append(name)
         }
     }
     
@@ -272,8 +270,9 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 fatalError("Unable to dequeue PersonCell.")
             }
             cell.isSelected = false
-            if selectedComics.contains(cell.ComicName.text!){
-                let pos = selectedComics.firstIndex(of: cell.ComicName.text!)!
+            let name = comics[indexPath[0]].name
+            if selectedComics.contains(name){
+                let pos = selectedComics.firstIndex(of: name)!
                 selectedComics.remove(at: pos)
             }
         default:
@@ -281,18 +280,14 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         }
     }
     
-}
-extension ViewController: UIGestureRecognizerDelegate {
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        let point = touch.location(in: collectionView)
-        if let indexPath = collectionView?.indexPathForItem(at: point),
-            let cell = collectionView?.cellForItem(at: indexPath) {
-            return touch.location(in: cell).y > 50
-        }
-        
-        return false
+    func updateCollectionCells(){
+        self.comicsFinder.updateStorageComics()
+        self.comics = self.comicsFinder.getSavedComics()
+        collectionView.reloadData()
     }
+    
+}
+extension ViewController{
     
     @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
