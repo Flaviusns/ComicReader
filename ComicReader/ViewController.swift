@@ -11,7 +11,7 @@ import CoreData
 
 
 class ViewController: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
-    
+    //MARK: View Variables
     var comics = [Comic]()
     var selectedComic : Comic? = nil
     var selectedComics = [String]()
@@ -63,6 +63,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         }
     }
     
+    //MARK: View Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = [
@@ -111,8 +113,19 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.global(qos: .background).async {
+            self.comicsFinder.updateStorageComics()
+            self.comicsFinder.removeComicsNoLongerExist()
+            self.comics = self.comicsFinder.getSavedComics()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
-       
+    
+    //MARK: override CollectionView
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searchActive {
             return filtered.count
@@ -153,39 +166,34 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         return cell
     }
     
-    @objc func addToFavorites(_ sender: UIButton){
-        guard let comicCell = sender.superview?.superview as? ComicMiniature else{
-            fatalError("Unable to convert the comic")
-        }
-        
-        let comic = comics.first(where: {$0.name == comicCell.ComicName.text!})
-        self.comicsFinder.toggleFavComic(comicName: comic!.name)
-        if comic!.favorite{
-            sender.setImage(UIImage(named: "FavUnselected"), for: .normal)
-        }else{
-            sender.setImage(UIImage(named: "FavSelected"), for: .normal)
-        }
-        comic?.favorite.toggle()
-    }
-        
-    @objc func addToSelection(_ sender: UIButton){
-        
-        guard let comic = sender.superview as? ComicMiniature else{
-            fatalError("Unable to convert the comic")
-        }
-        if #available(iOS 13.0, *) {
-            if(selectedComics.contains(comic.ComicName.text!)){
-                let configuration = UIImage.SymbolConfiguration(weight: .bold)
-                sender.setImage(UIImage(systemName: "circle",withConfiguration: configuration), for: .normal)
-                let index = selectedComics.firstIndex(of: comic.ComicName.text!)!
-                selectedComics.remove(at: index)
-            }else{
-                let configuration = UIImage.SymbolConfiguration(weight: .bold)
-                selectedComics.append(comic.ComicName.text!)
-                sender.setImage(UIImage(systemName: "circle.fill",withConfiguration: configuration), for: .normal)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch viewM {
+        case .view:
+            selectedComic = comics[indexPath[1]]
+            if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
+                nextVC.comic = selectedComic
+                navigationController?.pushViewController(nextVC, animated: true)
             }
-        } else {
-            // Fallback on earlier versions
+        case .edit:
+            let name = comics[indexPath[0]].name
+            selectedComics.append(name)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        switch viewM {
+        case .edit:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComicMin", for: indexPath) as? ComicMiniature else {
+                fatalError("Unable to dequeue PersonCell.")
+            }
+            cell.isSelected = false
+            let name = comics[indexPath[0]].name
+            if selectedComics.contains(name){
+                let pos = selectedComics.firstIndex(of: name)!
+                selectedComics.remove(at: pos)
+            }
+        default:
+            print("Default")
         }
     }
     
@@ -210,18 +218,20 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         self.collectionView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        if let nextVC = segue.destination as? ComicLecture {
-            nextVC.comic = self.selectedComic
+    
+    @objc func addToFavorites(_ sender: UIButton){
+        guard let comicCell = sender.superview?.superview as? ComicMiniature else{
+            fatalError("Unable to convert the comic")
         }
-    }
-    
-    
-    func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return paths[0]
+        
+        let comic = comics.first(where: {$0.name == comicCell.ComicName.text!})
+        self.comicsFinder.toggleFavComic(comicName: comic!.name)
+        if comic!.favorite{
+            sender.setImage(UIImage(named: "FavUnselected"), for: .normal)
+        }else{
+            sender.setImage(UIImage(named: "FavSelected"), for: .normal)
+        }
+        comic?.favorite.toggle()
     }
     
     //MARK: Search Bar
@@ -264,6 +274,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         searchController.searchBar.resignFirstResponder()
     }
     
+    //MARK: Refresher functions
     @objc func loadData() {
         self.comicsFinder.updateStorageComics()
         self.comics = self.comicsFinder.getSavedComics()
@@ -271,44 +282,10 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         collectionView.refreshControl?.endRefreshing()
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch viewM {
-        case .view:
-            selectedComic = comics[indexPath[1]]
-            if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
-                nextVC.comic = selectedComic
-                navigationController?.pushViewController(nextVC, animated: true)
-            }
-        case .edit:
-            let name = comics[indexPath[0]].name
-            selectedComics.append(name)
-        }
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        switch viewM {
-        case .edit:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComicMin", for: indexPath) as? ComicMiniature else {
-                fatalError("Unable to dequeue PersonCell.")
-            }
-            cell.isSelected = false
-            let name = comics[indexPath[0]].name
-            if selectedComics.contains(name){
-                let pos = selectedComics.firstIndex(of: name)!
-                selectedComics.remove(at: pos)
-            }
-        default:
-            print("Default")
-        }
-    }
-    
-    func updateCollectionCells(){
-        self.comicsFinder.updateStorageComics()
-        self.comics = self.comicsFinder.getSavedComics()
-        collectionView.reloadData()
-    }
     
 }
+
+//MARK: Extension ViewController
 extension ViewController{
     
     @available(iOS 13.0, *)
