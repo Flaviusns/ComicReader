@@ -20,7 +20,6 @@
 		75627F3A24211C3F0006D08A /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75627F3924211C3F0006D08A /* Comic.swift */; };
 		75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75627F3B242124FC0006D08A /* ComicLecture.swift */; };
 		759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */; };
-		75BF07A6242D2591000FF24D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BF07A5242D2591000FF24D /* Page.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +39,6 @@
 		75627F3924211C3F0006D08A /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		75627F3B242124FC0006D08A /* ComicLecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicLecture.swift; sourceTree = "<group>"; };
 		759B393E242F98F300D73586 /* ComicReaderModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ComicReaderModel.xcdatamodel; sourceTree = "<group>"; };
-		75BF07A5242D2591000FF24D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		D845FF0C777E8DF3A65703EF /* libPods-ComicReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ComicReader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -98,7 +96,6 @@
 				75627F3924211C3F0006D08A /* Comic.swift */,
 				75627F3B242124FC0006D08A /* ComicLecture.swift */,
 				751D9A7924214DDF00BBAC10 /* ComicFinder.swift */,
-				75BF07A5242D2591000FF24D /* Page.swift */,
 				759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */,
 			);
 			path = ComicReader;
@@ -213,7 +210,6 @@
 				759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */,
 				75627F3824211A830006D08A /* ComicMiniature.swift in Sources */,
 				75627F28242118D40006D08A /* ViewController.swift in Sources */,
-				75BF07A6242D2591000FF24D /* Page.swift in Sources */,
 				75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */,
 				75627F3A24211C3F0006D08A /* Comic.swift in Sources */,
 				751D9A7A24214DDF00BBAC10 /* ComicFinder.swift in Sources */,
