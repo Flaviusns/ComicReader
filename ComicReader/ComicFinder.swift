@@ -127,7 +127,7 @@ class ComicFinder{
                     guard let comicEntity = item as? NSManagedObject else{
                         fatalError("Unable to cast comicEntity")
                     }
-                    savedComics.append(Comic(name: comicEntity.value(forKey: "name") as! String, path: comicEntity.value(forKey: "path") as! String, cover: comicEntity.value(forKey: "cover") as! Data))
+                    savedComics.append(Comic(name: comicEntity.value(forKey: "name") as! String, path: comicEntity.value(forKey: "path") as! String, cover: comicEntity.value(forKey: "cover") as! Data,fav: comicEntity.value(forKey: "favorite") as? Bool ?? false))
                 }
             }
         }catch let error as NSError{
@@ -135,6 +135,31 @@ class ComicFinder{
         }
         
         return savedComics
+    }
+    
+    public func getFavComics() -> [Comic]{
+        var favComics = [Comic]()
+        do{
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicEntity")
+            request.returnsObjectsAsFaults = false
+            request.predicate = NSPredicate(format: "favorite = %@", true)
+            let result = try container.viewContext.fetch(request)
+            if result.isEmpty{
+                print("Empty fav collection")
+            }
+            else{
+                for item in result{
+                    guard let comicEntity = item as? NSManagedObject else{
+                        fatalError("Unable to cast comicEntity")
+                    }
+                    favComics.append(Comic(name: comicEntity.value(forKey: "name") as! String, path: comicEntity.value(forKey: "path") as! String, cover: comicEntity.value(forKey: "cover") as! Data))
+                }
+            }
+        }catch let error as NSError{
+            print("FatalError \(error)")
+        }
+        
+        return favComics
     }
     
     static func removeTempComic(fileName: String){
@@ -234,6 +259,7 @@ class ComicFinder{
         newComic.setValue(comicToSave.name, forKeyPath: "name")
         newComic.setValue(comicToSave.path, forKey: "path")
         newComic.setValue(comicToSave.comicsPages![0], forKey: "cover")
+        newComic.setValue(false, forKey: "favorite")
         
         do {
             try managedContext.save()
@@ -292,6 +318,34 @@ class ComicFinder{
         }
         
     }
+    
+    func toggleFavComic(comicName: String){
+        let managedContext = container.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicEntity")
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "name = %@", comicName)
+        
+        do {
+            let result = try managedContext.fetch(request)
+            if result.isEmpty{
+                print("Empty Result")
+            }
+            else{
+                guard let entity = result[0] as? NSManagedObject else{
+                    fatalError("Unresolved error")
+                }
+                let currentStatus = entity.value(forKey: "favorite") as! Bool
+                entity.setValue(!currentStatus, forKey: "favorite")
+                
+                try managedContext.save()
+            }
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    
     
     
 }

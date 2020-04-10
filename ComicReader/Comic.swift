@@ -13,22 +13,26 @@ class Comic :NSObject{
     var name: String
     var path: String
     var comicsPages: [Data]?
+    var favorite: Bool
     
     init(name:String,path:String,comicsPages:[Data]?){
         self.name = name
         self.path = path
         self.comicsPages = comicsPages
+        self.favorite = false
     }
     
-    init(name:String,path:String,cover:Data){
+    init(name:String,path:String,cover:Data,fav: Bool = false){
         self.name = name
         self.path = path
         self.comicsPages = [cover]
+        self.favorite = fav
     }
     
     init(name:String,path:String,cover:[Data]){
         self.name = name
         self.path = path
         self.comicsPages = cover
+        self.favorite = false
     }
 }

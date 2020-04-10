@@ -15,6 +15,7 @@ class ComicMiniature: UICollectionViewCell {
     @IBOutlet var FavButton: UIButton!
     @IBOutlet var SelectedButton: UIButton!
     
+    
     override var isSelected: Bool {
         didSet{
             if !isSelected{
@@ -25,7 +26,6 @@ class ComicMiniature: UICollectionViewCell {
             
         }
     }
-    
     
 }
 

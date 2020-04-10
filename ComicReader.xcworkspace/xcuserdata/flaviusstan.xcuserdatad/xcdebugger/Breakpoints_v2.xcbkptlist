@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "92C892CA-0629-460D-AC4F-3C65EDE559E1"
+            uuid = "12C18D5B-A7E0-4141-ABFC-C6405CE7A38C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ComicReader/ComicFinder.swift"
+            filePath = "ComicReader/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "removeComicsNoLongerExist()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F0DBBCDF-0375-4E44-B808-BA9F3329B33F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ComicReader/ComicFinder.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
-            landmarkName = "removeComic(comicToRemoveName:)"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
+            landmarkName = "makeContextMenu(comic:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

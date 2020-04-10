@@ -147,7 +147,25 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             cell.SelectedButton.isHidden = true
         }
         
+        cell.FavButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
+        cell.FavButton.setImage(comic.favorite ? UIImage(named: "FavSelected") : UIImage(named: "FavUnselected"), for: .normal)
+        
         return cell
+    }
+    
+    @objc func addToFavorites(_ sender: UIButton){
+        guard let comicCell = sender.superview?.superview as? ComicMiniature else{
+            fatalError("Unable to convert the comic")
+        }
+        
+        let comic = comics.first(where: {$0.name == comicCell.ComicName.text!})
+        self.comicsFinder.toggleFavComic(comicName: comic!.name)
+        if comic!.favorite{
+            sender.setImage(UIImage(named: "FavUnselected"), for: .normal)
+        }else{
+            sender.setImage(UIImage(named: "FavSelected"), for: .normal)
+        }
+        comic?.favorite.toggle()
     }
         
     @objc func addToSelection(_ sender: UIButton){
@@ -307,8 +325,14 @@ extension ViewController{
     func makeContextMenu(comic: Comic) -> UIMenu {
         
         // Create a UIAction for sharing
-        let share = UIAction(title: "Add to favorites", image: UIImage(systemName: "heart")) { action in
-            // Show system share sheet
+        let favorite = UIAction(title: comic.favorite ? "Remove from favorite" : "Add to favorite", image: comic.favorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")) { action in
+            if comic.favorite{
+                self.comicsFinder.toggleFavComic(comicName: comic.name)
+                comic.favorite = false
+            }else{
+                self.comicsFinder.toggleFavComic(comicName: comic.name)
+                comic.favorite = true
+            }
         }
         
         let deleted = UIAction(title: "Delete Comic", image: UIImage(systemName: "trash")) { action in
@@ -325,7 +349,7 @@ extension ViewController{
         }
         
         // Create and return a UIMenu with the share action
-        return UIMenu(title: comic.name, children: [share,deleted])
+        return UIMenu(title: comic.name, children: [favorite,deleted])
     }
 }
 
