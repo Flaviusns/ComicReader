@@ -175,7 +175,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 navigationController?.pushViewController(nextVC, animated: true)
             }
         case .edit:
-            let name = comics[indexPath[0]].name
+            let name = comics[indexPath[1]].name
             selectedComics.append(name)
         }
     }
