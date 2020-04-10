@@ -69,6 +69,38 @@ class ComicFinder{
         
     }
     
+    func removeComicsNoLongerExist(){
+        
+        let fileManager = FileManager.default
+        let savedComics = getSavedComics()
+        let documentsPath = ComicFinder.getDocumentsDirectory()
+        do {
+            var fileURLs = try fileManager.contentsOfDirectory(atPath: documentsPath.path)
+            fileURLs = fileURLs.filter({$0 != ".DS_Store" && $0 != "Inbox"})
+            
+            if fileURLs.isEmpty && !getSavedComics().isEmpty{
+                for savedComic in savedComics{
+                    removeComicFromDataBase(comicToRemoveName: savedComic.name)
+                }
+            }
+            else if fileURLs.count != savedComics.count{
+                fileURLs = fileURLs.map({
+                    String($0.split(separator: ".")[0])
+                })
+                
+                for savedComic in savedComics{
+                    if !fileURLs.contains(savedComic.name){
+                        removeComicFromDataBase(comicToRemoveName: savedComic.name)
+                    }
+                }
+            }
+        } catch  {
+            print("Error while cheking for removed files")
+        }
+        
+        
+    }
+    
     
     public static func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)

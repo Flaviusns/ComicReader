@@ -78,7 +78,11 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         
         DispatchQueue.global(qos: .background).async {
             self.comicsFinder.updateStorageComics()
+            self.comicsFinder.removeComicsNoLongerExist()
             self.comics = self.comicsFinder.getSavedComics()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
         
         
