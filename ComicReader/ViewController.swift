@@ -78,17 +78,6 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         comics = comicsFinder.getSavedComics()
         
         
-        DispatchQueue.global(qos: .background).async {
-            self.comicsFinder.updateStorageComics()
-            self.comicsFinder.removeComicsNoLongerExist()
-            self.comics = self.comicsFinder.getSavedComics()
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-        
-        
-        
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
         self.searchController.searchBar.delegate = self
@@ -280,6 +269,17 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         self.comics = self.comicsFinder.getSavedComics()
         collectionView.reloadData()
         collectionView.refreshControl?.endRefreshing()
+    }
+    
+    func reloadData(){
+        DispatchQueue.global(qos: .background).async {
+            self.comicsFinder.updateStorageComics()
+            self.comicsFinder.removeComicsNoLongerExist()
+            self.comics = self.comicsFinder.getSavedComics()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
     
     

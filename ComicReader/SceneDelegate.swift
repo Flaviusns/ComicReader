@@ -63,6 +63,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         print("File not saved")
                     }
                     
+                    guard let superView = window?.rootViewController as? UINavigationController else{
+                        throw ComicError.ViewNotMain
+                    }
+                    /*
+                    let alert = UIAlertController(title: "Comic Added", message: "Please refresh the collection", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    superView.present(alert, animated: true, completion: nil)*/
+                    guard let viewController = superView.viewControllers[0] as? ViewController else {
+                        throw ComicError.ViewNotMain
+                    }
+                    
+                    viewController.reloadData()
+                    
+                    let alert = UIAlertController(title: "Comic Added", message: "The comic is now in your collection", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    viewController.present(alert, animated: true, completion: nil)
                     
                     
                 } catch {
