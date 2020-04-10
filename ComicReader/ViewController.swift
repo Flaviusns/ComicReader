@@ -42,6 +42,9 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     lazy var edit : UIBarButtonItem = {
         UIBarButtonItem.init(barButtonSystemItem: .edit, target: self, action: #selector(entryEditMode))
     }()
+    lazy var share: UIBarButtonItem = {
+        UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(shareSelection))
+    }()
     
     enum viewMode {
         case view
@@ -53,11 +56,11 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             switch viewM {
             case .view:
                 navigationItem.rightBarButtonItem = nil
-                navigationItem.leftBarButtonItem = edit
+                navigationItem.leftBarButtonItems = [edit]
                 collectionView.allowsMultipleSelection = false
             case .edit:
                 navigationItem.rightBarButtonItem = done
-                navigationItem.leftBarButtonItem = trash
+                navigationItem.leftBarButtonItems = [trash,share]
                 collectionView.allowsMultipleSelection = true
             }
         }
@@ -191,7 +194,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         collectionView.reloadData()
     }
     
-    
+    //MARK: Bar Operations
     @objc func removeSelection(){
         for comicName in selectedComics {
             if(comicsFinder.removeComic(comicToRemoveName: comicName)){
@@ -205,6 +208,18 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             }
         }
         self.collectionView.reloadData()
+    }
+    
+    @objc func shareSelection(){
+        
+        var filesURL = [NSURL]()
+        for comicName in selectedComics {
+            let path = self.comicsFinder.getPathofComic(comicName: comicName)
+            filesURL.append(NSURL.fileURL(withPath: path) as NSURL)
+        }
+        
+        let vc = UIActivityViewController(activityItems: filesURL, applicationActivities: nil)
+        self.present(vc, animated: true)
     }
     
     
@@ -265,6 +280,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     
     //MARK: Refresher functions
     @objc func loadData() {
+        self.selectedComics.removeAll()
         self.comicsFinder.updateStorageComics()
         self.comics = self.comicsFinder.getSavedComics()
         collectionView.reloadData()
@@ -301,7 +317,7 @@ extension ViewController{
     @available(iOS 13.0, *)
     func makeContextMenu(comic: Comic) -> UIMenu {
         
-        // Create a UIAction for sharing
+        
         let favorite = UIAction(title: comic.favorite ? "Remove from favorite" : "Add to favorite", image: comic.favorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")) { action in
             if comic.favorite{
                 self.comicsFinder.toggleFavComic(comicName: comic.name)
@@ -310,6 +326,19 @@ extension ViewController{
                 self.comicsFinder.toggleFavComic(comicName: comic.name)
                 comic.favorite = true
             }
+        }
+        if let image = UIImage(named: "myImage") {
+            let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+            present(vc, animated: true)
+        }
+        
+        let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
+            let path = self.comicsFinder.getPathofComic(comicName: comic.name)
+            
+                let url = NSURL.fileURL(withPath: path)
+                let vc = UIActivityViewController(activityItems: [url], applicationActivities: [])
+                self.present(vc, animated: true)
+            
         }
         
         let deleted = UIAction(title: "Delete Comic", image: UIImage(systemName: "trash")) { action in
@@ -326,7 +355,7 @@ extension ViewController{
         }
         
         // Create and return a UIMenu with the share action
-        return UIMenu(title: comic.name, children: [favorite,deleted])
+        return UIMenu(title: comic.name, children: [favorite,share,deleted])
     }
 }
 

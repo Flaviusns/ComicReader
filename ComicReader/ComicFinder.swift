@@ -345,7 +345,9 @@ class ComicFinder{
         }
     }
     
-    
-    
+    func getPathofComic(comicName: String) -> String{
+        let documentPath = ComicFinder.getDocumentsDirectory()
+        return documentPath.path + "/" + comicName + ".cbz"
+    }
     
 }

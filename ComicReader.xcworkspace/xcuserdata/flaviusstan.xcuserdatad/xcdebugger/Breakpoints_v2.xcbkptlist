@@ -7,32 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "505FEB94-93F0-4BDA-87FC-821334B66812"
-            shouldBeEnabled = "No"
+            uuid = "90B2EE13-22E4-4646-B397-0829223684CB"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ComicReader/ViewController.swift"
+            filePath = "ComicReader/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "collectionView(_:didSelectItemAt:)"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D80FD138-C747-41D2-8DC1-A22CE47044EC"
-            shouldBeEnabled = "No"
+            uuid = "94BC7C3D-A69C-4C72-96B9-58822F9CF87E"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicReader/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "removeSelection()"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
+            landmarkName = "makeContextMenu(comic:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
