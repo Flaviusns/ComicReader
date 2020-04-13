@@ -14,7 +14,9 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     var currentPage = 0
     var hideNavBar = false
     var totalWidth : CGFloat = 0.0
+    let thumbnailWith : CGFloat = 50.0
     
+    @IBOutlet var bottomView: UIView!
     @IBOutlet var scrollView: UIScrollView!
    
     
@@ -26,7 +28,9 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         comic?.comicsPages = ComicFinder.getComicPages(fileName: comic!.name)
 
         prepareScrollView()
+        createthumbNails()
         
+        self.view.bringSubviewToFront(bottomView)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -37,8 +41,10 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideNavigationItem))
         
+        let tapBottom = UITapGestureRecognizer(target: self, action: #selector(changePageFromThumbnail))
         
         scrollView.addGestureRecognizer(tap)
+        bottomView.addGestureRecognizer(tapBottom)
         
         scrollView.delegate = self
         scrollView.minimumZoomScale = 1.0
@@ -54,6 +60,25 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         loadPages(width: self.view.bounds.size.width, heigth: self.view.bounds.size.height)
 
+    }
+    
+    func createthumbNails(){
+        
+        
+        let bottomScrollView = UIScrollView(frame: CGRect(x: 5, y: 0, width: bottomView.frame.size.width - 10, height: bottomView.frame.size.height))
+        bottomScrollView.contentSize = CGSize(width: thumbnailWith * CGFloat((comic?.comicsPages!.count)!), height: bottomView.frame.size.height)
+        
+        for i in 0...((comic?.comicsPages!.count)! - 1){
+            let image = UIImage(data: (comic?.comicsPages![i])!)
+            let imageView = UIImageView(frame: CGRect(x: thumbnailWith * CGFloat(i), y: 0, width: 50, height: 75))
+            
+            imageView.image = image
+            imageView.contentMode = .scaleAspectFit
+            
+            bottomScrollView.addSubview(imageView)
+        }
+        
+        bottomView.addSubview(bottomScrollView)
     }
     
     func loadPages(width: CGFloat,heigth: CGFloat){
@@ -88,6 +113,14 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         hideNavBar.toggle()
         navigationController?.setNavigationBarHidden(hideNavBar, animated: true)
+        bottomView.isHidden = hideNavBar
+    }
+    
+    @objc func changePageFromThumbnail(sender: UITapGestureRecognizer){
+        
+        let positionX = sender.location(in: bottomView.subviews[0]).x
+        let page = Int((positionX / thumbnailWith).rounded(.down))
+        scrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(page) * self.view.bounds.size.width),y: 0), animated: true)
     }
     
     override var prefersStatusBarHidden: Bool {

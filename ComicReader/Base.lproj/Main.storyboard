@@ -106,6 +106,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEH-Wj-Hbu">
+                                <rect key="frame" x="0.0" y="821" width="414" height="75"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="ovY-Tw-2c7"/>
+                                </constraints>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqV-mV-SC4">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -114,10 +121,16 @@
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="PEH-Wj-Hbu" firstAttribute="trailing" secondItem="mCi-TV-sdW" secondAttribute="trailing" id="5vb-lc-pZi"/>
+                            <constraint firstItem="PEH-Wj-Hbu" firstAttribute="leading" secondItem="mCi-TV-sdW" secondAttribute="leading" id="CaU-ep-wMR"/>
+                            <constraint firstAttribute="bottom" secondItem="PEH-Wj-Hbu" secondAttribute="bottom" id="FjP-gl-eMS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mCi-TV-sdW"/>
                     </view>
                     <navigationItem key="navigationItem" id="RuN-TV-gek"/>
                     <connections>
+                        <outlet property="bottomView" destination="PEH-Wj-Hbu" id="Gk9-Ii-I76"/>
                         <outlet property="scrollView" destination="qqV-mV-SC4" id="Ssr-yJ-lid"/>
                     </connections>
                 </viewController>
