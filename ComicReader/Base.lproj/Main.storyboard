@@ -107,7 +107,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEH-Wj-Hbu">
-                                <rect key="frame" x="0.0" y="821" width="414" height="75"/>
+                                <rect key="frame" x="0.0" y="787" width="414" height="75"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="ovY-Tw-2c7"/>
@@ -124,7 +124,7 @@
                         <constraints>
                             <constraint firstItem="PEH-Wj-Hbu" firstAttribute="trailing" secondItem="mCi-TV-sdW" secondAttribute="trailing" id="5vb-lc-pZi"/>
                             <constraint firstItem="PEH-Wj-Hbu" firstAttribute="leading" secondItem="mCi-TV-sdW" secondAttribute="leading" id="CaU-ep-wMR"/>
-                            <constraint firstAttribute="bottom" secondItem="PEH-Wj-Hbu" secondAttribute="bottom" id="FjP-gl-eMS"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="PEH-Wj-Hbu" secondAttribute="bottom" id="ZRE-jJ-8u7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mCi-TV-sdW"/>
                     </view>

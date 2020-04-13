@@ -65,7 +65,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     func createthumbNails(){
         
         
-        let bottomScrollView = UIScrollView(frame: CGRect(x: 5, y: 0, width: bottomView.frame.size.width - 10, height: bottomView.frame.size.height))
+        let bottomScrollView = UIScrollView(frame: CGRect(x: 5, y: 0, width: bottomView.frame.size.width - thumbnailWith, height: bottomView.frame.size.height))
         bottomScrollView.contentSize = CGSize(width: thumbnailWith * CGFloat((comic?.comicsPages!.count)!), height: bottomView.frame.size.height)
         
         for i in 0...((comic?.comicsPages!.count)! - 1){
