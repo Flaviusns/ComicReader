@@ -15,6 +15,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     var hideNavBar = false
     var totalWidth : CGFloat = 0.0
     let thumbnailWith : CGFloat = 50.0
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     
     @IBOutlet var bottomView: UIView!
     @IBOutlet var scrollView: UIScrollView!
@@ -26,11 +27,18 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         navigationItem.title = comic?.name ?? "Nulo"
         
         comic?.comicsPages = ComicFinder.getComicPages(fileName: comic!.name)
-
-        prepareScrollView()
-        createthumbNails()
-        
+        loadingIndicator.startAnimating()
         self.view.bringSubviewToFront(bottomView)
+        self.view.bringSubviewToFront(loadingIndicator)
+    }
+    
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        prepareScrollView()
+        createthumbNails(width: self.view.bounds.size.width)
+        loadingIndicator.startAnimating()
+        loadingIndicator.removeFromSuperview()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,12 +70,16 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
 
     }
     
-    func createthumbNails(){
+    func createthumbNails(width: CGFloat){
         
-        
-        //let bottomScrollView = UIScrollView(frame: CGRect(x: 5, y: 0, width: bottomView.frame.size.width - thumbnailWith, height: bottomView.frame.size.height))
-        
-        let bottomScrollView = UIScrollView(frame: CGRect(x: thumbnailWith/3, y: 0, width: self.view.bounds.size.width - thumbnailWith, height: bottomView.frame.size.height))
+        for view in bottomView.subviews{
+            for subView in view.subviews{
+                subView.removeFromSuperview()
+            }
+            view.removeFromSuperview()
+        }
+         
+        let bottomScrollView = UIScrollView(frame: CGRect(x: thumbnailWith/3, y: 0, width: width - thumbnailWith, height: bottomView.frame.size.height))
         bottomScrollView.contentSize = CGSize(width: thumbnailWith * CGFloat((comic?.comicsPages!.count)!), height: bottomView.frame.size.height)
         
         for i in 0...((comic?.comicsPages!.count)! - 1){
@@ -140,6 +152,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         loadPages(width: size.width, heigth: size.height)
+        createthumbNails(width: size.width)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

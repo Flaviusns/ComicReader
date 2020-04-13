@@ -106,6 +106,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="R5N-m3-yPj">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEH-Wj-Hbu">
                                 <rect key="frame" x="0.0" y="787" width="414" height="75"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -123,14 +127,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="PEH-Wj-Hbu" firstAttribute="trailing" secondItem="mCi-TV-sdW" secondAttribute="trailing" id="5vb-lc-pZi"/>
+                            <constraint firstItem="R5N-m3-yPj" firstAttribute="centerX" secondItem="Rn4-oW-ZCt" secondAttribute="centerX" id="7YG-4b-Rct"/>
                             <constraint firstItem="PEH-Wj-Hbu" firstAttribute="leading" secondItem="mCi-TV-sdW" secondAttribute="leading" id="CaU-ep-wMR"/>
                             <constraint firstAttribute="bottomMargin" secondItem="PEH-Wj-Hbu" secondAttribute="bottom" id="ZRE-jJ-8u7"/>
+                            <constraint firstItem="R5N-m3-yPj" firstAttribute="centerY" secondItem="Rn4-oW-ZCt" secondAttribute="centerY" id="lAK-jC-dlQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mCi-TV-sdW"/>
                     </view>
                     <navigationItem key="navigationItem" id="RuN-TV-gek"/>
                     <connections>
                         <outlet property="bottomView" destination="PEH-Wj-Hbu" id="Gk9-Ii-I76"/>
+                        <outlet property="loadingIndicator" destination="R5N-m3-yPj" id="feI-y7-c1z"/>
                         <outlet property="scrollView" destination="qqV-mV-SC4" id="Ssr-yJ-lid"/>
                     </connections>
                 </viewController>
