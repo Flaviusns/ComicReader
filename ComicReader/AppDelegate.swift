@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -34,9 +34,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
-            let name = url.lastPathComponent
-            let documentsPath = ComicFinder.getDocumentsDirectory()
-            let pathToSave = documentsPath.appendingPathComponent(name)
+      
+        let persistentContainer: NSPersistentContainer = {
+            
+            let container = NSPersistentContainer(name: "ComicReaderModel")
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            })
+            return container
+        }()
+        
+        let name = url.lastPathComponent
+        let documentsPath = ComicFinder.getDocumentsDirectory()
+        let pathToSave = documentsPath.appendingPathComponent(name)
             
             if !FileManager.default.fileExists(atPath: pathToSave.path){
                 do {
@@ -45,30 +58,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if !FileManager.default.fileExists(atPath: pathToSave.path){
                         print("File not saved")
                     }
-                    
-                    guard let superView = window?.rootViewController as? UINavigationController else{
-                        throw ComicError.ViewNotMain
-                    }
-                    /*
-                     let alert = UIAlertController(title: "Comic Added", message: "Please refresh the collection", preferredStyle: .alert)
-                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                     superView.present(alert, animated: true, completion: nil)*/
-                    guard let viewController = superView.viewControllers[0] as? ViewController else {
-                        throw ComicError.ViewNotMain
-                    }
-                    
-                    viewController.reloadData()
-                    
-                    let alert = UIAlertController(title: "Comic Added", message: "The comic is now in your collection", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    viewController.present(alert, animated: true, completion: nil)
-                    
-                    
+                    try FileManager.default.removeItem(at: url)
                 } catch {
                     print("Unable to save the comic: " + error.localizedDescription)
-                    return false
+                    
+                    do {
+                        try FileManager.default.removeItem(at: url)
+                        return false
+                    } catch{
+                        print("Unable to save the comic: " + error.localizedDescription)
+                        return false
+                    }
                 }
             }
+        
+        
+        do {
+            guard let superView = window?.rootViewController as? UINavigationController else{
+                throw ComicError.ViewNotMain
+            }
+            /*
+             let alert = UIAlertController(title: "Comic Added", message: "Please refresh the collection", preferredStyle: .alert)
+             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+             superView.present(alert, animated: true, completion: nil)*/
+            guard let viewController = superView.viewControllers[0] as? ViewController else {
+                throw ComicError.ViewNotMain
+            }
+            let comicsFinder = ComicFinder(container: persistentContainer)
+            comicsFinder.updateStorageComics()
+            viewController.comics = comicsFinder.getSavedComics()
+            
+            viewController.reloadData()
+            /*
+             let alert = UIAlertController(title: "Comic Added", message: "The comic is now in your collection", preferredStyle: .alert)
+             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+             viewController.present(alert, animated: true, completion: nil)*/
+        } catch {
+            print("Unable to present the alert  " + error.localizedDescription)
+            return false
+        }
+        
         return true
     }
 
