@@ -139,11 +139,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        if UIDevice.current.orientation.isLandscape {
-            loadPages(width: size.width, heigth: size.height)
-        } else {
-            loadPages(width: size.width, heigth: size.height)
-        }
+        loadPages(width: size.width, heigth: size.height)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
