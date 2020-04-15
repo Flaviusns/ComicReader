@@ -14,7 +14,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     var currentPage = 0
     var hideNavBar = false
     var totalWidth : CGFloat = 0.0
-    let thumbnailWith : CGFloat = 50.0
+    var thumbnailWith : CGFloat = 50.0
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     
     @IBOutlet var bottomView: UIView!
@@ -78,7 +78,15 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
             }
             view.removeFromSuperview()
         }
-         
+        
+        
+        if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
+            let pageNumbInCGFloat = (comic?.comicsPages!.count)!
+            thumbnailWith = (width - thumbnailWith)/CGFloat(pageNumbInCGFloat)
+        }else{
+            thumbnailWith = 50
+        }
+        
         let bottomScrollView = UIScrollView(frame: CGRect(x: thumbnailWith/3, y: 0, width: width - thumbnailWith, height: bottomView.frame.size.height))
         bottomScrollView.contentSize = CGSize(width: thumbnailWith * CGFloat((comic?.comicsPages!.count)!), height: bottomView.frame.size.height)
         
