@@ -134,6 +134,8 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         let positionX = sender.location(in: bottomView.subviews[0]).x
         let page = Int((positionX / thumbnailWith).rounded(.down))
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         scrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(page) * self.view.bounds.size.width),y: 0), animated: true)
     }
     
