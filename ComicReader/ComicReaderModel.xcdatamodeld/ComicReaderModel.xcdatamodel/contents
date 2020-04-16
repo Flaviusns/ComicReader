@@ -3,10 +3,11 @@
     <entity name="ComicEntity" representedClassName="ComicEntity" syncable="YES" codeGenerationType="class">
         <attribute name="cover" optional="YES" attributeType="Binary"/>
         <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="fileextension" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="path" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ComicEntity" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="ComicEntity" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>

@@ -27,7 +27,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         navigationItem.title = comic?.name ?? "Nulo"
         
-        comic?.comicsPages = ComicFinder.getComicPages(fileName: comic!.name)
+        comic?.comicsPages = ComicFinder.getComicPages(file: comic!)
         loadingIndicator.startAnimating()
         self.view.bringSubviewToFront(bottomView)
         self.view.bringSubviewToFront(loadingIndicator)

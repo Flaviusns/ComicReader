@@ -1,4 +1,4 @@
-module Zip {
+framework module Zip {
   umbrella header "Zip-umbrella.h"
 
   export *

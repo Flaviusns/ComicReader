@@ -9,6 +9,7 @@
 import Foundation
 import Zip
 import CoreData
+import LzmaSDK_ObjC
 
 class ComicFinder{
     
@@ -35,7 +36,6 @@ class ComicFinder{
                     if !savedComics.contains(String(fileName)){
                         
                         if let newComic = decompressCBZ(fileName: String(fileName)){
-                            print("I´m here")
                             saveNewComic(comicToSave: newComic)
                             
                             //Remove the comic from the temp directory
@@ -46,7 +46,23 @@ class ComicFinder{
                             }
                         }
                     }
+                }
+                else if(item.contains(".cb7")){
+                    let fileName = item.split(separator: ".")[0]
                     
+                    if !savedComics.contains(String(fileName)){
+                        
+                        if let newComic = decompressCB7(fileName: String(fileName)){
+                            saveNewComic(comicToSave: newComic)
+                            
+                            //Remove the comic from the temp directory
+                            do{
+                                try fileManager.removeItem(at: URL(fileURLWithPath: tempPath.path + "/" + fileName))
+                            } catch {
+                                print("Unable to delete the temp folder")
+                            }
+                        }
+                    }
                 }
             }
         } catch {
@@ -75,12 +91,57 @@ class ComicFinder{
                 }
             }
             
-            let newComic = Comic(name: fileName,path: cbzPath,cover: comicPages)
+            let newComic = Comic(name: fileName,path: cbzPath,cover: comicPages,fileExt: ".cbz")
             return newComic
         } catch {
             print("Error while enumerating files: \(error.localizedDescription)")
             return nil
         }
+    }
+    
+    func decompressCB7(fileName:String) -> Comic?{
+        let fileManager = FileManager.default
+        let documentsPath = ComicFinder.getDocumentsDirectory()
+        let tempPath = ComicFinder.getTempDirectory()
+        
+        let cb7Path = documentsPath.path  + "/" + fileName + ".cb7"
+        if fileManager.fileExists(atPath: cb7Path){
+            do {
+                let finalURL = URL(fileURLWithPath: tempPath.path + "/" + fileName + ".7z")
+                try fileManager.copyItem(at: URL(fileURLWithPath: cb7Path), to: finalURL)
+                let reader = LzmaSDKObjCReader(fileURL: finalURL)
+                var items = [LzmaSDKObjCItem]()  // Array with selected items.
+                try reader.open()
+                reader.iterate(handler: {
+                    (item: LzmaSDKObjCItem, error: Error?) -> Bool in
+                    items.append(item)
+                    return true
+                })
+                if reader.extract(items, toPath: tempPath.path, withFullPaths: true) {
+                    print("Extract failed: \(reader.lastError?.localizedDescription ?? "Dead Fail")")
+                }
+                
+                let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
+                
+                var comicPages = [Data]()
+                //This for it's just to avoid hidden files in the folder
+                for page in comicPagesPath {
+                    if(page.contains(".jpg") || page.contains(".png")){ //Find the first image and break.
+                        comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
+                        break
+                    }
+                }
+                
+                let newComic = Comic(name: fileName,path: cb7Path,cover: comicPages,fileExt: ".cb7")
+                try fileManager.removeItem(at: finalURL)
+                return newComic
+            } catch {
+                print("Error while enumerating files: \(error.localizedDescription)")
+                return nil
+            }
+        }
+        return nil
+        
     }
     
     func removeComicsNoLongerExist(){
@@ -92,7 +153,7 @@ class ComicFinder{
             var fileURLs = try fileManager.contentsOfDirectory(atPath: documentsPath.path)
             fileURLs = fileURLs.filter({$0 != ".DS_Store" && $0 != "Inbox"})
             
-            if fileURLs.isEmpty && !getSavedComics().isEmpty{
+            if fileURLs.isEmpty && !savedComics.isEmpty{
                 for savedComic in savedComics{
                     removeComicFromDataBase(comicToRemoveName: savedComic.name)
                 }
@@ -141,7 +202,8 @@ class ComicFinder{
                     guard let comicEntity = item as? NSManagedObject else{
                         fatalError("Unable to cast comicEntity")
                     }
-                    savedComics.append(Comic(name: comicEntity.value(forKey: "name") as! String, path: comicEntity.value(forKey: "path") as! String, cover: comicEntity.value(forKey: "cover") as! Data,fav: comicEntity.value(forKey: "favorite") as? Bool ?? false))
+                    savedComics.append(Comic(name: comicEntity.value(forKey: "name") as! String, path: comicEntity.value(forKey: "path") as! String, cover: comicEntity.value(forKey: "cover") as! Data,
+                                             fileExt: comicEntity.value(forKey: "fileextension") as! String, fav: comicEntity.value(forKey: "favorite") as? Bool ?? false))
                 }
             }
         }catch let error as NSError{
@@ -166,7 +228,7 @@ class ComicFinder{
                     guard let comicEntity = item as? NSManagedObject else{
                         fatalError("Unable to cast comicEntity")
                     }
-                    favComics.append(Comic(name: comicEntity.value(forKey: "name") as! String, path: comicEntity.value(forKey: "path") as! String, cover: comicEntity.value(forKey: "cover") as! Data))
+                    favComics.append(Comic(name: comicEntity.value(forKey: "name") as! String, path: comicEntity.value(forKey: "path") as! String, cover: comicEntity.value(forKey: "cover") as! Data,fileExt: comicEntity.value(forKey: "fileextension") as! String))
                 }
             }
         }catch let error as NSError{
@@ -238,9 +300,59 @@ class ComicFinder{
         return comicPages
     }
     
+    static func getComicPages(file: Comic)-> [Data]{
+        
+        var comicPages = [Data]()
+        let fileManager = FileManager.default
+        let tempPath = getTempDirectory()
+        let docPath = getDocumentsDirectory()
+        let completePath = docPath.path + "/" + file.name + file.fileExtension
+        
+        do {
+            if file.fileExtension == ".cbz"{
+                try Zip.unzipFile(URL(fileURLWithPath: completePath), destination: tempPath, overwrite: true, password: nil) // Unzip
+                let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/").sorted()
+                
+                for page in comicPagesPath {
+                    if(page.contains(".jpg") || page.contains(".png")){
+                        comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
+                    }
+                }
+            }else if file.fileExtension == ".cb7"{
+                let finalURL = URL(fileURLWithPath: tempPath.path + "/" + file.name + ".7z")
+                try fileManager.copyItem(at: URL(fileURLWithPath: completePath), to: finalURL)
+                let reader = LzmaSDKObjCReader(fileURL: finalURL)
+                var items = [LzmaSDKObjCItem]()  // Array with selected items.
+                try reader.open()
+                reader.iterate(handler: {
+                    (item: LzmaSDKObjCItem, error: Error?) -> Bool in
+                    items.append(item)
+                    return true
+                })
+                if reader.extract(items, toPath: tempPath.path, withFullPaths: true) {
+                    print("Extract failed: \(reader.lastError?.localizedDescription ?? "Dead Fail")")
+                }
+                
+                let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/").sorted()
+                
+                for page in comicPagesPath {
+                    if(page.contains(".jpg") || page.contains(".png")){
+                        comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
+                    }
+                }
+                try fileManager.removeItem(at: finalURL)
+            }
+            
+        } catch let error{
+            print("Unable to get the comic pages" + error.localizedDescription)
+        }
+        
+        return comicPages
+    }
+    
     func removeComic(comicToRemove: Comic) -> Bool{
         let docPath = ComicFinder.getDocumentsDirectory()
-        let comicFile = comicToRemove.name + ".cbz"
+        let comicFile = comicToRemove.name + comicToRemove.fileExtension
         do {
             removeComicFromDataBase(comicToRemove: comicToRemove)
             try FileManager.default.removeItem(atPath: docPath.path + "/" + comicFile)
@@ -274,6 +386,7 @@ class ComicFinder{
         newComic.setValue(comicToSave.path, forKey: "path")
         newComic.setValue(comicToSave.comicsPages![0], forKey: "cover")
         newComic.setValue(false, forKey: "favorite")
+        newComic.setValue(comicToSave.fileExtension, forKey: "fileextension")
         
         do {
             try managedContext.save()

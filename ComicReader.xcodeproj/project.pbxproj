@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C2A15D835AA6B53409BCD6A /* libPods-ComicReader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D845FF0C777E8DF3A65703EF /* libPods-ComicReader.a */; };
 		751D9A7A24214DDF00BBAC10 /* ComicFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751D9A7924214DDF00BBAC10 /* ComicFinder.swift */; };
 		751E477F2437740E008E73AA /* AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 751E477E2437740E008E73AA /* AppIcon.png */; };
 		753B063A2440B0DC002946A4 /* ComicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B06392440B0DC002946A4 /* ComicError.swift */; };
@@ -21,11 +20,13 @@
 		75627F3A24211C3F0006D08A /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75627F3924211C3F0006D08A /* Comic.swift */; };
 		75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75627F3B242124FC0006D08A /* ComicLecture.swift */; };
 		759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */; };
+		C420559A14164B72FF1DF165 /* Pods_ComicReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9FFF9EED45EE518CFEBD01 /* Pods_ComicReader.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		25E1B262260C0E1A166085B9 /* Pods-ComicReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComicReader.release.xcconfig"; path = "Target Support Files/Pods-ComicReader/Pods-ComicReader.release.xcconfig"; sourceTree = "<group>"; };
 		3C9F9D95C62A1BB06580A265 /* Pods-ComicReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComicReader.debug.xcconfig"; path = "Target Support Files/Pods-ComicReader/Pods-ComicReader.debug.xcconfig"; sourceTree = "<group>"; };
+		4F9FFF9EED45EE518CFEBD01 /* Pods_ComicReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComicReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		751D9A7924214DDF00BBAC10 /* ComicFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicFinder.swift; sourceTree = "<group>"; };
 		751E477E2437740E008E73AA /* AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon.png; sourceTree = "<group>"; };
 		753B06392440B0DC002946A4 /* ComicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicError.swift; sourceTree = "<group>"; };
@@ -41,7 +42,6 @@
 		75627F3924211C3F0006D08A /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		75627F3B242124FC0006D08A /* ComicLecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicLecture.swift; sourceTree = "<group>"; };
 		759B393E242F98F300D73586 /* ComicReaderModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ComicReaderModel.xcdatamodel; sourceTree = "<group>"; };
-		D845FF0C777E8DF3A65703EF /* libPods-ComicReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ComicReader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C2A15D835AA6B53409BCD6A /* libPods-ComicReader.a in Frameworks */,
+				C420559A14164B72FF1DF165 /* Pods_ComicReader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +107,7 @@
 		791F4E708FE5E95F160EF403 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D845FF0C777E8DF3A65703EF /* libPods-ComicReader.a */,
+				4F9FFF9EED45EE518CFEBD01 /* Pods_ComicReader.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,6 +123,7 @@
 				75627F1C242118D40006D08A /* Sources */,
 				75627F1D242118D40006D08A /* Frameworks */,
 				75627F1E242118D40006D08A /* Resources */,
+				E26E293D44470ACE78661778 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,6 +202,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E26E293D44470ACE78661778 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ComicReader/Pods-ComicReader-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ComicReader/Pods-ComicReader-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ComicReader/Pods-ComicReader-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

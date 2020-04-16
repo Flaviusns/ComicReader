@@ -1,16 +1,20 @@
 PODS:
+  - LzmaSDK-ObjC (2.1.1)
   - Zip (1.1.0)
 
 DEPENDENCIES:
+  - LzmaSDK-ObjC
   - Zip (~> 1.1)
 
 SPEC REPOS:
   trunk:
+    - LzmaSDK-ObjC
     - Zip
 
 SPEC CHECKSUMS:
+  LzmaSDK-ObjC: 6c68c37743a658fc9a4c7b70f7d6045b587aa42b
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 5c64767b4c7bdad8e143544eb2b1631a9f1d06fc
+PODFILE CHECKSUM: 5707cee082b19ccda8f27d7121db96e38a977c8c
 
 COCOAPODS: 1.8.4

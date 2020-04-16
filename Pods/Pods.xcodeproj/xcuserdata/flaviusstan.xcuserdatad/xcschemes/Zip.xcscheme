@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "31708EE6929C61C0EDA6F5DAE3AF9DB7"
-               BuildableName = "libZip.a"
+               BuildableName = "Zip.framework"
                BlueprintName = "Zip"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

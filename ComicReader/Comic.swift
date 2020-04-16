@@ -14,25 +14,32 @@ class Comic :NSObject{
     var path: String
     var comicsPages: [Data]?
     var favorite: Bool
+    var fileExtension: String
     
-    init(name:String,path:String,comicsPages:[Data]?){
+    init(name:String,path:String,comicsPages:[Data]?,fileExt: String){
         self.name = name
         self.path = path
         self.comicsPages = comicsPages
         self.favorite = false
+        self.fileExtension = fileExt
     }
     
-    init(name:String,path:String,cover:Data,fav: Bool = false){
+    init(name:String,path:String,cover:Data,fileExt: String,fav: Bool = false){
         self.name = name
         self.path = path
         self.comicsPages = [cover]
         self.favorite = fav
+        self.fileExtension = fileExt
     }
     
-    init(name:String,path:String,cover:[Data]){
+    
+    init(name:String,path:String,cover:[Data],fileExt: String){
         self.name = name
         self.path = path
         self.comicsPages = cover
         self.favorite = false
+        self.fileExtension = fileExt
     }
+    
+    
 }
