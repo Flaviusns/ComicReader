@@ -15,6 +15,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     var hideNavBar = false
     var totalWidth : CGFloat = 0.0
     var thumbnailWith : CGFloat = 50.0
+    @IBOutlet var PageIndicator: UILabel!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     
     @IBOutlet var bottomView: UIView!
@@ -30,6 +31,13 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         loadingIndicator.startAnimating()
         self.view.bringSubviewToFront(bottomView)
         self.view.bringSubviewToFront(loadingIndicator)
+        
+        PageIndicator.textColor = .white
+        PageIndicator.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+        PageIndicator.isHidden = true
+        PageIndicator.textAlignment = .center
+        PageIndicator.adjustsFontSizeToFitWidth = true
+        
     }
     
 
@@ -39,6 +47,10 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         createthumbNails(width: self.view.bounds.size.width)
         loadingIndicator.startAnimating()
         loadingIndicator.removeFromSuperview()
+        
+        PageIndicator.isHidden = false
+        PageIndicator.text = "1 of \((comic?.comicsPages!.count)!)"
+        self.view.bringSubviewToFront(PageIndicator)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,12 +94,12 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
             let pageNumbInCGFloat = (comic?.comicsPages!.count)!
-            thumbnailWith = (width - thumbnailWith)/CGFloat(pageNumbInCGFloat)
+            thumbnailWith = (width - thumbnailWith) / CGFloat(pageNumbInCGFloat)
         }else{
             thumbnailWith = 50
         }
         
-        let bottomScrollView = UIScrollView(frame: CGRect(x: thumbnailWith/3, y: 0, width: width - thumbnailWith, height: bottomView.frame.size.height))
+        let bottomScrollView = UIScrollView(frame: CGRect(x: thumbnailWith / 3, y: 0, width: width - thumbnailWith, height: bottomView.frame.size.height))
         bottomScrollView.contentSize = CGSize(width: thumbnailWith * CGFloat((comic?.comicsPages!.count)!), height: bottomView.frame.size.height)
         
         for i in 0...((comic?.comicsPages!.count)! - 1){
@@ -136,15 +148,19 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         hideNavBar.toggle()
         navigationController?.setNavigationBarHidden(hideNavBar, animated: true)
         bottomView.isHidden = hideNavBar
+        PageIndicator.isHidden = hideNavBar
     }
     
     @objc func changePageFromThumbnail(sender: UITapGestureRecognizer){
         
         let positionX = sender.location(in: bottomView.subviews[0]).x
         let page = Int((positionX / thumbnailWith).rounded(.down))
+        
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        
         scrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(page) * self.view.bounds.size.width),y: 0), animated: true)
+        changeCurrentPage(currentPage: page)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -171,9 +187,13 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
             let realPage = scrollView.contentOffset.x / self.view.bounds.width
             if(Int(realPage.rounded(.down)) != currentPage){
                 currentPage = Int(realPage.rounded(.down))
-                print(currentPage)
+                changeCurrentPage(currentPage: currentPage)
             }
         }
+    }
+    
+    func changeCurrentPage(currentPage: Int){
+        PageIndicator.text = "\(currentPage + 1) of \((comic?.comicsPages!.count)!)"
     }
 }
 
