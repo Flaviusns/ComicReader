@@ -33,32 +33,18 @@ class ComicFinder{
                     let fileName = item.split(separator: ".")[0]
                     
                     if !savedComics.contains(String(fileName)){
-                        let cbzPath = documentsPath.path  + "/" + item
-                        print(fileManager.fileExists(atPath: cbzPath))                                                                
-                        try Zip.unzipFile(URL(fileURLWithPath: cbzPath), destination: tempPath, overwrite: true, password: nil) // Unzip
-                        let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
                         
-                        var comicPages = [Data]()
-                        //This for it's just to avoid hidden files in the folder
-                        for page in comicPagesPath {
-                            if(page.contains(".jpg") || page.contains(".png")){ //Find the first image and break.
-                                comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
-                                break
+                        if let newComic = decompressCBZ(fileName: String(fileName)){
+                            print("I´m here")
+                            saveNewComic(comicToSave: newComic)
+                            
+                            //Remove the comic from the temp directory
+                            do{
+                                try fileManager.removeItem(at: URL(fileURLWithPath: tempPath.path + "/" + fileName))
+                            } catch {
+                                print("Unable to delete the temp folder")
                             }
                         }
-                        
-                        let newComic = Comic(name: String(fileName),path: cbzPath,cover: comicPages)
-                        
-                                               
-                        saveNewComic(comicToSave: newComic)
-                        
-                        //Remove the comic from the temp directory
-                        do{
-                            try fileManager.removeItem(at: URL(fileURLWithPath: tempPath.path + "/" + fileName))
-                        } catch {
-                            print("Unable to delete the temp folder")
-                        }
-                        
                     }
                     
                 }
@@ -67,6 +53,34 @@ class ComicFinder{
             print("Error while enumerating files: \(error.localizedDescription)")
         }
         
+    }
+    
+    func decompressCBZ(fileName:String) -> Comic?{
+        let fileManager = FileManager.default
+        let documentsPath = ComicFinder.getDocumentsDirectory()
+        let tempPath = ComicFinder.getTempDirectory()
+        
+        let cbzPath = documentsPath.path  + "/" + fileName + ".cbz"
+        print(fileManager.fileExists(atPath: cbzPath))
+        do {
+            try Zip.unzipFile(URL(fileURLWithPath: cbzPath), destination: tempPath, overwrite: true, password: nil) // Unzip
+            let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
+            
+            var comicPages = [Data]()
+            //This for it's just to avoid hidden files in the folder
+            for page in comicPagesPath {
+                if(page.contains(".jpg") || page.contains(".png")){ //Find the first image and break.
+                    comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
+                    break
+                }
+            }
+            
+            let newComic = Comic(name: fileName,path: cbzPath,cover: comicPages)
+            return newComic
+        } catch {
+            print("Error while enumerating files: \(error.localizedDescription)")
+            return nil
+        }
     }
     
     func removeComicsNoLongerExist(){
