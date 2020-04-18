@@ -27,7 +27,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         navigationItem.title = comic?.name ?? "Nulo"
         
-        comic?.comicsPages = ComicFinder.getComicPages(file: comic!)
+        
         loadingIndicator.startAnimating()
         self.view.bringSubviewToFront(bottomView)
         self.view.bringSubviewToFront(loadingIndicator)
@@ -43,6 +43,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
 
     
     override func viewDidAppear(_ animated: Bool) {
+        comic?.comicsPages = ComicFinder.getComicPages(file: comic!)
         prepareScrollView()
         createthumbNails(width: self.view.bounds.size.width)
         loadingIndicator.startAnimating()
@@ -84,35 +85,39 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     func createthumbNails(width: CGFloat){
         
-        for view in bottomView.subviews{
-            for subView in view.subviews{
-                subView.removeFromSuperview()
+        DispatchQueue.global(qos: .background).async {
+            for view in self.bottomView.subviews{
+                for subView in view.subviews{
+                    subView.removeFromSuperview()
+                }
+                view.removeFromSuperview()
             }
-            view.removeFromSuperview()
-        }
-        
-        
-        if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
-            let pageNumbInCGFloat = (comic?.comicsPages!.count)!
-            thumbnailWith = (width - thumbnailWith) / CGFloat(pageNumbInCGFloat)
-        }else{
-            thumbnailWith = 50
-        }
-        
-        let bottomScrollView = UIScrollView(frame: CGRect(x: thumbnailWith / 3, y: 0, width: width - thumbnailWith, height: bottomView.frame.size.height))
-        bottomScrollView.contentSize = CGSize(width: thumbnailWith * CGFloat((comic?.comicsPages!.count)!), height: bottomView.frame.size.height)
-        
-        for i in 0...((comic?.comicsPages!.count)! - 1){
-            let image = UIImage(data: (comic?.comicsPages![i])!)
-            let imageView = UIImageView(frame: CGRect(x: thumbnailWith * CGFloat(i), y: 0, width: 50, height: 75))
             
-            imageView.image = image
-            imageView.contentMode = .scaleAspectFit
             
-            bottomScrollView.addSubview(imageView)
+            if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
+                let pageNumbInCGFloat = (self.comic?.comicsPages!.count)!
+                self.thumbnailWith = (width - self.thumbnailWith) / CGFloat(pageNumbInCGFloat)
+            }else{
+                self.thumbnailWith = 50
+            }
+            
+            let bottomScrollView = UIScrollView(frame: CGRect(x: self.thumbnailWith / 3, y: 0, width: width - self.thumbnailWith, height: self.bottomView.frame.size.height))
+            bottomScrollView.contentSize = CGSize(width: self.thumbnailWith * CGFloat((self.comic?.comicsPages!.count)!), height: self.bottomView.frame.size.height)
+            
+            for i in 0...((self.comic?.comicsPages!.count)! - 1){
+                let image = UIImage(data: (self.comic?.comicsPages![i])!)
+                let imageView = UIImageView(frame: CGRect(x: self.thumbnailWith * CGFloat(i), y: 0, width: 50, height: 75))
+                
+                imageView.image = image
+                imageView.contentMode = .scaleAspectFit
+                
+                bottomScrollView.addSubview(imageView)
+            }
+            DispatchQueue.main.async {
+                self.bottomView.addSubview(bottomScrollView)
+            }
         }
         
-        bottomView.addSubview(bottomScrollView)
     }
     
     func loadPages(width: CGFloat,heigth: CGFloat){
