@@ -10,5 +10,6 @@ target 'ComicReader' do
   # Pods for ComicReader
   pod 'Zip', '~> 1.1'
   pod 'LzmaSDK-ObjC', :inhibit_warnings => true
+  pod "UnrarKit"
 
 end

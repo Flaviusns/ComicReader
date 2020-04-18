@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,7 @@
 		75627F3A24211C3F0006D08A /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75627F3924211C3F0006D08A /* Comic.swift */; };
 		75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75627F3B242124FC0006D08A /* ComicLecture.swift */; };
 		759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */; };
+		75E1D912244AFFEC0016261D /* DecompressRar.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1D911244AFFEC0016261D /* DecompressRar.m */; };
 		C420559A14164B72FF1DF165 /* Pods_ComicReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9FFF9EED45EE518CFEBD01 /* Pods_ComicReader.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,9 @@
 		75627F3924211C3F0006D08A /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		75627F3B242124FC0006D08A /* ComicLecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicLecture.swift; sourceTree = "<group>"; };
 		759B393E242F98F300D73586 /* ComicReaderModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ComicReaderModel.xcdatamodel; sourceTree = "<group>"; };
+		75E1D910244AFFEC0016261D /* ComicReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ComicReader-Bridging-Header.h"; sourceTree = "<group>"; };
+		75E1D911244AFFEC0016261D /* DecompressRar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DecompressRar.m; sourceTree = "<group>"; };
+		75E1D913244B01000016261D /* DecompressRar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DecompressRar.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,9 @@
 				751D9A7924214DDF00BBAC10 /* ComicFinder.swift */,
 				759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */,
 				753B06392440B0DC002946A4 /* ComicError.swift */,
+				75E1D911244AFFEC0016261D /* DecompressRar.m */,
+				75E1D910244AFFEC0016261D /* ComicReader-Bridging-Header.h */,
+				75E1D913244B01000016261D /* DecompressRar.h */,
 			);
 			path = ComicReader;
 			sourceTree = "<group>";
@@ -146,6 +153,7 @@
 				TargetAttributes = {
 					75627F1F242118D40006D08A = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
@@ -232,6 +240,7 @@
 				759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */,
 				75627F3824211A830006D08A /* ComicMiniature.swift in Sources */,
 				75627F28242118D40006D08A /* ViewController.swift in Sources */,
+				75E1D912244AFFEC0016261D /* DecompressRar.m in Sources */,
 				75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */,
 				75627F3A24211C3F0006D08A /* Comic.swift in Sources */,
 				751D9A7A24214DDF00BBAC10 /* ComicFinder.swift in Sources */,
@@ -381,6 +390,7 @@
 			baseConfigurationReference = 3C9F9D95C62A1BB06580A265 /* Pods-ComicReader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N997Q2Y7ME;
 				INFOPLIST_FILE = ComicReader/Info.plist;
@@ -391,6 +401,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.flavius.ComicReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ComicReader/ComicReader-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -401,6 +413,7 @@
 			baseConfigurationReference = 25E1B262260C0E1A166085B9 /* Pods-ComicReader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N997Q2Y7ME;
 				INFOPLIST_FILE = ComicReader/Info.plist;
@@ -411,6 +424,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.flavius.ComicReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ComicReader/ComicReader-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -1,10 +1,10 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/LzmaSDK-ObjC" "${PODS_CONFIGURATION_BUILD_DIR}/Zip"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/LzmaSDK-ObjC" "${PODS_CONFIGURATION_BUILD_DIR}/UnrarKit" "${PODS_CONFIGURATION_BUILD_DIR}/Zip"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/LzmaSDK-ObjC/LzmaSDK_ObjC.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Zip/Zip.framework/Headers"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/LzmaSDK-ObjC/LzmaSDK_ObjC.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/UnrarKit/UnrarKit.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/Zip/Zip.framework/Headers"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_CONFIGURATION_BUILD_DIR}/LzmaSDK-ObjC/LzmaSDK_ObjC.framework/Headers" -iframework "${PODS_CONFIGURATION_BUILD_DIR}/LzmaSDK-ObjC"
-OTHER_LDFLAGS = $(inherited) -l"c++" -l"z" -framework "LzmaSDK_ObjC" -framework "Zip"
+OTHER_LDFLAGS = $(inherited) -l"c++" -l"z" -framework "LzmaSDK_ObjC" -framework "UnrarKit" -framework "Zip"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

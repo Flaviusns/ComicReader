@@ -9,6 +9,56 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
+				<string>rar</string>
+				<string>RAR</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>rar</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>application/rar</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>RAR archive</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.rarlab.rar-archive</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cbr</string>
+				<string>CBR</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>cbr</string>
+			<key>CFBundleTypeName</key>
+			<string>Comic Rar</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.macitbetter.cbr-archive</string>
+				<string>public.cbr-archive</string>
+				<string>cx.c3.cbr-archive</string>
+				<string>com.bitcartel.comicbooklover.cbr</string>
+				<string>com.milke.cbr-archive</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
 				<string>cb7</string>
 				<string>CB7</string>
 			</array>
@@ -174,6 +224,109 @@
 				<string>public.archive</string>
 			</array>
 			<key>UTTypeDescription</key>
+			<string>RAR Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>sc_rar</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.rarlab.rar-archive</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>rar</string>
+					<string>RAR</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/x-rar</string>
+					<string>application/x-rar-compressed</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data </string>
+				<string>public.archive </string>
+				<string>public.zip-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Comic Book Zip Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>sc_cbz</string>
+			<key>UTTypeIdentifier</key>
+			<string>cx.c3.cbz-archive</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>CBZ</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cbz</string>
+					<string>CBZ</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data </string>
+				<string>public.archive </string>
+				<string>com.rarlab.rar-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Comic Book Rar Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>sc_cbr</string>
+			<key>UTTypeIdentifier</key>
+			<string>cx.c3.cbr-archive</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>CBR</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cbr</string>
+					<string>CBR</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data </string>
+				<string>public.archive </string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Comic Book 7-Zip Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>sc_7z</string>
+			<key>UTTypeIdentifier</key>
+			<string>cx.c3.cb7-archive</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>CB7</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cb7</string>
+					<string>CB7</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+				<string>public.archive</string>
+			</array>
+			<key>UTTypeDescription</key>
 			<string>7z Archive</string>
 			<key>UTTypeIconFile</key>
 			<string>sc_7z</string>
@@ -219,57 +372,6 @@
 				<key>public.mime-type</key>
 				<array>
 					<string>application/x-cb7-compressed</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data </string>
-				<string>public.archive </string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Comic Book 7-Zip Archive</string>
-			<key>UTTypeIconFile</key>
-			<string>sc_7z</string>
-			<key>UTTypeIdentifier</key>
-			<string>cx.c3.cb7-archive</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>com.apple.ostype</key>
-				<array>
-					<string>CB7</string>
-				</array>
-				<key>public.filename-extension</key>
-				<array>
-					<string>cb7</string>
-					<string>CB7</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-				<string>public.archive</string>
-				<string>public.zip-archive</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Comic Book Zip Archive</string>
-			<key>UTTypeIconFiles</key>
-			<array/>
-			<key>UTTypeIdentifier</key>
-			<string>cx.c3.cbz-archive</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>com.apple.ostype</key>
-				<array>
-					<string>CBZ</string>
-				</array>
-				<key>public.filename-extension</key>
-				<array>
-					<string>cbz</string>
-					<string>CBZ</string>
 				</array>
 			</dict>
 		</dict>

@@ -64,6 +64,23 @@ class ComicFinder{
                         }
                     }
                 }
+                else if(item.contains(".cbr")){
+                    let fileName = item.split(separator: ".")[0]
+                    
+                    if !savedComics.contains(String(fileName)){
+                        
+                        if let newComic = decompressCBR(fileName: String(fileName)){
+                            saveNewComic(comicToSave: newComic)
+                            
+                            //Remove the comic from the temp directory
+                            do{
+                                try fileManager.removeItem(at: URL(fileURLWithPath: tempPath.path + "/" + fileName))
+                            } catch {
+                                print("Unable to delete the temp folder")
+                            }
+                        }
+                    }
+                }
             }
         } catch {
             print("Error while enumerating files: \(error.localizedDescription)")
@@ -93,6 +110,41 @@ class ComicFinder{
             
             let newComic = Comic(name: fileName,path: cbzPath,cover: comicPages,fileExt: ".cbz")
             return newComic
+        } catch {
+            print("Error while enumerating files: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    func decompressCBR(fileName:String) -> Comic?{
+        let fileManager = FileManager.default
+        let documentsPath = ComicFinder.getDocumentsDirectory()
+        let tempPath = ComicFinder.getTempDirectory()
+        
+        let cbrPath = documentsPath.path  + "/" + fileName + ".cbr"
+        print(fileManager.fileExists(atPath: cbrPath))
+        let extractURL = tempPath.path + "/" + fileName
+        do {
+            try fileManager.createDirectory(atPath: extractURL, withIntermediateDirectories: false, attributes: nil)
+            let decompressRarClass = DecompressRar()
+            let extractResult = decompressRarClass.extractFile(cbrPath, withSecond: extractURL)
+            if extractResult {
+                let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
+                
+                var comicPages = [Data]()
+                //This for it's just to avoid hidden files in the folder
+                for page in comicPagesPath {
+                    if(page.contains(".jpg") || page.contains(".png")){ //Find the first image and break.
+                        comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
+                        break
+                    }
+                }
+                
+                let newComic = Comic(name: fileName,path: cbrPath,cover: comicPages,fileExt: ".cbr")
+                return newComic
+            }
+            return nil
+            
         } catch {
             print("Error while enumerating files: \(error.localizedDescription)")
             return nil
@@ -318,7 +370,8 @@ class ComicFinder{
                         comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
                     }
                 }
-            }else if file.fileExtension == ".cb7"{
+            }
+            else if file.fileExtension == ".cb7"{
                 let finalURL = URL(fileURLWithPath: tempPath.path + "/" + file.name + ".7z")
                 try fileManager.copyItem(at: URL(fileURLWithPath: completePath), to: finalURL)
                 let reader = LzmaSDKObjCReader(fileURL: finalURL)
@@ -341,6 +394,32 @@ class ComicFinder{
                     }
                 }
                 try fileManager.removeItem(at: finalURL)
+            }
+            else if file.fileExtension == ".cbr"{
+                
+                let extractURL = tempPath.path + "/" + file.name
+                do {
+                    try fileManager.createDirectory(atPath: extractURL, withIntermediateDirectories: false, attributes: nil)
+                    let decompressRarClass = DecompressRar()
+                    let extractResult = decompressRarClass.extractFile(completePath, withSecond: extractURL)
+                    if extractResult {
+                        let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/").sorted()
+                        
+                        
+                        //This for it's just to avoid hidden files in the folder
+                        for page in comicPagesPath {
+                            if(page.contains(".jpg") || page.contains(".png")){ //Find the first image and break.
+                                comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
+                            }
+                        }
+                        
+                    }
+                    
+                    try fileManager.removeItem(atPath: extractURL)
+                    
+                } catch {
+                    print("Error while enumerating files: \(error.localizedDescription)")
+                }
             }
             
         } catch let error{
@@ -365,7 +444,8 @@ class ComicFinder{
     
     func removeComic(comicToRemoveName: String) -> Bool{
         let docPath = ComicFinder.getDocumentsDirectory()
-        let comicFile = comicToRemoveName + ".cbz"
+        let comicExtension = getComicExtension(comicName: comicToRemoveName)
+        let comicFile = comicToRemoveName + comicExtension
         do {
             removeComicFromDataBase(comicToRemoveName: comicToRemoveName)
             try FileManager.default.removeItem(atPath: docPath.path + "/" + comicFile)
@@ -421,6 +501,7 @@ class ComicFinder{
 
     }
     
+    
     private func removeComicFromDataBase(comicToRemoveName: String){
         let managedContext = container.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicEntity")
@@ -444,6 +525,29 @@ class ComicFinder{
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
         
+    }
+    
+    private func getComicExtension(comicName: String) -> String{
+        let managedContext = container.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicEntity")
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "name = %@", comicName)
+        do {
+            let result = try managedContext.fetch(request)
+            if result.isEmpty{
+                print("Empty Result")
+                return ""
+            }
+            else{
+                guard let entity = result[0] as? NSManagedObject else{
+                    fatalError("Unresolved error")
+                }
+                let comicExtension = entity.value(forKey: "fileextension") as! String
+                return comicExtension
+            }
+        } catch {
+            return ""
+        }
     }
     
     func toggleFavComic(comicName: String){
