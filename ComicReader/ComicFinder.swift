@@ -122,9 +122,12 @@ class ComicFinder{
         let tempPath = ComicFinder.getTempDirectory()
         
         let cbrPath = documentsPath.path  + "/" + fileName + ".cbr"
-        print(fileManager.fileExists(atPath: cbrPath))
+        
         let extractURL = tempPath.path + "/" + fileName
         do {
+            if fileManager.fileExists(atPath: extractURL){
+                try fileManager.removeItem(at: URL(fileURLWithPath: extractURL))
+            }
             try fileManager.createDirectory(atPath: extractURL, withIntermediateDirectories: false, attributes: nil)
             let decompressRarClass = DecompressRar()
             let extractResult = decompressRarClass.extractFile(cbrPath, withSecond: extractURL)

@@ -85,7 +85,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     func createthumbNails(width: CGFloat){
         
-        DispatchQueue.global(qos: .background).async {
+        
             for view in self.bottomView.subviews{
                 for subView in view.subviews{
                     subView.removeFromSuperview()
@@ -116,7 +116,6 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
             DispatchQueue.main.async {
                 self.bottomView.addSubview(bottomScrollView)
             }
-        }
         
     }
     
