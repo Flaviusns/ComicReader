@@ -2,10 +2,159 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIFileSharingEnabled</key>
-	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>rar</string>
+				<string>RAR</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>rar</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>application/rar</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>RAR archive</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.rarlab.rar-archive</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cbr</string>
+				<string>CBR</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>cbr</string>
+			<key>CFBundleTypeName</key>
+			<string>Comic Rar</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.macitbetter.cbr-archive</string>
+				<string>public.cbr-archive</string>
+				<string>cx.c3.cbr-archive</string>
+				<string>com.bitcartel.comicbooklover.cbr</string>
+				<string>com.milke.cbr-archive</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cb7</string>
+				<string>CB7</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>cb7</string>
+			<key>CFBundleTypeName</key>
+			<string>Comic 7-Zip</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.macitbetter.cb7-archive</string>
+				<string>public.cb7-archive</string>
+				<string>cx.c3.cb7-archive</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>7z</string>
+				<string>7Z</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>7z</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>application/x-7z-compressed</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>7-Zip Archive</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>org.7-zip.7-zip-archive</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>zip</string>
+				<string>ZIP</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>zip</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>application/zip</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>ZIP archive</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.zip-archive</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>cbz</string>
+				<string>CBZ</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>cbz</string>
+			<key>CFBundleTypeName</key>
+			<string>Comic Zip</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.macitbetter.cbz-archive</string>
+				<string>public.cbz-archive</string>
+				<string>cx.c3.cbz-archive</string>
+				<string>com.milke.cbz-archive</string>
+				<string>com.bitcartel.comicbooklover.cbz</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,10 +166,12 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
@@ -41,6 +192,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -55,14 +208,173 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+				<string>public.archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>RAR Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>sc_rar</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.rarlab.rar-archive</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>rar</string>
+					<string>RAR</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/x-rar</string>
+					<string>application/x-rar-compressed</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data </string>
+				<string>public.archive </string>
+				<string>public.zip-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Comic Book Zip Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>sc_cbz</string>
+			<key>UTTypeIdentifier</key>
+			<string>cx.c3.cbz-archive</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>CBZ</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cbz</string>
+					<string>CBZ</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data </string>
+				<string>public.archive </string>
+				<string>com.rarlab.rar-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Comic Book Rar Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>sc_cbr</string>
+			<key>UTTypeIdentifier</key>
+			<string>cx.c3.cbr-archive</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>CBR</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cbr</string>
+					<string>CBR</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data </string>
+				<string>public.archive </string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Comic Book 7-Zip Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>sc_7z</string>
+			<key>UTTypeIdentifier</key>
+			<string>cx.c3.cb7-archive</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>CB7</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cb7</string>
+					<string>CB7</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+				<string>public.archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>7z Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>sc_7z</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.7-zip.7-zip-archive</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>7z</string>
+					<string>7Z</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/x-7z-compressed</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+				<string>public.archive</string>
+				<string>org.7-zip.7-zip-archive</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>7z Comic Archive Archive</string>
+			<key>UTTypeIconFile</key>
+			<string>sc_7z</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.7-zip.7-zip-comic-archive</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>CB7</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cb7</string>
+					<string>CB7</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/x-cb7-compressed</string>
+				</array>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>

@@ -1,0 +1,6 @@
+framework module Pods_ComicReader {
+  umbrella header "Pods-ComicReader-umbrella.h"
+
+  export *
+  module * { export * }
+}
