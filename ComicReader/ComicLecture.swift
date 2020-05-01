@@ -11,6 +11,7 @@ import UIKit
 class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     var comic: Comic? = nil
+    var comicFinder: ComicFinder? = nil
     var currentPage = 0
     var hideNavBar = false
     var totalWidth : CGFloat = 0.0
@@ -50,11 +51,17 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         loadingIndicator.removeFromSuperview()
         
         PageIndicator.isHidden = false
-        PageIndicator.text = "1 of \((comic?.comicsPages!.count)!)"
+        currentPage = comic?.lastPage ?? 0
+        PageIndicator.text = "\(currentPage + 1) of \((comic?.comicsPages!.count)!)"
+        scrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.view.bounds.size.width),y: 0), animated: true)
+        let subscrollView = self.bottomView.subviews[0] as! UIScrollView
+        subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
         self.view.bringSubviewToFront(PageIndicator)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        comicFinder?.saveLastPage(comicName: comic!.name, lastPage: currentPage + 1 == (comic?.comicsPages!.count)! ? 0 : currentPage)
         ComicFinder.removeTempComic(fileName: comic!.name)
     }
     
@@ -113,9 +120,10 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
                 
                 bottomScrollView.addSubview(imageView)
             }
-            DispatchQueue.main.async {
-                self.bottomView.addSubview(bottomScrollView)
-            }
+        
+            
+            self.bottomView.addSubview(bottomScrollView)
+            
         
     }
     

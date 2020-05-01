@@ -15,21 +15,16 @@ class Comic :NSObject{
     var comicsPages: [Data]?
     var favorite: Bool
     var fileExtension: String
+    var lastPage: Int?
+
     
-    init(name:String,path:String,comicsPages:[Data]?,fileExt: String){
-        self.name = name
-        self.path = path
-        self.comicsPages = comicsPages
-        self.favorite = false
-        self.fileExtension = fileExt
-    }
-    
-    init(name:String,path:String,cover:Data,fileExt: String,fav: Bool = false){
+    init(name:String,path:String,cover:Data,fileExt: String,lastPage: Int,fav: Bool = false){
         self.name = name
         self.path = path
         self.comicsPages = [cover]
         self.favorite = fav
         self.fileExtension = fileExt
+        self.lastPage = lastPage
     }
     
     
@@ -40,6 +35,5 @@ class Comic :NSObject{
         self.favorite = false
         self.fileExtension = fileExt
     }
-    
     
 }

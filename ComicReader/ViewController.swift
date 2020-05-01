@@ -168,6 +168,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             selectedComic = comics[indexPath[1]]
             if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
                 nextVC.comic = selectedComic
+                nextVC.comicFinder = comicsFinder
                 navigationController?.pushViewController(nextVC, animated: true)
             }
         case .edit:
