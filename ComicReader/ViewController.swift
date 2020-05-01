@@ -15,6 +15,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     var comics = [Comic]()
     var selectedComic : Comic? = nil
     var selectedComics = [String]()
+    var favSelected = false
     lazy var persistentContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "ComicReaderModel")
@@ -45,7 +46,10 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     lazy var share: UIBarButtonItem = {
         UIBarButtonItem.init(barButtonSystemItem: .action, target: self, action: #selector(shareSelection))
     }()
-    
+    lazy var filter: UIBarButtonItem = {
+        let image = self.favSelected ? UIImage(named: "FavSelectedMini") : UIImage(named: "FavUnselectedMini")
+        return UIBarButtonItem.init(image: image, style: .plain, target: self, action: #selector(getFavorites))
+    }()
     enum viewMode {
         case view
         case edit
@@ -55,7 +59,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         didSet{
             switch viewM {
             case .view:
-                navigationItem.rightBarButtonItem = nil
+                navigationItem.rightBarButtonItem = filter
                 navigationItem.leftBarButtonItems = [edit]
                 collectionView.allowsMultipleSelection = false
             case .edit:
@@ -236,6 +240,21 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             sender.setImage(UIImage(named: "FavSelected"), for: .normal)
         }
         comic?.favorite.toggle()
+    }
+    
+    @objc func getFavorites(){
+        favSelected.toggle()
+        
+        if favSelected{
+            comics = comicsFinder.getFavComics()
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "FavSelectedMini")
+            collectionView.reloadData()
+        }else{
+            comics = comicsFinder.getSavedComics()
+            navigationItem.rightBarButtonItem?.image = UIImage(named: "FavUnselectedMini")
+            collectionView.reloadData()
+        }
+        
     }
     
     //MARK: Search Bar

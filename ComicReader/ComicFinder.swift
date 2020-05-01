@@ -273,7 +273,7 @@ class ComicFinder{
         do{
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicEntity")
             request.returnsObjectsAsFaults = false
-            request.predicate = NSPredicate(format: "favorite = %@", true)
+            request.predicate = NSPredicate(format: "favorite == true")
             let result = try container.viewContext.fetch(request)
             if result.isEmpty{
                 print("Empty fav collection")
