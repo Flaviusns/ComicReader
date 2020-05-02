@@ -206,6 +206,8 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     func changeCurrentPage(currentPage: Int){
         PageIndicator.text = "\(currentPage + 1) of \((comic?.comicsPages!.count)!)"
+        let subscrollView = self.bottomView.subviews[0] as! UIScrollView
+        subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
     }
 }
 
