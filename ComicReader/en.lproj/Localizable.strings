@@ -1,0 +1,48 @@
+/* No comment provided by engineer. */
+"AddFavourite" = "Add to favorite";
+
+/* No comment provided by engineer. */
+"DeleteComic" = "Delete comic";
+
+/* No comment provided by engineer. */
+"EmptyCollection" = "Your collection it's empty.";
+
+/* No comment provided by engineer. */
+"EmptyCollectionMessage" = "Try to add some comics and see how your collection grows.";
+
+/* No comment provided by engineer. */
+"ErrorInFile" = "Error in file";
+
+/* No comment provided by engineer. */
+"InvalidFileMessage" = "It seems that some files are invalid files, please check the instruction with the files.";
+
+/* No comment provided by engineer. */
+"MoreInfo" = "More info";
+
+/* No comment provided by engineer. */
+"MyComics" = "My Comics";
+
+/* No comment provided by engineer. */
+"NoItemMatch" = "No item match";
+
+/* No comment provided by engineer. */
+"NoItemMatchMessage" = "Try with other search.";
+
+/* No comment provided by engineer. */
+"NotFavorites" = "You don't have any favourite comic";
+
+/* No comment provided by engineer. */
+"NotFavoritesMessage" = "Try to add some comics to your favourite list.";
+
+/* No comment provided by engineer. */
+"RemoveFavourite" = "Remove from favourite";
+
+/* No comment provided by engineer. */
+"SearchComic" = "Search for comics";
+
+/* No comment provided by engineer. */
+"UnableDelete" = "Unable to delete";
+
+/* No comment provided by engineer. */
+"UnableDeleteMessage" = "The app cannot delete the comic.";
+

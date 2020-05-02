@@ -26,7 +26,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = comic?.name ?? "Nulo"
+        navigationItem.title = comic?.name ?? "Null"
         
         
         loadingIndicator.startAnimating()

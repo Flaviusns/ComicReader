@@ -1,0 +1,54 @@
+/* No comment provided by engineer. */
+"AddFavourite" = "Añadir a favoritos";
+
+/* No comment provided by engineer. */
+"DeleteComic" = "Borrar comic";
+
+/* No comment provided by engineer. */
+"EmptyCollection" = "Tu colección de comics está vacía";
+
+/* No comment provided by engineer. */
+"EmptyCollectionMessage" = "Prueba a añadir más comics y observa como tu colección crece";
+
+/* No comment provided by engineer. */
+"ErrorInFile" = "Fallo en el archivo";
+
+/* No comment provided by engineer. */
+"InvalidFileMessage" = "Parece ser que hay varios archivos invalidos, por favor comprueba las instrucciones relacionadas con los archivos";
+
+/* No comment provided by engineer. */
+"MoreInfo" = "Más información";
+
+/* No comment provided by engineer. */
+"MyComics" = "Mis Comics";
+
+/* No comment provided by engineer. */
+"NoItemMatch" = "Ningún item concuerda";
+
+/* No comment provided by engineer. */
+"NoItemMatchMessage" = "Prueba con otra búsqueda";
+
+/* No comment provided by engineer. */
+"NotFavorites" = "No tienes ningún comic en favoritos";
+
+/* No comment provided by engineer. */
+"NotFavoritesMessage" = "Prueba a añadir comics a la lista de favoritos";
+
+/* No comment provided by engineer. */
+"Ok" = "Ok";
+
+/* No comment provided by engineer. */
+"RemoveFavourite" = "Borrar de favoritos";
+
+/* No comment provided by engineer. */
+"SearchComic" = "Buscar comics";
+
+/* No comment provided by engineer. */
+"Share" = "Compartir";
+
+/* No comment provided by engineer. */
+"UnableDelete" = "Incapaz de borrar";
+
+/* No comment provided by engineer. */
+"UnableDeleteMessage" = "La aplicación es incapaz de borrar el comic";
+
