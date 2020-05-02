@@ -8,9 +8,9 @@
 
 import UIKit
 import CoreData
+import SafariServices
 
-
-class ViewController: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+class ViewController: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating, SFSafariViewControllerDelegate {
     //MARK: View Variables
     var comics = [Comic]()
     var selectedComic : Comic? = nil
@@ -70,6 +70,28 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         }
     }
     
+    var presentErrorinFile = false {
+        didSet{
+            if presentErrorinFile==true{
+                let alert = UIAlertController(title: "Error in file", message: "It seems that some files are invalid files, please check the instruction with the files", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "More info", style: .default, handler: {
+                    _ in
+                    let urlString = "https://www.apple.com/"
+                    
+                    if let url = URL(string: urlString) {
+                        let vc = SFSafariViewController(url: url)
+                        vc.delegate = self
+                        
+                        self.present(vc, animated: true)
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true)
+                }
+        }
+    }
+    
     //MARK: View Functions
     
     override func viewDidLoad() {
@@ -115,6 +137,11 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             self.comicsFinder.removeComicsNoLongerExist()
             self.comics = self.comicsFinder.getSavedComics()
             DispatchQueue.main.async {
+                if self.comicsFinder.getErrorInFile(){
+                    self.presentErrorinFile = true
+                }else{
+                    self.presentErrorinFile = false
+                }
                 self.collectionView.reloadData()
             }
         }
@@ -303,6 +330,11 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         self.selectedComics.removeAll()
         self.comicsFinder.updateStorageComics()
         self.comics = self.comicsFinder.getSavedComics()
+        if self.comicsFinder.getErrorInFile(){
+            self.presentErrorinFile = true
+        }else{
+            self.presentErrorinFile = false
+        }
         collectionView.reloadData()
         collectionView.refreshControl?.endRefreshing()
     }
@@ -313,9 +345,19 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             self.comicsFinder.removeComicsNoLongerExist()
             self.comics = self.comicsFinder.getSavedComics()
             DispatchQueue.main.async {
+                if self.comicsFinder.getErrorInFile(){
+                    self.presentErrorinFile = true
+                }else{
+                    self.presentErrorinFile = false
+                }
                 self.collectionView.reloadData()
             }
         }
+    }
+    
+    //MARK: Safari view
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true)
     }
     
     

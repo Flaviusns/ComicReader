@@ -14,6 +14,7 @@ import LzmaSDK_ObjC
 class ComicFinder{
     
     var container: NSPersistentContainer!
+    var errorInFile = false
     
     init(container: NSPersistentContainer!) {
         self.container = container
@@ -112,6 +113,7 @@ class ComicFinder{
             return newComic
         } catch {
             print("Error while enumerating files: \(error.localizedDescription)")
+            errorInFile = true
             return nil
         }
     }
@@ -147,12 +149,14 @@ class ComicFinder{
                 return newComic
             }else{
                 do{//If the file is not a valid Rar file, remove it from the system
+                    errorInFile = true
                     try fileManager.removeItem(atPath: cbrPath)
                 }
             }
             return nil
             
         } catch {
+            errorInFile = true
             print("Error while enumerating files: \(error.localizedDescription)")
             return nil
         }
@@ -195,10 +199,12 @@ class ComicFinder{
                 try fileManager.removeItem(at: finalURL)
                 return newComic
             } catch {
+                errorInFile = true
                 print("Error while enumerating files: \(error.localizedDescription)")
                 return nil
             }
         }
+        errorInFile = true
         return nil
         
     }
@@ -616,6 +622,14 @@ class ComicFinder{
     func getPathofComic(comicName: String) -> String{
         let documentPath = ComicFinder.getDocumentsDirectory()
         return documentPath.path + "/" + comicName + ".cbz"
+    }
+    
+    func getErrorInFile() -> Bool{
+        let error = errorInFile
+        if error{
+            errorInFile.toggle()
+        }
+        return error
     }
     
 }
