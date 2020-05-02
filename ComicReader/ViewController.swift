@@ -144,6 +144,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 self.collectionView.reloadData()
             }
         }
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     

@@ -20,6 +20,10 @@ class ComicFinder{
         self.container = container
     }
     
+    init(){
+        
+    }
+    
     
     func updateStorageComics(){
         

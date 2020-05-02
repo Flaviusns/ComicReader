@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ym6-6K-UKS">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iYc-Gh-00O">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,7 +14,7 @@
             <objects>
                 <collectionViewController id="8Wt-oJ-2Ut" customClass="ViewController" customModule="ComicReader" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="23Y-1p-sEV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m1R-1H-ByJ">
@@ -103,11 +103,11 @@
             <objects>
                 <viewController storyboardIdentifier="ComicLectureTop" useStoryboardIdentifierAsRestorationIdentifier="YES" id="t4d-k2-NWa" customClass="ComicLecture" customModule="ComicReader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="ComicLecture" id="Rn4-oW-ZCt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ej-cP-Got">
-                                <rect key="frame" x="309" y="138" width="75" height="21"/>
+                                <rect key="frame" x="270" y="94" width="75" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Hns-H1-IIw"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="sRt-DU-DTK"/>
@@ -117,18 +117,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="R5N-m3-yPj">
-                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                                 <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEH-Wj-Hbu">
-                                <rect key="frame" x="0.0" y="787" width="414" height="75"/>
+                                <rect key="frame" x="0.0" y="543" width="375" height="75"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="ovY-Tw-2c7"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqV-mV-SC4">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="HkD-UH-tUN"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="b8R-rL-gga"/>
@@ -159,13 +159,78 @@
             </objects>
             <point key="canvasLocation" x="3582.608695652174" y="115.84821428571428"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="mj5-3l-bqh">
+            <objects>
+                <tabBarController id="iYc-Gh-00O" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mmx-Zr-F21">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ym6-6K-UKS" kind="relationship" relationship="viewControllers" id="WQ9-hA-Jcs"/>
+                        <segue destination="3Fp-ct-4nn" kind="relationship" relationship="viewControllers" id="wJ2-ZD-YVf"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rFs-Gg-xcM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-20" y="339"/>
+        </scene>
+        <!--Comic Scanner-->
+        <scene sceneID="OgU-Ne-lsH">
+            <objects>
+                <viewController title="Comic Scanner" id="zJI-rs-n6A" customClass="CameraScanner" customModule="ComicReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P4O-eg-icZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRk-45-Thz">
+                                <rect key="frame" x="137" y="480" width="100" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Scan Page"/>
+                                <connections>
+                                    <action selector="openCamera:" destination="zJI-rs-n6A" eventType="touchUpInside" id="BF3-1F-hmM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u85-3j-DsT">
+                                <rect key="frame" x="144" y="544" width="86" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Save Comic"/>
+                                <connections>
+                                    <action selector="saveComic:" destination="zJI-rs-n6A" eventType="touchUpInside" id="xyk-wi-MdK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="u85-3j-DsT" firstAttribute="top" secondItem="aRk-45-Thz" secondAttribute="bottom" constant="34" id="2WX-rS-sSf"/>
+                            <constraint firstItem="Mds-NO-HpS" firstAttribute="trailing" secondItem="u85-3j-DsT" secondAttribute="trailing" constant="145" id="H5F-Lr-iSP"/>
+                            <constraint firstItem="u85-3j-DsT" firstAttribute="leading" secondItem="Mds-NO-HpS" secondAttribute="leading" constant="144" id="MGL-30-oQa"/>
+                            <constraint firstItem="aRk-45-Thz" firstAttribute="leading" secondItem="Mds-NO-HpS" secondAttribute="leading" constant="137" id="YGD-uJ-aka"/>
+                            <constraint firstItem="Mds-NO-HpS" firstAttribute="trailing" secondItem="aRk-45-Thz" secondAttribute="trailing" constant="138" id="f88-yO-7OF"/>
+                            <constraint firstItem="Mds-NO-HpS" firstAttribute="bottom" secondItem="u85-3j-DsT" secondAttribute="bottom" constant="44" id="pdI-mM-NSz"/>
+                            <constraint firstItem="aRk-45-Thz" firstAttribute="top" secondItem="Mds-NO-HpS" secondAttribute="top" constant="436" id="x5C-rF-NzP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Mds-NO-HpS"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Qnf-VQ-PPh"/>
+                    <connections>
+                        <outlet property="ScanButton" destination="aRk-45-Thz" id="GBQ-yn-MZ5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wll-UQ-tkc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2644" y="849.62518740629696"/>
+        </scene>
+        <!--Collection-->
         <scene sceneID="ZZG-kY-t1t">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ym6-6K-UKS" sceneMemberID="viewController">
+                <navigationController title="Collection" automaticallyAdjustsScrollViewInsets="NO" id="ym6-6K-UKS" userLabel="Collection" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Collection" image="FavSelectedMini" id="155-nq-vww"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gRi-R8-cDH">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -177,9 +242,30 @@
             </objects>
             <point key="canvasLocation" x="1734.7826086956522" y="117.85714285714285"/>
         </scene>
+        <!--Comic Scanner-->
+        <scene sceneID="mZE-VM-qek">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Fp-ct-4nn" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Comic Scanner" image="FavUnselectedMini" id="e3Z-sd-emW"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PBJ-4c-yQG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zJI-rs-n6A" kind="relationship" relationship="rootViewController" id="JcK-Nk-gm2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IcV-6t-I19" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1734.7826086956522" y="849.77678571428567"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="FavSelectedMini" width="30" height="27"/>
         <image name="FavUnselected" width="50" height="45"/>
+        <image name="FavUnselectedMini" width="30" height="27"/>
         <image name="Unselected" width="51" height="51"/>
     </resources>
 </document>
