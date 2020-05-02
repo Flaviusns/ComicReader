@@ -151,10 +151,28 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     //MARK: override CollectionView
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searchActive {
+            if filtered.count == 0 {
+                collectionView.setEmptyView(title: "No item match.", message: "Try with other search.")
+            } else {
+                collectionView.restore()
+            }
             return filtered.count
         }
         else
         {
+            if favSelected {
+                if comics.count == 0 {
+                    collectionView.setEmptyView(title: "You don't have any favorite.", message: "Try to add some comics to your favorite list.")
+                } else {
+                    collectionView.restore()
+                }
+            }else{
+                if comics.count == 0 {
+                    collectionView.setEmptyView(title: "You collection it's empty.", message: "Try to add some comics and see how your collection grows.")
+                } else {
+                    collectionView.restore()
+                }
+            }
             return comics.count
         }
     }
@@ -418,6 +436,37 @@ extension ViewController{
         
         // Create and return a UIMenu with the share action
         return UIMenu(title: comic.name, children: [favorite,share,deleted])
+    }
+}
+
+// MARK: UICollectionView extension
+extension UICollectionView {
+    func setEmptyView(title: String, message: String) {
+        let emptyView = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
+        let titleLabel = UILabel()
+        let messageLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textColor = .systemGray
+        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        messageLabel.textColor = .systemGray
+        messageLabel.font = UIFont.systemFont(ofSize: 17, weight: .thin)
+        emptyView.addSubview(titleLabel)
+        emptyView.addSubview(messageLabel)
+        titleLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+        messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
+        messageLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 20).isActive = true
+        messageLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -20).isActive = true
+        titleLabel.text = title
+        messageLabel.text = message
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        
+        self.backgroundView = emptyView
+    }
+    func restore() {
+        self.backgroundView = nil
     }
 }
 
