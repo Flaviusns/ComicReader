@@ -145,6 +145,10 @@ class ComicFinder{
                 
                 let newComic = Comic(name: fileName,path: cbrPath,cover: comicPages,fileExt: ".cbr")
                 return newComic
+            }else{
+                do{//If the file is not a valid Rar file, remove it from the system
+                    try fileManager.removeItem(atPath: cbrPath)
+                }
             }
             return nil
             
