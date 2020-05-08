@@ -14,10 +14,13 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
 
     @IBOutlet var ScanButton: UIButton!
     
+    @IBOutlet var SaveButton: UIButton!
+    
     var comicPages = [UIImage]()
     var numPages = 0
     var pageWidth: CGFloat = 0
     var pageHeight: CGFloat = 0
+    var comicName = "New Comic"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,17 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         pageHeight = height/2
         let scrollView = UIScrollView(frame: CGRect(x: 10, y: 50, width: width - 10, height: height / 2))
         self.view.addSubview(scrollView)
+        
+        navigationItem.title = NSLocalizedString("CreateComicTitle", comment: "")
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
+        ]
+        
+        SaveButton.isHidden = true
+        SaveButton.layer.cornerRadius = 4
+        
+        ScanButton.layer.cornerRadius = 4
+        
         
     }
     
@@ -68,26 +82,81 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             }
         }
         
+        if SaveButton.isHidden{
+            SaveButton.isHidden = false
+        }
+        
     }
     
     
     @IBAction func saveComic(_ sender: Any) {
-        let fileManager = FileManager.default
-        do {
-            var tempPath = FileManager.default.temporaryDirectory
-            tempPath.appendPathComponent("TestComic")
-            try fileManager.createDirectory(at: tempPath, withIntermediateDirectories: true, attributes: nil)
-            for image in comicPages{
-                let imageURL = tempPath.path + "/" + "0\(comicPages.firstIndex(of: image)!).png"
-                try image.fixOrientation()!.pngData()?.write(to: URL(fileURLWithPath: imageURL))
+        let alert = UIAlertController(title: NSLocalizedString("InputComicName", comment: ""), message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "")
+        })
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            
+            if let name = alert.textFields?.first?.text {
+                self.comicName = name
+                let fileManager = FileManager.default
+                do {
+                    var tempPath = FileManager.default.temporaryDirectory
+                    tempPath.appendPathComponent(self.comicName)
+                    //TODO: Check if the comic name exist already
+                    try fileManager.createDirectory(at: tempPath, withIntermediateDirectories: true, attributes: nil)
+                    for image in self.comicPages{
+                        let imageURL = tempPath.path + "/" + "0\(self.comicPages.firstIndex(of: image)!).jpeg"
+                        try image.fixOrientation()!.jpegData(compressionQuality: 0.5)?.write(to: URL(fileURLWithPath: imageURL))
+                    }
+                    var finalPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                    finalPath.appendPathComponent("\(self.comicName).cbz")
+                    try Zip.zipFiles(paths: [tempPath], zipFilePath: finalPath, password: nil, progress: nil)
+                    
+                    
+                    try fileManager.removeItem(at: tempPath) //Remove temp file
+                    
+                    for view in self.view.subviews{
+                        if let scrollView = view as? UIScrollView {
+                            for view in scrollView.subviews{
+                                view.removeFromSuperview()
+                            }
+                        }
+                    }
+                    
+                    let confirmAlert = UIAlertController(title: NSLocalizedString("ComicSaved", comment: ""), message: "", preferredStyle: .alert)
+                    
+                    confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+                    
+                    self.present(confirmAlert, animated: true)
+                } catch {
+                    print("Error")
+                }
             }
-            var finalPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            finalPath.appendPathComponent("TestComic.cbz")
-            try Zip.zipFiles(paths: [tempPath], zipFilePath: finalPath, password: nil, progress: nil)
-            print("Comic created")
-        } catch {
-            print("Error")
-        }
+        }))
+        
+        self.present(alert, animated: true)
+        
+    }
+    
+    private func presentAlertName(){
+        let alert = UIAlertController(title: NSLocalizedString("InputComicName", comment: ""), message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "")
+        })
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            
+            if let name = alert.textFields?.first?.text {
+                self.comicName = name
+            }
+        }))
+        
+        self.present(alert, animated: true)
     }
     
 }

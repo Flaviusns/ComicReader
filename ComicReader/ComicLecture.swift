@@ -27,6 +27,8 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
         
+        
+        
         navigationItem.title = comic?.name ?? "Null"
         
         

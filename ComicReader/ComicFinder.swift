@@ -107,7 +107,7 @@ class ComicFinder{
             var comicPages = [Data]()
             //This for it's just to avoid hidden files in the folder
             for page in comicPagesPath {
-                if(page.contains(".jpg") || page.contains(".png")){ //Find the first image and break.
+                if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
                     comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
                     break
                 }
@@ -143,7 +143,7 @@ class ComicFinder{
                 var comicPages = [Data]()
                 //This for it's just to avoid hidden files in the folder
                 for page in comicPagesPath {
-                    if(page.contains(".jpg") || page.contains(".png")){ //Find the first image and break.
+                    if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
                         comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
                         break
                     }
@@ -193,7 +193,7 @@ class ComicFinder{
                 var comicPages = [Data]()
                 //This for it's just to avoid hidden files in the folder
                 for page in comicPagesPath {
-                    if(page.contains(".jpg") || page.contains(".png")){ //Find the first image and break.
+                    if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
                         comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
                         break
                     }
@@ -387,7 +387,7 @@ class ComicFinder{
                 let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/").sorted()
                 
                 for page in comicPagesPath {
-                    if(page.contains(".jpg") || page.contains(".png")){
+                    if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){
                         comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
                     }
                 }
@@ -410,7 +410,7 @@ class ComicFinder{
                 let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/").sorted()
                 
                 for page in comicPagesPath {
-                    if(page.contains(".jpg") || page.contains(".png")){
+                    if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){
                         comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
                     }
                 }
@@ -429,7 +429,7 @@ class ComicFinder{
                         
                         //This for it's just to avoid hidden files in the folder
                         for page in comicPagesPath {
-                            if(page.contains(".jpg") || page.contains(".png")){ //Find the first image and break.
+                            if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
                                 comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
                             }
                         }
