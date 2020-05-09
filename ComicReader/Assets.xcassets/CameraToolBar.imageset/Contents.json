@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "FavSelectedMini.png",
+      "filename" : "CameraToolBar.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "FavSelectedMini@2x.png",
+      "filename" : "CameraToolBar@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "FavSelectedMini@3x.png",
+      "filename" : "CameraToolBar@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -254,7 +254,9 @@
         <scene sceneID="ZZG-kY-t1t">
             <objects>
                 <navigationController title="Collection" automaticallyAdjustsScrollViewInsets="NO" id="ym6-6K-UKS" userLabel="Collection" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Collection" image="FavSelectedMini" id="155-nq-vww"/>
+                    <tabBarItem key="tabBarItem" title="Collection" image="ComicCollectionIcon" id="155-nq-vww">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gRi-R8-cDH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -273,7 +275,7 @@
         <scene sceneID="mZE-VM-qek">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Fp-ct-4nn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Comic Scanner" image="FavUnselectedMini" id="e3Z-sd-emW"/>
+                    <tabBarItem key="tabBarItem" title="Comic Scanner" image="CameraToolBar" id="e3Z-sd-emW"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PBJ-4c-yQG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -290,9 +292,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="FavSelectedMini" width="30" height="27"/>
+        <image name="CameraToolBar" width="24" height="24"/>
+        <image name="ComicCollectionIcon" width="23" height="23"/>
         <image name="FavUnselected" width="50" height="45"/>
-        <image name="FavUnselectedMini" width="30" height="27"/>
         <image name="Unselected" width="51" height="51"/>
     </resources>
 </document>
