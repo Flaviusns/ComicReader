@@ -8,6 +8,7 @@
 
 import UIKit
 import Zip
+import VisionKit
 
 class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate {
 
@@ -30,7 +31,7 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         let height = self.view.bounds.height
         pageWidth = width/3
         pageHeight = height/2
-        let scrollView = UIScrollView(frame: CGRect(x: 10, y: 50, width: width - 10, height: height / 2))
+        let scrollView = UIScrollView(frame: CGRect(x: 10, y: 50, width: width - 5, height: pageHeight))
         self.view.addSubview(scrollView)
         
         navigationItem.title = NSLocalizedString("CreateComicTitle", comment: "")
@@ -45,11 +46,18 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     }
     
     @IBAction func openCamera(_ sender: Any) {
-        let vc = UIImagePickerController()
-        vc.sourceType = .camera
-        vc.allowsEditing = false
-        vc.delegate = self
-        present(vc, animated: true)
+        if #available(iOS 13.0, *){
+            let vc = VNDocumentCameraViewController()
+            vc.delegate = self
+            present(vc, animated: true)
+        }else{
+            let vc = UIImagePickerController()
+            vc.sourceType = .camera
+            vc.allowsEditing = false
+            vc.delegate = self
+            present(vc, animated: true)
+        }
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -60,8 +68,6 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             return
         }
         
-        // print out the image size as a test
-        comicPages.append(image)
         addImageViewToPreview(imageToAdd: image)
         
     }
@@ -72,6 +78,8 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         
         imageView.image = imageToAdd
         imageView.contentMode = .scaleAspectFit
+        
+        comicPages.append(imageToAdd)
         
         numPages+=1
         
@@ -115,7 +123,8 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             if let name = alert.textFields?.first?.text {
                 self.comicName = name
                 self.saveComicOperations()
-                    
+                self.SaveButton.isHidden=true
+                self.DeleteComic.isHidden=true
                 let confirmAlert = UIAlertController(title: NSLocalizedString("ComicSaved", comment: ""), message: "", preferredStyle: .alert)
                     
                 confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
@@ -165,17 +174,18 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     }
     
 }
-
-extension UIImage {
-    func fixOrientation() -> UIImage? {
-        if self.imageOrientation == UIImage.Orientation.up {
-            return self
+@available(iOS 13.0, *)
+extension CameraScanner: VNDocumentCameraViewControllerDelegate{
+    
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        print("Found \(scan.pageCount)")
+        
+        for i in 0 ..< scan.pageCount {
+            let img = scan.imageOfPage(at: i)
+            print(img.size)
+            addImageViewToPreview(imageToAdd: img)
         }
         
-        UIGraphicsBeginImageContext(self.size)
-        self.draw(in: CGRect(origin: .zero, size: self.size))
-        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return normalizedImage
+        controller.dismiss(animated: true, completion: nil)
     }
 }
