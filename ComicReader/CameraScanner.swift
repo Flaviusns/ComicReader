@@ -16,6 +16,8 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     
     @IBOutlet var SaveButton: UIButton!
     
+    @IBOutlet var DeleteComic: UIButton!
+    
     var comicPages = [UIImage]()
     var numPages = 0
     var pageWidth: CGFloat = 0
@@ -37,9 +39,7 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         ]
         
         SaveButton.isHidden = true
-        SaveButton.layer.cornerRadius = 4
-        
-        ScanButton.layer.cornerRadius = 4
+        DeleteComic.isHidden = true
         
         
     }
@@ -84,10 +84,23 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         
         if SaveButton.isHidden{
             SaveButton.isHidden = false
+            DeleteComic.isHidden = false
         }
         
     }
     
+    @IBAction func deleteComic(_ sender: Any) {
+        errasePreviewFromScrollView()
+        
+        SaveButton.isHidden = true
+        DeleteComic.isHidden = true
+        
+        let confirmAlert = UIAlertController(title: NSLocalizedString("ComicDeleted", comment: ""), message: "", preferredStyle: .alert)
+        
+        confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+        
+        self.present(confirmAlert, animated: true)
+    }
     
     @IBAction func saveComic(_ sender: Any) {
         let alert = UIAlertController(title: NSLocalizedString("InputComicName", comment: ""), message: nil, preferredStyle: .alert)
@@ -101,62 +114,54 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             
             if let name = alert.textFields?.first?.text {
                 self.comicName = name
-                let fileManager = FileManager.default
-                do {
-                    var tempPath = FileManager.default.temporaryDirectory
-                    tempPath.appendPathComponent(self.comicName)
-                    //TODO: Check if the comic name exist already
-                    try fileManager.createDirectory(at: tempPath, withIntermediateDirectories: true, attributes: nil)
-                    for image in self.comicPages{
-                        let imageURL = tempPath.path + "/" + "0\(self.comicPages.firstIndex(of: image)!).jpeg"
-                        try image.fixOrientation()!.jpegData(compressionQuality: 0.5)?.write(to: URL(fileURLWithPath: imageURL))
-                    }
-                    var finalPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                    finalPath.appendPathComponent("\(self.comicName).cbz")
-                    try Zip.zipFiles(paths: [tempPath], zipFilePath: finalPath, password: nil, progress: nil)
+                self.saveComicOperations()
                     
+                let confirmAlert = UIAlertController(title: NSLocalizedString("ComicSaved", comment: ""), message: "", preferredStyle: .alert)
                     
-                    try fileManager.removeItem(at: tempPath) //Remove temp file
+                confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
                     
-                    for view in self.view.subviews{
-                        if let scrollView = view as? UIScrollView {
-                            for view in scrollView.subviews{
-                                view.removeFromSuperview()
-                            }
-                        }
-                    }
-                    
-                    let confirmAlert = UIAlertController(title: NSLocalizedString("ComicSaved", comment: ""), message: "", preferredStyle: .alert)
-                    
-                    confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
-                    
-                    self.present(confirmAlert, animated: true)
-                } catch {
-                    print("Error")
-                }
+                self.present(confirmAlert, animated: true)
             }
-        }))
+        }
+        ))
         
         self.present(alert, animated: true)
         
     }
     
-    private func presentAlertName(){
-        let alert = UIAlertController(title: NSLocalizedString("InputComicName", comment: ""), message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
-        
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "")
-        })
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-            
-            if let name = alert.textFields?.first?.text {
-                self.comicName = name
+    private func errasePreviewFromScrollView(){
+        for view in self.view.subviews{
+            if let scrollView = view as? UIScrollView {
+                for view in scrollView.subviews{
+                    view.removeFromSuperview()
+                }
             }
-        }))
-        
-        self.present(alert, animated: true)
+        }
+    }
+    
+    private func saveComicOperations(){
+        let fileManager = FileManager.default
+        do {
+            var tempPath = FileManager.default.temporaryDirectory
+            tempPath.appendPathComponent(comicName)
+            //TODO: Check if the comic name exist already
+            try fileManager.createDirectory(at: tempPath, withIntermediateDirectories: true, attributes: nil)
+            for image in comicPages{
+                let imageURL = tempPath.path + "/" + "0\(comicPages.firstIndex(of: image)!).jpeg"
+                try image.jpegData(compressionQuality: 0.5)?.write(to: URL(fileURLWithPath: imageURL))
+            }
+            var finalPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            finalPath.appendPathComponent("\(comicName).cbz")
+            try Zip.zipFiles(paths: [tempPath], zipFilePath: finalPath, password: nil, progress: nil)
+            
+            
+            try fileManager.removeItem(at: tempPath) //Remove temp file
+            
+            errasePreviewFromScrollView()
+            
+        } catch {
+            print("Error")
+        }
     }
     
 }

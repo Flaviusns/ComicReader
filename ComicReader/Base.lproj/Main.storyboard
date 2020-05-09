@@ -185,22 +185,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRk-45-Thz">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRk-45-Thz">
                                 <rect key="frame" x="120" y="313" width="80" height="80"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="UaW-Vq-Nyb"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="eZs-SQ-JaV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Scan Page"/>
+                                <state key="normal" title="Scan Page">
+                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                </state>
                                 <connections>
                                     <action selector="openCamera:" destination="zJI-rs-n6A" eventType="touchUpInside" id="BF3-1F-hmM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u85-3j-DsT">
                                 <rect key="frame" x="34" y="410" width="86" height="80"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="2X8-2v-BGO"/>
                                     <constraint firstAttribute="height" constant="80" id="BE1-oR-Psb"/>
@@ -211,20 +212,36 @@
                                     <action selector="saveComic:" destination="zJI-rs-n6A" eventType="touchUpInside" id="xyk-wi-MdK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wPV-W6-M0g">
+                                <rect key="frame" x="188" y="410" width="98" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="86" id="OFx-rR-gAS"/>
+                                    <constraint firstAttribute="height" constant="80" id="e9V-Wx-f88"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Delete Comic"/>
+                                <connections>
+                                    <action selector="deleteComic:" destination="zJI-rs-n6A" eventType="touchUpInside" id="jFc-CF-rGH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="wPV-W6-M0g" firstAttribute="leading" secondItem="Mds-NO-HpS" secondAttribute="leading" constant="188" id="0r8-7f-X42"/>
                             <constraint firstItem="Mds-NO-HpS" firstAttribute="trailing" secondItem="aRk-45-Thz" secondAttribute="trailing" constant="120" id="Acx-ay-UGm"/>
                             <constraint firstItem="Mds-NO-HpS" firstAttribute="bottom" secondItem="u85-3j-DsT" secondAttribute="bottom" constant="29" id="Isw-bv-8dh"/>
                             <constraint firstItem="Mds-NO-HpS" firstAttribute="trailing" secondItem="u85-3j-DsT" secondAttribute="trailing" constant="200" id="SDo-Jv-Hr1"/>
                             <constraint firstItem="Mds-NO-HpS" firstAttribute="bottom" secondItem="aRk-45-Thz" secondAttribute="bottom" constant="126" id="UhH-Xn-xKM"/>
                             <constraint firstItem="u85-3j-DsT" firstAttribute="leading" secondItem="Mds-NO-HpS" secondAttribute="leading" constant="34" id="biK-sb-D8P"/>
                             <constraint firstItem="aRk-45-Thz" firstAttribute="leading" secondItem="Mds-NO-HpS" secondAttribute="leading" constant="120" id="lDB-m4-PTG"/>
+                            <constraint firstItem="Mds-NO-HpS" firstAttribute="trailing" secondItem="wPV-W6-M0g" secondAttribute="trailing" constant="34" id="vmU-cI-OTp"/>
+                            <constraint firstItem="Mds-NO-HpS" firstAttribute="bottom" secondItem="wPV-W6-M0g" secondAttribute="bottom" constant="29" id="zR4-1T-SqY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mds-NO-HpS"/>
                     </view>
                     <navigationItem key="navigationItem" id="Qnf-VQ-PPh"/>
                     <connections>
+                        <outlet property="DeleteComic" destination="wPV-W6-M0g" id="SxT-Iz-Juf"/>
                         <outlet property="SaveButton" destination="u85-3j-DsT" id="sZW-c8-aTb"/>
                         <outlet property="ScanButton" destination="aRk-45-Thz" id="GBQ-yn-MZ5"/>
                     </connections>
