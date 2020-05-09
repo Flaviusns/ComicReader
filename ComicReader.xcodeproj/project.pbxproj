@@ -24,6 +24,10 @@
 		759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */; };
 		75DA1A23245DC677000187E3 /* CameraScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA1A22245DC677000187E3 /* CameraScanner.swift */; };
 		75E1D912244AFFEC0016261D /* DecompressRar.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1D911244AFFEC0016261D /* DecompressRar.m */; };
+		75ECF94F2466DE4E00B3B6BA /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF94E2466DE4E00B3B6BA /* SettingTableViewCell.swift */; };
+		75ECF9512466DF0900B3B6BA /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9502466DF0900B3B6BA /* SettingTableViewController.swift */; };
+		75ECF9532466E45900B3B6BA /* ExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9522466E45900B3B6BA /* ExportSettings.swift */; };
+		75ECF9552466E84800B3B6BA /* ExportSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9542466E84800B3B6BA /* ExportSettingTableViewCell.swift */; };
 		C420559A14164B72FF1DF165 /* Pods_ComicReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9FFF9EED45EE518CFEBD01 /* Pods_ComicReader.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +59,10 @@
 		75E1D910244AFFEC0016261D /* ComicReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ComicReader-Bridging-Header.h"; sourceTree = "<group>"; };
 		75E1D911244AFFEC0016261D /* DecompressRar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DecompressRar.m; sourceTree = "<group>"; };
 		75E1D913244B01000016261D /* DecompressRar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DecompressRar.h; sourceTree = "<group>"; };
+		75ECF94E2466DE4E00B3B6BA /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		75ECF9502466DF0900B3B6BA /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		75ECF9522466E45900B3B6BA /* ExportSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettings.swift; sourceTree = "<group>"; };
+		75ECF9542466E84800B3B6BA /* ExportSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettingTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +127,10 @@
 				75E1D910244AFFEC0016261D /* ComicReader-Bridging-Header.h */,
 				75E1D913244B01000016261D /* DecompressRar.h */,
 				75DA1A22245DC677000187E3 /* CameraScanner.swift */,
+				75ECF94E2466DE4E00B3B6BA /* SettingTableViewCell.swift */,
+				75ECF9502466DF0900B3B6BA /* SettingTableViewController.swift */,
+				75ECF9522466E45900B3B6BA /* ExportSettings.swift */,
+				75ECF9542466E84800B3B6BA /* ExportSettingTableViewCell.swift */,
 			);
 			path = ComicReader;
 			sourceTree = "<group>";
@@ -252,14 +264,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				753B063A2440B0DC002946A4 /* ComicError.swift in Sources */,
+				75ECF9512466DF0900B3B6BA /* SettingTableViewController.swift in Sources */,
 				759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */,
 				75627F3824211A830006D08A /* ComicMiniature.swift in Sources */,
 				75627F28242118D40006D08A /* ViewController.swift in Sources */,
 				75E1D912244AFFEC0016261D /* DecompressRar.m in Sources */,
 				75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */,
+				75ECF94F2466DE4E00B3B6BA /* SettingTableViewCell.swift in Sources */,
 				75DA1A23245DC677000187E3 /* CameraScanner.swift in Sources */,
 				75627F3A24211C3F0006D08A /* Comic.swift in Sources */,
+				75ECF9532466E45900B3B6BA /* ExportSettings.swift in Sources */,
 				751D9A7A24214DDF00BBAC10 /* ComicFinder.swift in Sources */,
+				75ECF9552466E84800B3B6BA /* ExportSettingTableViewCell.swift in Sources */,
 				75627F24242118D40006D08A /* AppDelegate.swift in Sources */,
 				75627F26242118D40006D08A /* SceneDelegate.swift in Sources */,
 			);
