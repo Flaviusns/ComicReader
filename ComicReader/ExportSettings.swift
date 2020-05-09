@@ -34,11 +34,11 @@ class ExportSettings: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExportSetting", for: indexPath) as? ExportSettingTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExportSetting", for: indexPath) as? SettingRowTableViewCell else {
             fatalError("Big Error")
         }
         
-        cell.ExportSettingLabel.text = "ExportHello"
+        cell.RowSettingLabel.text = "ExportHello"
         
         return cell
     }

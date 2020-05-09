@@ -27,7 +27,8 @@
 		75ECF94F2466DE4E00B3B6BA /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF94E2466DE4E00B3B6BA /* SettingTableViewCell.swift */; };
 		75ECF9512466DF0900B3B6BA /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9502466DF0900B3B6BA /* SettingTableViewController.swift */; };
 		75ECF9532466E45900B3B6BA /* ExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9522466E45900B3B6BA /* ExportSettings.swift */; };
-		75ECF9552466E84800B3B6BA /* ExportSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9542466E84800B3B6BA /* ExportSettingTableViewCell.swift */; };
+		75ECF9552466E84800B3B6BA /* SettingRowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9542466E84800B3B6BA /* SettingRowTableViewCell.swift */; };
+		75ECF9572466F1C800B3B6BA /* OrderBySettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9562466F1C800B3B6BA /* OrderBySettingsController.swift */; };
 		C420559A14164B72FF1DF165 /* Pods_ComicReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9FFF9EED45EE518CFEBD01 /* Pods_ComicReader.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,7 +63,8 @@
 		75ECF94E2466DE4E00B3B6BA /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		75ECF9502466DF0900B3B6BA /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		75ECF9522466E45900B3B6BA /* ExportSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettings.swift; sourceTree = "<group>"; };
-		75ECF9542466E84800B3B6BA /* ExportSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettingTableViewCell.swift; sourceTree = "<group>"; };
+		75ECF9542466E84800B3B6BA /* SettingRowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRowTableViewCell.swift; sourceTree = "<group>"; };
+		75ECF9562466F1C800B3B6BA /* OrderBySettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBySettingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +132,8 @@
 				75ECF94E2466DE4E00B3B6BA /* SettingTableViewCell.swift */,
 				75ECF9502466DF0900B3B6BA /* SettingTableViewController.swift */,
 				75ECF9522466E45900B3B6BA /* ExportSettings.swift */,
-				75ECF9542466E84800B3B6BA /* ExportSettingTableViewCell.swift */,
+				75ECF9542466E84800B3B6BA /* SettingRowTableViewCell.swift */,
+				75ECF9562466F1C800B3B6BA /* OrderBySettingsController.swift */,
 			);
 			path = ComicReader;
 			sourceTree = "<group>";
@@ -269,13 +272,14 @@
 				75627F3824211A830006D08A /* ComicMiniature.swift in Sources */,
 				75627F28242118D40006D08A /* ViewController.swift in Sources */,
 				75E1D912244AFFEC0016261D /* DecompressRar.m in Sources */,
+				75ECF9572466F1C800B3B6BA /* OrderBySettingsController.swift in Sources */,
 				75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */,
 				75ECF94F2466DE4E00B3B6BA /* SettingTableViewCell.swift in Sources */,
 				75DA1A23245DC677000187E3 /* CameraScanner.swift in Sources */,
 				75627F3A24211C3F0006D08A /* Comic.swift in Sources */,
 				75ECF9532466E45900B3B6BA /* ExportSettings.swift in Sources */,
 				751D9A7A24214DDF00BBAC10 /* ComicFinder.swift in Sources */,
-				75ECF9552466E84800B3B6BA /* ExportSettingTableViewCell.swift in Sources */,
+				75ECF9552466E84800B3B6BA /* SettingRowTableViewCell.swift in Sources */,
 				75627F24242118D40006D08A /* AppDelegate.swift in Sources */,
 				75627F26242118D40006D08A /* SceneDelegate.swift in Sources */,
 			);

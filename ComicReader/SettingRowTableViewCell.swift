@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ExportSettingTableViewCell: UITableViewCell {
+class SettingRowTableViewCell: UITableViewCell {
 
-    @IBOutlet var ExportSettingLabel: UILabel!
+    @IBOutlet var RowSettingLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
