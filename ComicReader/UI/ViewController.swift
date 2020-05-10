@@ -69,6 +69,9 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         }
     }
     
+    var settings:ComicReaderAppSettings!
+    
+    
     var presentErrorinFile = false {
         didSet{
             if presentErrorinFile==true{
@@ -127,6 +130,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         collectionView.addSubview(refresher)
         
         viewM = .view
+        
+        settings = ComicReaderAppSettings(container: persistentContainer)
     
     }
     
@@ -135,6 +140,9 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             self.comicsFinder.updateStorageComics()
             self.comicsFinder.removeComicsNoLongerExist()
             self.comics = self.comicsFinder.getSavedComics()
+            if self.settings.getValueFromKey(key: "orderby") == 0{
+                self.comics.sort()
+            }
             DispatchQueue.main.async {
                 if self.comicsFinder.getErrorInFile(){
                     self.presentErrorinFile = true

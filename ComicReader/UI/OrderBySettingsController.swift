@@ -15,6 +15,7 @@ class OrderBySettingsController: UIViewController,UITableViewDelegate,UITableVie
     @IBOutlet var TextInfoLabel: UILabel!
     
     let orderByOptions = [NSLocalizedString("OrderByName", comment: ""),NSLocalizedString("OrderByAdditionDate", comment: "")]
+    let orderByTextInfo = [NSLocalizedString("OrderByNameText", comment: ""),NSLocalizedString("OrderByAdditionText", comment: "")]
     var settings:ComicReaderAppSettings!
     var selectedIndex = -1
     
@@ -30,10 +31,14 @@ class OrderBySettingsController: UIViewController,UITableViewDelegate,UITableVie
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
         
-        TextInfoLabel.text = NSLocalizedString("OrderByNameText", comment: "")
         
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         selectedIndex = settings.getValueFromKey(key: "orderby")
-        
+        TextInfoLabel.text = orderByTextInfo[selectedIndex]
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -59,10 +64,26 @@ class OrderBySettingsController: UIViewController,UITableViewDelegate,UITableVie
         
         if indexPath.item == selectedIndex{
             cell.accessoryType = .checkmark
+        }else{
+            cell.accessoryType = .none
         }
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if settings.setValueForKey(key: "orderby", value: indexPath.item){
+            selectedIndex = indexPath.item
+            TextInfoLabel.text = orderByTextInfo[selectedIndex]
+        }else{
+            let alert = UIAlertController(title: NSLocalizedString("UnableToSetSetting", comment: ""), message: NSLocalizedString("UnableToSetSettingMessage", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        SettingsTable.reloadData()
     }
     
 

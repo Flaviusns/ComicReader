@@ -39,9 +39,10 @@ class SettingTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         navigationItem.title = NSLocalizedString("Settings", comment: "")
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
-        ]
+        //self.navigationController?.navigationBar.titleTextAttributes = [
+        //    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
+        //]
+        navigationItem.largeTitleDisplayMode = .always
         
         if #available(iOS 13, *){
             secondSection.append(NSLocalizedString("ScaningMode", comment: ""))

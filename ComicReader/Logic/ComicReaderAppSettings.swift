@@ -59,7 +59,6 @@ class ComicReaderAppSettings{
         do{
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicAppSettings")
             request.returnsObjectsAsFaults = false
-            
             let result = try context.fetch(request)
             if !result.isEmpty{
                 guard let settingsEntity = result[0] as? NSManagedObject else{
@@ -72,6 +71,28 @@ class ComicReaderAppSettings{
         catch let error as NSError{
             print(error)
             return -1
+        }
+    }
+    
+    public func setValueForKey(key: String, value: Int) ->Bool {
+        do{
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicAppSettings")
+            request.returnsObjectsAsFaults = false
+            let result = try context.fetch(request)
+            if !result.isEmpty{
+                guard let settingsEntity = result[0] as? NSManagedObject else{
+                    fatalError("Unable to cast ComicAppSettings")
+                }
+                settingsEntity.setValue(value, forKey: key)
+                
+                try context.save()
+                return true
+            }
+            return false
+        }
+        catch let error as NSError{
+            print(error)
+            return false
         }
     }
     

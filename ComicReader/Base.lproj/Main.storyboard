@@ -16,7 +16,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="23Y-1p-sEV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="m1R-1H-ByJ">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -107,7 +107,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ej-cP-Got">
-                                <rect key="frame" x="215" y="94" width="75" height="21"/>
+                                <rect key="frame" x="215" y="141" width="75" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Hns-H1-IIw"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="sRt-DU-DTK"/>
@@ -259,8 +259,8 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gRi-R8-cDH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="gRi-R8-cDH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -278,8 +278,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Fp-ct-4nn" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Comic Scanner" image="CameraToolBar" id="e3Z-sd-emW"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PBJ-4c-yQG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="PBJ-4c-yQG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -348,18 +348,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="lKt-9a-sPU">
-                                <rect key="frame" x="0.0" y="62" width="320" height="187"/>
+                                <rect key="frame" x="0.0" y="133" width="320" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="CCz-kn-mhb"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderBySetting" id="PNZ-Vr-fa8" customClass="SettingRowTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PNZ-Vr-fa8" id="iVt-lX-ZMl">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdY-Cw-4iz">
-                                                    <rect key="frame" x="15" y="11" width="232" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="232" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -379,24 +382,22 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello Darkness" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IA0-dI-KVJ">
-                                <rect key="frame" x="16" y="289" width="288" height="154"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="154" id="NF7-qf-7cK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="16" y="406" width="288" height="102"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="lKt-9a-sPU" firstAttribute="leading" secondItem="1pZ-8V-4xN" secondAttribute="leading" id="3PW-dD-CIs"/>
-                            <constraint firstItem="1pZ-8V-4xN" firstAttribute="trailing" secondItem="IA0-dI-KVJ" secondAttribute="trailing" constant="16" id="Kns-Jm-Kct"/>
-                            <constraint firstItem="lKt-9a-sPU" firstAttribute="trailing" secondItem="1pZ-8V-4xN" secondAttribute="trailing" id="Na0-za-qhl"/>
-                            <constraint firstItem="1pZ-8V-4xN" firstAttribute="bottom" secondItem="IA0-dI-KVJ" secondAttribute="bottom" constant="125" id="Oxc-7t-kml"/>
-                            <constraint firstItem="lKt-9a-sPU" firstAttribute="top" secondItem="1pZ-8V-4xN" secondAttribute="top" constant="18" id="R7y-K5-bpi"/>
-                            <constraint firstItem="IA0-dI-KVJ" firstAttribute="top" secondItem="lKt-9a-sPU" secondAttribute="bottom" constant="40" id="cFD-lG-8Ih"/>
-                            <constraint firstItem="IA0-dI-KVJ" firstAttribute="leading" secondItem="1pZ-8V-4xN" secondAttribute="leading" constant="16" id="hL1-2U-Z1n"/>
+                            <constraint firstItem="1pZ-8V-4xN" firstAttribute="bottom" secondItem="IA0-dI-KVJ" secondAttribute="bottom" constant="60" id="3EM-cG-2VO"/>
+                            <constraint firstItem="1pZ-8V-4xN" firstAttribute="trailing" secondItem="IA0-dI-KVJ" secondAttribute="trailing" constant="16" id="3zC-dn-Hcq"/>
+                            <constraint firstItem="lKt-9a-sPU" firstAttribute="top" secondItem="1pZ-8V-4xN" secondAttribute="top" constant="89" id="Fga-nm-Je0"/>
+                            <constraint firstItem="IA0-dI-KVJ" firstAttribute="leading" secondItem="1pZ-8V-4xN" secondAttribute="leading" constant="16" id="GP1-ma-WxM"/>
+                            <constraint firstItem="IA0-dI-KVJ" firstAttribute="top" secondItem="lKt-9a-sPU" secondAttribute="bottom" constant="23" id="VbD-bY-DTE"/>
+                            <constraint firstItem="lKt-9a-sPU" firstAttribute="leading" secondItem="ZdR-iD-vho" secondAttribute="leading" id="fVc-P6-Rou"/>
+                            <constraint firstItem="lKt-9a-sPU" firstAttribute="trailing" secondItem="1pZ-8V-4xN" secondAttribute="trailing" id="iPg-Gz-UDk"/>
+                            <constraint firstItem="lKt-9a-sPU" firstAttribute="leading" secondItem="1pZ-8V-4xN" secondAttribute="leading" id="jC0-Nw-auo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1pZ-8V-4xN"/>
                     </view>
@@ -408,7 +409,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yom-bf-pSb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4841" y="1174"/>
+            <point key="canvasLocation" x="4839.375" y="1173.5915492957747"/>
         </scene>
         <!--Settings-->
         <scene sceneID="FdI-7X-TLk">
@@ -416,8 +417,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="req-sU-qSe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" id="EEV-XU-MDx"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GKZ-oF-YBT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="GKZ-oF-YBT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -434,8 +435,8 @@
             <objects>
                 <navigationController storyboardIdentifier="OrderBySettingsNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AcO-D9-nkA" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6GA-df-IeU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="6GA-df-IeU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -456,18 +457,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="CID-ju-gNM">
-                                <rect key="frame" x="0.0" y="62" width="320" height="220"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="238"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExportQualitySetting" id="g4N-fZ-Y8j" customClass="SettingRowTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g4N-fZ-Y8j" id="eO3-0J-OgE">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vz-SD-Dmj">
-                                                    <rect key="frame" x="15" y="11" width="232" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="232" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -501,7 +502,7 @@
                             <constraint firstItem="iDl-4m-z8R" firstAttribute="trailing" secondItem="jdr-zs-vaG" secondAttribute="trailing" constant="16" id="6Pg-sB-F2e"/>
                             <constraint firstItem="jdr-zs-vaG" firstAttribute="leading" secondItem="iDl-4m-z8R" secondAttribute="leading" constant="16" id="Bmy-at-ZYJ"/>
                             <constraint firstItem="CID-ju-gNM" firstAttribute="trailing" secondItem="iDl-4m-z8R" secondAttribute="trailing" id="LJK-B8-IuN"/>
-                            <constraint firstItem="CID-ju-gNM" firstAttribute="top" secondItem="iDl-4m-z8R" secondAttribute="top" constant="18" id="MOZ-Ie-9tV"/>
+                            <constraint firstItem="CID-ju-gNM" firstAttribute="top" secondItem="iDl-4m-z8R" secondAttribute="top" id="Qc2-EF-KdW"/>
                             <constraint firstItem="jdr-zs-vaG" firstAttribute="top" secondItem="CID-ju-gNM" secondAttribute="bottom" constant="7" id="RT1-Py-U4y"/>
                             <constraint firstItem="CID-ju-gNM" firstAttribute="leading" secondItem="iDl-4m-z8R" secondAttribute="leading" id="XGj-aZ-74S"/>
                             <constraint firstItem="iDl-4m-z8R" firstAttribute="bottom" secondItem="jdr-zs-vaG" secondAttribute="bottom" constant="125" id="Zji-mL-uNF"/>
@@ -516,15 +517,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ykp-c6-4Yc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4868" y="1916"/>
+            <point key="canvasLocation" x="4867.5" y="1915.1408450704225"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mNf-oi-zG2">
             <objects>
                 <navigationController storyboardIdentifier="ExportQualitySettingsNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GNO-Zz-PMe" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9k2-Zq-Wql">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="9k2-Zq-Wql">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -612,8 +613,8 @@
             <objects>
                 <navigationController storyboardIdentifier="ScaningModeSettingsNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gMe-Iq-u94" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iD9-Dc-CeC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="iD9-Dc-CeC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
