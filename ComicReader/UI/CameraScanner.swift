@@ -12,6 +12,8 @@ import VisionKit
 import CoreData
 
 class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate {
+    
+
 
 
     @IBOutlet var ScanButton: UIButton!
@@ -63,6 +65,8 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
         
+        
+        
         SaveButton.isHidden = true
         DeleteComic.isHidden = true
         
@@ -94,8 +98,6 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             
         }
     }
-    
-    
     
     @IBAction func openCamera(_ sender: Any) {
         if #available(iOS 13.0, *), enableVisionKit{
