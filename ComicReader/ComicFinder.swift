@@ -635,5 +635,4 @@ class ComicFinder{
         }
         return error
     }
-    
 }

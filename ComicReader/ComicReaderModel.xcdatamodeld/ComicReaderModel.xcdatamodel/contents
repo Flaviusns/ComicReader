@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="AppSettings" representedClassName="AppSettings" syncable="YES" codeGenerationType="class">
+    <entity name="ComicAppSettings" representedClassName="ComicAppSettings" syncable="YES" codeGenerationType="class">
         <attribute name="cameramode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="exportquality" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="orderby" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -14,7 +14,7 @@
         <attribute name="path" optional="YES" attributeType="String"/>
     </entity>
     <elements>
+        <element name="ComicAppSettings" positionX="-63" positionY="27" width="128" height="88"/>
         <element name="ComicEntity" positionX="-63" positionY="-18" width="128" height="133"/>
-        <element name="AppSettings" positionX="-63" positionY="27" width="128" height="88"/>
     </elements>
 </model>

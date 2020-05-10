@@ -12,9 +12,21 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "ComicReaderModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        _ = ComicReaderAppSettings(container: persistentContainer)
         return true
     }
 
@@ -23,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
+        
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     @available(iOS 13.0, *)
@@ -35,17 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
       
-        let persistentContainer: NSPersistentContainer = {
-            
-            let container = NSPersistentContainer(name: "ComicReaderModel")
-            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-                if let error = error as NSError? {
-                    
-                    fatalError("Unresolved error \(error), \(error.userInfo)")
-                }
-            })
-            return container
-        }()
+        
         
         let name = url.lastPathComponent
         let documentsPath = ComicFinder.getDocumentsDirectory()
