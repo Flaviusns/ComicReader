@@ -9,6 +9,7 @@
 import UIKit
 import Zip
 import VisionKit
+import CoreData
 
 class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate {
 
@@ -18,6 +19,29 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     @IBOutlet var SaveButton: UIButton!
     
     @IBOutlet var DeleteComic: UIButton!
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "ComicReaderModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    var settings:ComicReaderAppSettings!
+    var enableVisionKit = false
+    
+    struct exportQuality {
+        let VeryHighQuality = 1.0
+        let HighQuality = 0.75
+        let MediumQuality = 0.5
+        let LowQuality = 0.25
+    }
+    
+    var exportQualityValue: CGFloat = 0.5
     
     var comicPages = [UIImage]()
     var numPages = 0
@@ -43,10 +67,38 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         DeleteComic.isHidden = true
         
         
+        settings = ComicReaderAppSettings(container: persistentContainer)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.global(qos: .background).async {
+            let exportQualityValue = self.settings.getValueFromKey(key: "exportquality")
+            switch exportQualityValue{
+            case 0:
+                self.exportQualityValue = 1.0
+            case 1:
+                self.exportQualityValue = 0.75
+            case 2:
+                self.exportQualityValue = 0.5
+            case 3:
+                self.exportQualityValue = 0.25
+            default:
+                self.exportQualityValue = 0.5
+            }
+            let cameraModeValue = self.settings.getValueFromKey(key: "cameramode")
+            if cameraModeValue==0{
+                self.enableVisionKit=true
+            }else{
+                self.enableVisionKit=false
+            }
+            
+        }
+    }
+    
+    
+    
     @IBAction func openCamera(_ sender: Any) {
-        if #available(iOS 13.0, *){
+        if #available(iOS 13.0, *), enableVisionKit{
             let vc = VNDocumentCameraViewController()
             vc.delegate = self
             present(vc, animated: true)
@@ -153,11 +205,11 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         do {
             var tempPath = FileManager.default.temporaryDirectory
             tempPath.appendPathComponent(comicName)
-            //TODO: Check if the comic name exist already
+            //MARK: Check if the comic name exist already
             try fileManager.createDirectory(at: tempPath, withIntermediateDirectories: true, attributes: nil)
             for image in comicPages{
                 let imageURL = tempPath.path + "/" + "0\(comicPages.firstIndex(of: image)!).jpeg"
-                try image.jpegData(compressionQuality: 0.5)?.write(to: URL(fileURLWithPath: imageURL))
+                try image.jpegData(compressionQuality: exportQualityValue)?.write(to: URL(fileURLWithPath: imageURL))
             }
             var finalPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             finalPath.appendPathComponent("\(comicName).cbz")
