@@ -1,5 +1,5 @@
 //
-//  ExportQualityViewController.swift
+//  ScanModeSettingViewController.swift
 //  ComicReader
 //
 //  Created by Flavius Stan on 10/05/2020.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ExportQualityViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     
     @IBOutlet var SettingsTable: UITableView!
     @IBOutlet var TextInfoLabel: UILabel!
-    let orderByOptions = [NSLocalizedString("VeryHighQualityName", comment: ""),NSLocalizedString("HighQualityName", comment: ""),NSLocalizedString("MediumQualityName", comment: ""),NSLocalizedString("LowQualityName", comment: "")]
+    let orderByOptions = [NSLocalizedString("VisionKitName", comment: ""),NSLocalizedString("CameraName", comment: "")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +36,16 @@ class ExportQualityViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("QualityExportHeader", comment: "")
+        return NSLocalizedString("ScanningModeHeader", comment: "")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return orderByOptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExportQualitySetting", for: indexPath) as? SettingRowTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ScanModeSetting", for: indexPath) as? SettingRowTableViewCell else {
             fatalError("Big Error")
         }
         

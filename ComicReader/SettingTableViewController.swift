@@ -82,10 +82,16 @@ class SettingTableViewController: UITableViewController {
         }
         else if indexPath.section == 1{
             if indexPath.item == 0{
-                if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ExportQualitySetting") as? ExportQualityViewController {
+                if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ExportQualitySetting") as? ExportQualitySettingsViewController {
                     
                     navigationController?.pushViewController(nextVC, animated: true)
                 }
+            }else{
+                if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ScaningModeSetting") as? ScanModeSettingViewController {
+                    
+                    navigationController?.pushViewController(nextVC, animated: true)
+                }
+                
             }
         }
         
