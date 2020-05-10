@@ -9,6 +9,8 @@
 import UIKit
 
 class ExportSettings: UITableViewController {
+    
+    var settings:ComicReaderAppSettings!
 
     override func viewDidLoad() {
         super.viewDidLoad()

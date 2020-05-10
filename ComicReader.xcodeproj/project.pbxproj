@@ -94,6 +94,35 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		75545C342467F1E500E988AC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				75DA1A22245DC677000187E3 /* CameraScanner.swift */,
+				75ECF94E2466DE4E00B3B6BA /* SettingTableViewCell.swift */,
+				75ECF9502466DF0900B3B6BA /* SettingTableViewController.swift */,
+				75ECF9522466E45900B3B6BA /* ExportSettings.swift */,
+				75ECF9542466E84800B3B6BA /* SettingRowTableViewCell.swift */,
+				75ECF9562466F1C800B3B6BA /* OrderBySettingsController.swift */,
+				75545C2E2467E43300E988AC /* ExportQualitySettingsViewController.swift */,
+				75545C302467E92000E988AC /* ScanModeSettingViewController.swift */,
+				75627F27242118D40006D08A /* ViewController.swift */,
+				75627F3724211A830006D08A /* ComicMiniature.swift */,
+				75627F3B242124FC0006D08A /* ComicLecture.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		75545C352467F22100E988AC /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				75627F3924211C3F0006D08A /* Comic.swift */,
+				751D9A7924214DDF00BBAC10 /* ComicFinder.swift */,
+				753B06392440B0DC002946A4 /* ComicError.swift */,
+				75545C322467ED4500E988AC /* ComicReaderAppSettings.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
 		75627F17242118D30006D08A = {
 			isa = PBXGroup;
 			children = (
@@ -116,33 +145,20 @@
 		75627F22242118D40006D08A /* ComicReader */ = {
 			isa = PBXGroup;
 			children = (
+				75E1D911244AFFEC0016261D /* DecompressRar.m */,
+				75E1D910244AFFEC0016261D /* ComicReader-Bridging-Header.h */,
+				75E1D913244B01000016261D /* DecompressRar.h */,
+				75545C352467F22100E988AC /* Logic */,
+				75545C342467F1E500E988AC /* UI */,
 				75627F23242118D40006D08A /* AppDelegate.swift */,
 				75627F25242118D40006D08A /* SceneDelegate.swift */,
-				75627F27242118D40006D08A /* ViewController.swift */,
 				75627F29242118D40006D08A /* Main.storyboard */,
 				75627F2C242118D50006D08A /* Assets.xcassets */,
 				75627F2E242118D50006D08A /* LaunchScreen.storyboard */,
 				75627F31242118D50006D08A /* Info.plist */,
 				75924C46245D88970022C6CA /* InfoPlist.strings */,
 				75924C43245D887B0022C6CA /* Localizable.strings */,
-				75627F3724211A830006D08A /* ComicMiniature.swift */,
-				75627F3924211C3F0006D08A /* Comic.swift */,
-				75627F3B242124FC0006D08A /* ComicLecture.swift */,
-				751D9A7924214DDF00BBAC10 /* ComicFinder.swift */,
 				759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */,
-				753B06392440B0DC002946A4 /* ComicError.swift */,
-				75E1D911244AFFEC0016261D /* DecompressRar.m */,
-				75E1D910244AFFEC0016261D /* ComicReader-Bridging-Header.h */,
-				75E1D913244B01000016261D /* DecompressRar.h */,
-				75DA1A22245DC677000187E3 /* CameraScanner.swift */,
-				75ECF94E2466DE4E00B3B6BA /* SettingTableViewCell.swift */,
-				75ECF9502466DF0900B3B6BA /* SettingTableViewController.swift */,
-				75ECF9522466E45900B3B6BA /* ExportSettings.swift */,
-				75ECF9542466E84800B3B6BA /* SettingRowTableViewCell.swift */,
-				75ECF9562466F1C800B3B6BA /* OrderBySettingsController.swift */,
-				75545C2E2467E43300E988AC /* ExportQualitySettingsViewController.swift */,
-				75545C302467E92000E988AC /* ScanModeSettingViewController.swift */,
-				75545C322467ED4500E988AC /* ComicReaderAppSettings.swift */,
 			);
 			path = ComicReader;
 			sourceTree = "<group>";

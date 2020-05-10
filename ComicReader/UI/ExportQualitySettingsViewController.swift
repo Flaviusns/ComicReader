@@ -1,5 +1,5 @@
 //
-//  ScanModeSettingViewController.swift
+//  ExportQualityViewController.swift
 //  ComicReader
 //
 //  Created by Flavius Stan on 10/05/2020.
@@ -8,12 +8,14 @@
 
 import UIKit
 
-class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ExportQualitySettingsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     
     @IBOutlet var SettingsTable: UITableView!
     @IBOutlet var TextInfoLabel: UILabel!
-    let orderByOptions = [NSLocalizedString("VisionKitName", comment: ""),NSLocalizedString("CameraName", comment: "")]
+    let orderByOptions = [NSLocalizedString("VeryHighQualityName", comment: ""),NSLocalizedString("HighQualityName", comment: ""),NSLocalizedString("MediumQualityName", comment: ""),NSLocalizedString("LowQualityName", comment: "")]
+    var settings:ComicReaderAppSettings!
+    var selectedIndex = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,7 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
         ]
         
         TextInfoLabel.text = NSLocalizedString("QualityExportText", comment: "")
+        selectedIndex = settings.getValueFromKey(key: "exportquality")
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -36,22 +39,23 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("ScanningModeHeader", comment: "")
+        return NSLocalizedString("QualityExportHeader", comment: "")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderByOptions.count
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ScanModeSetting", for: indexPath) as? SettingRowTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ExportQualitySetting", for: indexPath) as? SettingRowTableViewCell else {
             fatalError("Big Error")
         }
         
         cell.RowSettingLabel.text = orderByOptions[indexPath.item]
-        
-        cell.accessoryType = .checkmark
+        if indexPath.item == selectedIndex{
+            cell.accessoryType = .checkmark
+        }
         
         return cell
     }

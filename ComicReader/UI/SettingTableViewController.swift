@@ -7,12 +7,27 @@
 //
 
 import UIKit
+import CoreData
 
 class SettingTableViewController: UITableViewController {
     
     let sectionTitles = ["CollectionSettings","ScanComicSettings"]
     let firstSection = [NSLocalizedString("CollectionOrder", comment: "")]
     var secondSection = [NSLocalizedString("ExportQuality", comment: "")]
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "ComicReaderModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    var settings:ComicReaderAppSettings!
+    
     
 
     override func viewDidLoad() {
@@ -31,6 +46,8 @@ class SettingTableViewController: UITableViewController {
         if #available(iOS 13, *){
             secondSection.append(NSLocalizedString("ScaningMode", comment: ""))
         }
+        
+        settings = ComicReaderAppSettings(container: persistentContainer)
     }
 
     // MARK: - Table view data source
@@ -76,19 +93,19 @@ class SettingTableViewController: UITableViewController {
         
         if indexPath.section == 0{
             if let nextVC = storyboard?.instantiateViewController(withIdentifier: "CollectionOrderSetting") as? OrderBySettingsController {
-                
+                nextVC.settings = self.settings
                 navigationController?.pushViewController(nextVC, animated: true)
             }
         }
         else if indexPath.section == 1{
             if indexPath.item == 0{
                 if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ExportQualitySetting") as? ExportQualitySettingsViewController {
-                    
+                    nextVC.settings = self.settings
                     navigationController?.pushViewController(nextVC, animated: true)
                 }
             }else{
                 if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ScaningModeSetting") as? ScanModeSettingViewController {
-                    
+                    nextVC.settings = self.settings
                     navigationController?.pushViewController(nextVC, animated: true)
                 }
                 
