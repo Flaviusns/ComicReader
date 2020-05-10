@@ -347,8 +347,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello Darkness" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IA0-dI-KVJ">
+                                <rect key="frame" x="16" y="315" width="288" height="193"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="lKt-9a-sPU">
-                                <rect key="frame" x="0.0" y="133" width="320" height="250"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="CCz-kn-mhb"/>
@@ -381,23 +387,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello Darkness" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IA0-dI-KVJ">
-                                <rect key="frame" x="16" y="406" width="288" height="102"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="1pZ-8V-4xN" firstAttribute="bottom" secondItem="IA0-dI-KVJ" secondAttribute="bottom" constant="60" id="3EM-cG-2VO"/>
                             <constraint firstItem="1pZ-8V-4xN" firstAttribute="trailing" secondItem="IA0-dI-KVJ" secondAttribute="trailing" constant="16" id="3zC-dn-Hcq"/>
-                            <constraint firstItem="lKt-9a-sPU" firstAttribute="top" secondItem="1pZ-8V-4xN" secondAttribute="top" constant="89" id="Fga-nm-Je0"/>
                             <constraint firstItem="IA0-dI-KVJ" firstAttribute="leading" secondItem="1pZ-8V-4xN" secondAttribute="leading" constant="16" id="GP1-ma-WxM"/>
-                            <constraint firstItem="IA0-dI-KVJ" firstAttribute="top" secondItem="lKt-9a-sPU" secondAttribute="bottom" constant="23" id="VbD-bY-DTE"/>
+                            <constraint firstItem="lKt-9a-sPU" firstAttribute="top" secondItem="1pZ-8V-4xN" secondAttribute="top" id="dm2-Ev-5VA"/>
                             <constraint firstItem="lKt-9a-sPU" firstAttribute="leading" secondItem="ZdR-iD-vho" secondAttribute="leading" id="fVc-P6-Rou"/>
                             <constraint firstItem="lKt-9a-sPU" firstAttribute="trailing" secondItem="1pZ-8V-4xN" secondAttribute="trailing" id="iPg-Gz-UDk"/>
                             <constraint firstItem="lKt-9a-sPU" firstAttribute="leading" secondItem="1pZ-8V-4xN" secondAttribute="leading" id="jC0-Nw-auo"/>
+                            <constraint firstItem="IA0-dI-KVJ" firstAttribute="top" secondItem="lKt-9a-sPU" secondAttribute="bottom" constant="21" id="zyw-Fh-LUp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1pZ-8V-4xN"/>
                     </view>
@@ -435,8 +435,8 @@
             <objects>
                 <navigationController storyboardIdentifier="OrderBySettingsNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AcO-D9-nkA" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="6GA-df-IeU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6GA-df-IeU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -461,14 +461,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExportQualitySetting" id="g4N-fZ-Y8j" customClass="SettingRowTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g4N-fZ-Y8j" id="eO3-0J-OgE">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vz-SD-Dmj">
-                                                    <rect key="frame" x="15" y="11" width="232" height="21.5"/>
+                                                    <rect key="frame" x="15" y="11" width="232" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -524,8 +524,8 @@
             <objects>
                 <navigationController storyboardIdentifier="ExportQualitySettingsNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GNO-Zz-PMe" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="9k2-Zq-Wql">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9k2-Zq-Wql">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -550,14 +550,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScanModeSetting" id="nK0-OA-jbu" customClass="SettingRowTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nK0-OA-jbu" id="cjP-kQ-73g">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbV-kg-2UD">
-                                                    <rect key="frame" x="15" y="11" width="232" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="232" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -613,8 +613,8 @@
             <objects>
                 <navigationController storyboardIdentifier="ScaningModeSettingsNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gMe-Iq-u94" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="iD9-Dc-CeC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iD9-Dc-CeC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
