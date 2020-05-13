@@ -220,7 +220,7 @@ class ComicFinder{
         let documentsPath = ComicFinder.getDocumentsDirectory()
         do {
             var fileURLs = try fileManager.contentsOfDirectory(atPath: documentsPath.path)
-            fileURLs = fileURLs.filter({$0 != ".DS_Store" && $0 != "Inbox"})
+            fileURLs = fileURLs.filter({$0 != ".DS_Store" && $0 != "Inbox" && $0 != ".Trash"})
             
             if fileURLs.isEmpty && !savedComics.isEmpty{
                 for savedComic in savedComics{
