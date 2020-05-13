@@ -57,13 +57,34 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         let height = self.view.bounds.height
         pageWidth = width/3
         pageHeight = height/2
-        let scrollView = UIScrollView(frame: CGRect(x: 10, y: 50, width: width - 5, height: pageHeight))
+        
+        let scrollView = UIScrollView()
+        if UIApplication.shared.statusBarOrientation.isLandscape {
+            if UIDevice.current.userInterfaceIdiom == .pad{
+                scrollView.frame = CGRect(x: 0, y: height/5, width: width, height: height/5)
+            }else{
+                scrollView.frame = CGRect(x: 0, y: height/4, width: width, height: height/5)
+            }
+            
+        } else {
+            scrollView.frame = CGRect(x: 0, y: pageHeight*0.25, width: width, height: pageHeight)
+        }
+        
+
         self.view.addSubview(scrollView)
+        
+        
+        
+        
         
         navigationItem.title = NSLocalizedString("CreateComicTitle", comment: "")
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
+        
+        
+        
+        
         
         
         
@@ -128,7 +149,15 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     
     
     private func addImageViewToPreview(imageToAdd: UIImage){
-        let imageView = UIImageView(frame: CGRect(x: pageWidth * CGFloat(numPages), y: 0, width: pageWidth, height: pageHeight))
+        
+        var newHeigth:CGFloat
+        if UIApplication.shared.statusBarOrientation.isLandscape{
+            newHeigth = pageHeight/3
+        }else{
+            newHeigth = pageHeight
+        }
+        
+        let imageView = UIImageView(frame: CGRect(x: pageWidth * CGFloat(numPages), y: 0, width: pageWidth, height: newHeigth))
         
         imageView.image = imageToAdd
         imageView.contentMode = .scaleAspectFit
@@ -151,6 +180,75 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         
     }
     
+    private func addImagetoPreviewOrientation(imageToAdd: UIImage,height: CGFloat, _ landscape: Bool){
+        var newHeigth:CGFloat
+        if landscape{
+            newHeigth = pageHeight/3
+        }else{
+            newHeigth = pageHeight
+        }
+        
+        let imageView = UIImageView(frame: CGRect(x: pageWidth * CGFloat(numPages), y: 0, width: pageWidth, height: newHeigth))
+        
+        imageView.image = imageToAdd
+        imageView.contentMode = .scaleAspectFit
+        
+        numPages+=1
+        
+        for view in self.view.subviews{
+            if let scrollView = view as? UIScrollView {
+                scrollView.contentSize = CGSize(width: pageWidth * CGFloat(numPages), height: height/2)
+                scrollView.addSubview(imageView)
+            }
+        }
+        
+        if SaveButton.isHidden{
+            SaveButton.isHidden = false
+            DeleteComic.isHidden = false
+        }
+    }
+    
+    private func changeScrollViewOrientation(width: CGFloat, height: CGFloat){
+        var landscape = false
+        for view in self.view.subviews{
+            if let scrollView = view as? UIScrollView {
+                for subview in scrollView.subviews{
+                    subview.removeFromSuperview()
+                }
+                scrollView.removeFromSuperview()
+            }
+        }
+        
+        if width>height{ //Landscape
+            landscape = true
+            let scrollView = UIScrollView()
+            if UIDevice.current.userInterfaceIdiom == .pad{
+                scrollView.frame = CGRect(x: 0, y: height/5, width: width, height: height/5)
+            }else{
+                scrollView.frame = CGRect(x: 0, y: height/4, width: width, height: height/5)
+            }
+            
+            
+            self.view.addSubview(scrollView)
+        }else{
+            let scrollView = UIScrollView()
+            scrollView.frame = CGRect(x: 0, y: pageHeight*0.25, width: width, height: pageHeight)
+            
+            self.view.addSubview(scrollView)
+        }
+        numPages = 0
+        for image in comicPages{
+            addImagetoPreviewOrientation(imageToAdd: image,height: height,landscape)
+        }
+        
+        
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        changeScrollViewOrientation(width: size.width, height: size.height)
+    }
+    
     @IBAction func deleteComic(_ sender: Any) {
         errasePreviewFromScrollView()
         
@@ -160,6 +258,9 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         let confirmAlert = UIAlertController(title: NSLocalizedString("ComicDeleted", comment: ""), message: "", preferredStyle: .alert)
         
         confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+        
+        comicPages.removeAll()
+        numPages = 0
         
         self.present(confirmAlert, animated: true)
     }
@@ -232,11 +333,9 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
 extension CameraScanner: VNDocumentCameraViewControllerDelegate{
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
-        print("Found \(scan.pageCount)")
-        
         for i in 0 ..< scan.pageCount {
             let img = scan.imageOfPage(at: i)
-            print(img.size)
+
             addImageViewToPreview(imageToAdd: img)
         }
         
