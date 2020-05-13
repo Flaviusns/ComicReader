@@ -13,7 +13,9 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
     
     @IBOutlet var SettingsTable: UITableView!
     @IBOutlet var TextInfoLabel: UILabel!
-    let orderByOptions = [NSLocalizedString("VisionKitName", comment: ""),NSLocalizedString("CameraName", comment: "")]
+    let scanModeOptions = [NSLocalizedString("VisionKitName", comment: ""),NSLocalizedString("CameraName", comment: "")]
+    let scanModeText = [NSLocalizedString("CameraModeText", comment: ""),NSLocalizedString("VisionKitText", comment: "")]
+    
     var settings:ComicReaderAppSettings!
     var selectedIndex = -1
     
@@ -29,8 +31,8 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
         
-        TextInfoLabel.text = NSLocalizedString("CameraModeText", comment: "")
         selectedIndex = settings.getValueFromKey(key: "cameramode")
+        TextInfoLabel.text = scanModeText[selectedIndex]
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,7 +45,7 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderByOptions.count
+        return scanModeOptions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,13 +54,30 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
             fatalError("Big Error")
         }
         
-        cell.RowSettingLabel.text = orderByOptions[indexPath.item]
+        cell.RowSettingLabel.text = scanModeOptions[indexPath.item]
+        
         if indexPath.item == selectedIndex{
             cell.accessoryType = .checkmark
+        }else{
+            cell.accessoryType = .none
         }
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if settings.setValueForKey(key: "cameramode", value: indexPath.item){
+            selectedIndex = indexPath.item
+            TextInfoLabel.text = scanModeText[selectedIndex]
+        }else{
+            let alert = UIAlertController(title: NSLocalizedString("UnableToSetSetting", comment: ""), message: NSLocalizedString("UnableToSetSettingMessage", comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        SettingsTable.reloadData()
     }
 
 }
