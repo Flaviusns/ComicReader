@@ -1,14 +1,14 @@
 //
-//  SCanNavigationController.swift
+//  MainTabBarController.swift
 //  ComicReader
 //
-//  Created by Flavius Stan on 13/05/2020.
+//  Created by Flavius Stan on 14/05/2020.
 //  Copyright © 2020 flaviusstan. All rights reserved.
 //
 
 import UIKit
 
-class SCanNavigationController: UINavigationController {
+class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,4 +26,5 @@ class SCanNavigationController: UINavigationController {
         // Pass the selected object to the new view controller.
     }
     */
+
 }

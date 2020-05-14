@@ -18,13 +18,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+        guard let myScene = (scene as? UIWindowScene) else { return }
+        
         if let shortcutItem = connectionOptions.shortcutItem {
-            if shortcutItem.type == "com.flavius.ComicReader.openlastcomic" {
+            if shortcutItem.type == "com.flavius.ComicReader.openscancomic" {
                 print("ShourtCut")
+                if let tabBarController = myScene.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 1
+                }
             }
         }
         
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        
+        
     }
     
     
@@ -61,8 +69,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
-            if shortcutItem.type == "com.flavius.ComicReader.openlastcomic" {
+            if shortcutItem.type == "com.flavius.ComicReader.openscancomic" {
                 print("ShourtCut")
+                if let tabBarController = windowScene.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 1
+                }
             }
     }
     

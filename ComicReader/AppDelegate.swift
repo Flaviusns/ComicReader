@@ -28,12 +28,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         _ = ComicReaderAppSettings(container: persistentContainer)
         if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
-            if shortcutItem.type == "com.flavius.ComicReader.addcomic" {
+            if shortcutItem.type == "com.flavius.ComicReader.openscancomic" {
                 print("ShourtCut")
             }
         }
         
         return true
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        if shortcutItem.type == "com.flavius.ComicReader.openscancomic" {
+            print("ShourtCut")
+            if let tabBarController = application.windows[0].rootViewController as? MainTabBarController{
+                tabBarController.selectedIndex = 1
+            }
+        }
     }
 
     // MARK: UISceneSession Lifecycle

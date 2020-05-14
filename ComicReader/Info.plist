@@ -220,6 +220,14 @@
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeCapturePhoto</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Open Comic Scanner</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.flavius.ComicReader.openscancomic</string>
+		</dict>
+		<dict>
 			<key>UIApplicationShortcutItemType</key>
 			<string>com.flavius.ComicReader.openlastcomic</string>
 			<key>UIApplicationShortcutItemTitle</key>
