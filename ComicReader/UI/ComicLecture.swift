@@ -30,6 +30,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         
         navigationItem.title = comic?.name ?? "Null"
+        navigationItem.largeTitleDisplayMode = .never
         
         
         loadingIndicator.startAnimating()
