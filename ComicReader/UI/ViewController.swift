@@ -28,7 +28,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     }()
     
     var comicsFinder :ComicFinder!
-    var comicNameToOpen = ""
+
     var filtered:[Comic] = []
     var searchActive : Bool = false
     let searchController = UISearchController(searchResultsController: nil)
@@ -153,8 +153,25 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             }
         }
         self.tabBarController?.tabBar.isHidden = false
-        if comicNameToOpen != ""{
-            print(comicNameToOpen)
+
+    }
+    
+    func forceUpdate(){
+
+        self.comicsFinder.updateStorageComics()
+        self.comicsFinder.removeComicsNoLongerExist()
+        self.comics = self.comicsFinder.getSavedComics()
+        if self.settings.getValueFromKey(key: "orderby") == 0{
+            self.comics.sort()
+            
+            
+            if self.comicsFinder.getErrorInFile(){
+                self.presentErrorinFile = true
+            }else{
+                self.presentErrorinFile = false
+            }
+            self.collectionView.reloadData()
+            
         }
     }
     

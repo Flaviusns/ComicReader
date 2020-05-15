@@ -119,12 +119,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                             viewController.navigationController?.pushViewController(nextVC, animated: true)
                                         }
                                     }
-                                    }
+                                }
                                 
                             }
                         }
                     }
-            }
+                }
         }
     }
     
@@ -156,7 +156,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     if !FileManager.default.fileExists(atPath: pathToSave.path){
                         print("File not saved")
                     }
-                    try FileManager.default.removeItem(at: item.url)
+                    if let windowsScene = scene as? UIWindowScene{
+                        if let tabBarController = windowsScene.windows[0].rootViewController as? MainTabBarController{
+                            tabBarController.selectedIndex = 0
+                            for view in tabBarController.viewControllers!{
+                                if let mainViewController = view as? MainNavController{
+                                    for subview in mainViewController.viewControllers{
+                                        if let viewController = subview as? ViewController{
+                                            viewController.forceUpdate()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    
                 } catch {
                     print("Unable to save the comic: " + error.localizedDescription)
                     
