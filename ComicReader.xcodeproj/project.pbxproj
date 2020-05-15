@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		750626BF246EA03800825BA2 /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750626BE246EA03800825BA2 /* MainNavController.swift */; };
 		751D9A7A24214DDF00BBAC10 /* ComicFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751D9A7924214DDF00BBAC10 /* ComicFinder.swift */; };
 		751E477F2437740E008E73AA /* AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 751E477E2437740E008E73AA /* AppIcon.png */; };
 		753B063A2440B0DC002946A4 /* ComicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B06392440B0DC002946A4 /* ComicError.swift */; };
@@ -40,6 +41,7 @@
 		25E1B262260C0E1A166085B9 /* Pods-ComicReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComicReader.release.xcconfig"; path = "Target Support Files/Pods-ComicReader/Pods-ComicReader.release.xcconfig"; sourceTree = "<group>"; };
 		3C9F9D95C62A1BB06580A265 /* Pods-ComicReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComicReader.debug.xcconfig"; path = "Target Support Files/Pods-ComicReader/Pods-ComicReader.debug.xcconfig"; sourceTree = "<group>"; };
 		4F9FFF9EED45EE518CFEBD01 /* Pods_ComicReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComicReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		750626BE246EA03800825BA2 /* MainNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
 		751D9A7924214DDF00BBAC10 /* ComicFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicFinder.swift; sourceTree = "<group>"; };
 		751E477E2437740E008E73AA /* AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon.png; sourceTree = "<group>"; };
 		753B06392440B0DC002946A4 /* ComicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicError.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				75627F3724211A830006D08A /* ComicMiniature.swift */,
 				75627F3B242124FC0006D08A /* ComicLecture.swift */,
 				7583920B246D843E00FD5BC6 /* MainTabBarController.swift */,
+				750626BE246EA03800825BA2 /* MainNavController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				75545C2F2467E43300E988AC /* ExportQualitySettingsViewController.swift in Sources */,
 				75E1D912244AFFEC0016261D /* DecompressRar.m in Sources */,
 				75ECF9572466F1C800B3B6BA /* OrderBySettingsController.swift in Sources */,
+				750626BF246EA03800825BA2 /* MainNavController.swift in Sources */,
 				75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */,
 				75ECF94F2466DE4E00B3B6BA /* SettingTableViewCell.swift in Sources */,
 				75DA1A23245DC677000187E3 /* CameraScanner.swift in Sources */,

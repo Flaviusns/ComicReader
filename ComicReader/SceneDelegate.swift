@@ -27,6 +27,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 if let tabBarController = myScene.windows[0].rootViewController as? MainTabBarController{
                     tabBarController.selectedIndex = 1
                 }
+            }else if shortcutItem.type == "com.flavius.ComicReader.openlastcomic"{
+                
+                if let tabBarController = myScene.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 0
+                    for view in tabBarController.viewControllers!{
+                        if let mainViewController = view as? MainNavController{
+                            for subview in mainViewController.viewControllers{
+                                if let viewController = subview as? ViewController{
+                                    let comicsFinder = ComicFinder()
+                                    if let comic = comicsFinder.getComicbyName(comicName: "Ultimate Spiderman #116"){
+                                        
+                                        if let nextVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
+                                            nextVC.comic = comic
+                                            nextVC.comicFinder = comicsFinder
+                                            viewController.navigationController?.pushViewController(nextVC, animated: true)
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                
             }
         }
         
@@ -74,7 +98,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 if let tabBarController = windowScene.windows[0].rootViewController as? MainTabBarController{
                     tabBarController.selectedIndex = 1
                 }
+            }else if shortcutItem.type == "com.flavius.ComicReader.openlastcomic"{
+                
+                
+                
+                if let tabBarController = windowScene.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 0
+                    for view in tabBarController.viewControllers!{
+                        if let mainViewController = view as? MainNavController{
+                            for subview in mainViewController.viewControllers{
+                                if let viewController = subview as? ViewController{
+                                    let comicsFinder = ComicFinder()
+                                    if let comic = comicsFinder.getComicbyName(comicName: "Ultimate Spiderman #116"){
+                                        
+                                        if let nextVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
+                                            nextVC.comic = comic
+                                            nextVC.comicFinder = comicsFinder
+                                            viewController.navigationController?.pushViewController(nextVC, animated: true)
+                                        }
+                                    }
+                                    }
+                                
+                            }
+                        }
+                    }
             }
+        }
     }
     
     

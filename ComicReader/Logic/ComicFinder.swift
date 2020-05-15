@@ -635,4 +635,41 @@ class ComicFinder{
         }
         return error
     }
+    
+    func getComicbyName(comicName: String) -> Comic? {
+        let persistentContainer: NSPersistentContainer = {
+            
+            let container = NSPersistentContainer(name: "ComicReaderModel")
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            })
+            return container
+        }()
+        
+        let managedContext = persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicEntity")
+        request.returnsObjectsAsFaults = false
+        request.predicate = NSPredicate(format: "name = %@", comicName)
+        
+        do {
+            let result = try managedContext.fetch(request)
+            if result.isEmpty{
+                print("Empty Result")
+            }
+            else{
+                guard let comicEntity = result[0] as? NSManagedObject else{
+                    fatalError("Unable to cast comicEntity")
+                }
+                
+                return Comic(name: comicEntity.value(forKey: "name") as! String, path: comicEntity.value(forKey: "path") as! String, cover: comicEntity.value(forKey: "cover") as! Data,fileExt: comicEntity.value(forKey: "fileextension") as! String,
+                      lastPage: comicEntity.value(forKey: "lastpage") as? Int ?? 0,
+                      fav: comicEntity.value(forKey: "favorite") as? Bool ?? true)
+            }
+        } catch {
+            return nil
+        }
+        return nil
+    }
 }

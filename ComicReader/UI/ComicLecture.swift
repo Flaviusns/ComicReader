@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ComicLecture: UIViewController,UIScrollViewDelegate {
     
@@ -21,6 +22,17 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     @IBOutlet var bottomView: UIView!
     @IBOutlet var scrollView: UIScrollView!
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "ComicReaderModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
    
     
     override func viewDidLoad() {
@@ -65,6 +77,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        comicFinder?.container = persistentContainer
         comicFinder?.saveLastPage(comicName: comic!.name, lastPage: currentPage + 1 == (comic?.comicsPages!.count)! ? 0 : currentPage)
         ComicFinder.removeTempComic(fileName: comic!.name)
     }

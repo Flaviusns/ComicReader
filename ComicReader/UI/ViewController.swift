@@ -28,7 +28,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     }()
     
     var comicsFinder :ComicFinder!
-    
+    var comicNameToOpen = ""
     var filtered:[Comic] = []
     var searchActive : Bool = false
     let searchController = UISearchController(searchResultsController: nil)
@@ -153,6 +153,9 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             }
         }
         self.tabBarController?.tabBar.isHidden = false
+        if comicNameToOpen != ""{
+            print(comicNameToOpen)
+        }
     }
     
     
