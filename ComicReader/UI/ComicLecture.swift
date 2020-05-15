@@ -79,6 +79,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         comicFinder?.container = persistentContainer
         comicFinder?.saveLastPage(comicName: comic!.name, lastPage: currentPage + 1 == (comic?.comicsPages!.count)! ? 0 : currentPage)
+        comicFinder?.setLastComicRead(comicName: comic!.name)
         ComicFinder.removeTempComic(fileName: comic!.name)
     }
     

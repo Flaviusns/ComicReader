@@ -36,7 +36,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             for subview in mainViewController.viewControllers{
                                 if let viewController = subview as? ViewController{
                                     let comicsFinder = ComicFinder()
-                                    if let comic = comicsFinder.getComicbyName(comicName: "Ultimate Spiderman #116"){
+                                    let comicName = comicsFinder.getLastComicRead()
+                                    if let comic = comicsFinder.getComicbyName(comicName: comicName){
                                         
                                         if let nextVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
                                             nextVC.comic = comic
@@ -109,7 +110,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             for subview in mainViewController.viewControllers{
                                 if let viewController = subview as? ViewController{
                                     let comicsFinder = ComicFinder()
-                                    if let comic = comicsFinder.getComicbyName(comicName: "Ultimate Spiderman #116"){
+                                    let comicName = comicsFinder.getLastComicRead()
+                                    if let comic = comicsFinder.getComicbyName(comicName: comicName){
                                         
                                         if let nextVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
                                             nextVC.comic = comic

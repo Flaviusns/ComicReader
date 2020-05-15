@@ -672,4 +672,74 @@ class ComicFinder{
         }
         return nil
     }
+    
+    func getLastComicRead() -> String{
+        let persistentContainer: NSPersistentContainer = {
+            
+            let container = NSPersistentContainer(name: "ComicReaderModel")
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            })
+            return container
+        }()
+        
+        let managedContext = persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LastComicRead")
+        request.returnsObjectsAsFaults = false
+        do {
+            let result = try managedContext.fetch(request)
+            if result.isEmpty{
+                print("Empty Result")
+            }
+            else{
+                guard let lastComicEntity = result[0] as? NSManagedObject else{
+                    fatalError("Unable to cast comicEntity")
+                }
+                return lastComicEntity.value(forKey: "name") as? String ?? ""
+
+            }
+        } catch {
+            return ""
+        }
+        return ""
+    }
+    
+    func setLastComicRead(comicName: String){
+        let persistentContainer: NSPersistentContainer = {
+            
+            let container = NSPersistentContainer(name: "ComicReaderModel")
+            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                if let error = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            })
+            return container
+        }()
+        
+        let managedContext = persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LastComicRead")
+        request.returnsObjectsAsFaults = false
+        do {
+            let result = try managedContext.fetch(request)
+            if result.isEmpty{
+                let entity = NSEntityDescription.entity(forEntityName: "LastComicRead", in: managedContext)!
+                let lastComicEntity = NSManagedObject(entity: entity, insertInto: managedContext)
+                
+                lastComicEntity.setValue(comicName, forKeyPath: "name")
+                try managedContext.save()
+            }
+            else{
+                guard let lastComicEntity = result[0] as? NSManagedObject else{
+                    fatalError("Unable to cast comicEntity")
+                }
+                lastComicEntity.setValue(comicName, forKey: "name")
+                try managedContext.save()
+                
+            }
+        } catch {
+            
+        }
+    }
 }

@@ -13,8 +13,12 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="path" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="LastComicRead" representedClassName="LastComicRead" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="ComicAppSettings" positionX="-63" positionY="27" width="128" height="88"/>
         <element name="ComicEntity" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="LastComicRead" positionX="-63" positionY="27" width="128" height="58"/>
     </elements>
 </model>
