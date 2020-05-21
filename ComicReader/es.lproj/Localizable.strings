@@ -2,6 +2,27 @@
 "AddFavourite" = "Añadir a favoritos";
 
 /* No comment provided by engineer. */
+"CameraModeText" = "Utilizar la cámara es la opción por defecto en iOS 12. Seleccionando esta opción se usará directamente la cámara del dispositivo para escanear cómics.";
+
+/* No comment provided by engineer. */
+"CameraName" = "Cámara";
+
+/* No comment provided by engineer. */
+"Cancel" = "Cancelar";
+
+/* No comment provided by engineer. */
+"CollectionOrder" = "Orden en la colección";
+
+/* No comment provided by engineer. */
+"ComicDeleted" = "Cómic borrado";
+
+/* No comment provided by engineer. */
+"ComicSaved" = "Cómic guardado";
+
+/* No comment provided by engineer. */
+"CreateComicTitle" = "Nombrar cómic";
+
+/* No comment provided by engineer. */
 "DeleteComic" = "Borrar comic";
 
 /* No comment provided by engineer. */
@@ -14,13 +35,40 @@
 "ErrorInFile" = "Fallo en el archivo";
 
 /* No comment provided by engineer. */
+"ExportQuality" = "Calidad de exportación";
+
+/* No comment provided by engineer. */
+"HighQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será alta.";
+
+/* No comment provided by engineer. */
+"HighQualityName" = "Alta calidad";
+
+/* No comment provided by engineer. */
+"InputComicName" = "Introduce un nombre para tu cómic";
+
+/* No comment provided by engineer. */
+"InputNamePlaceHolder" = "Introduzca el nombre del cómic";
+
+/* No comment provided by engineer. */
 "InvalidFileMessage" = "Parece ser que hay varios archivos invalidos, por favor comprueba las instrucciones relacionadas con los archivos";
+
+/* No comment provided by engineer. */
+"LowQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será baja. No recomendada a menos que se quiera generar archivos muy ligeros.";
+
+/* No comment provided by engineer. */
+"LowQualityName" = "Baja calidad";
+
+/* No comment provided by engineer. */
+"MediumQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será media. Opción recomendada.";
+
+/* No comment provided by engineer. */
+"MediumQualityName" = "Calidad estándar";
 
 /* No comment provided by engineer. */
 "MoreInfo" = "Más información";
 
 /* No comment provided by engineer. */
-"MyComics" = "Mis Comics";
+"MyComics" = "Mis Cómics";
 
 /* No comment provided by engineer. */
 "NoItemMatch" = "Ningún item concuerda";
@@ -38,10 +86,43 @@
 "Ok" = "Ok";
 
 /* No comment provided by engineer. */
+"OrderByAdditionDate" = "Ordenar por fecha de creación";
+
+/* No comment provided by engineer. */
+"OrderByAdditionText" = "Esta opción ordenará los cómics de tu colección por orden de creación en la colección";
+
+/* No comment provided by engineer. */
+"OrderByHeader" = "Ordenar por";
+
+/* No comment provided by engineer. */
+"OrderByName" = "Ordenar por nombre";
+
+/* No comment provided by engineer. */
+"OrderByNameText" = "Esta opción ordenará los cómics de tu colección por orden alfabético, sin importar la fecha de creación.";
+
+/* No comment provided by engineer. */
+"OrderBySetting" = "Ordenar por";
+
+/* No comment provided by engineer. */
+"QualityExportHeader" = "Calidad de exportación";
+
+/* No comment provided by engineer. */
+"QualityExportSetting" = "Calidad de exportación";
+
+/* No comment provided by engineer. */
 "RemoveFavourite" = "Borrar de favoritos";
 
 /* No comment provided by engineer. */
-"SearchComic" = "Buscar comics";
+"ScaningMode" = "Modo de escaneo";
+
+/* No comment provided by engineer. */
+"ScanningModeHeader" = "Modo de escaneo";
+
+/* No comment provided by engineer. */
+"SearchComic" = "Buscar cómics";
+
+/* No comment provided by engineer. */
+"Settings" = "Ajustes";
 
 /* No comment provided by engineer. */
 "Share" = "Compartir";
@@ -51,4 +132,22 @@
 
 /* No comment provided by engineer. */
 "UnableDeleteMessage" = "La aplicación es incapaz de borrar el comic";
+
+/* No comment provided by engineer. */
+"UnableToSetSetting" = "Incapaz de guardar la configuración";
+
+/* No comment provided by engineer. */
+"UnableToSetSettingMessage" = "La aplicación es incapaz de guardar la configuración";
+
+/* No comment provided by engineer. */
+"VeryHighQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será muy alta. Esto hará que los cómics exportados sean muy pesados.";
+
+/* No comment provided by engineer. */
+"VeryHighQualityName" = "Muy alta calidad";
+
+/* No comment provided by engineer. */
+"VisionKitName" = "VisionKit";
+
+/* No comment provided by engineer. */
+"VisionKitText" = "Con esta opción seleccionada, se utilizará la tecnología de VisionKit de Apple para capturar las páginas del cómic.";
 

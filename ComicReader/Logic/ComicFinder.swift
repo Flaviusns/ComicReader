@@ -142,10 +142,20 @@ class ComicFinder{
                 
                 var comicPages = [Data]()
                 //This for it's just to avoid hidden files in the folder
-                for page in comicPagesPath {
-                    if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
-                        comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
-                        break
+                if comicPagesPath.count == 1{ //If it´s a directory, check inside the directory
+                    let comicPagesInsideDirectory = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/" + comicPagesPath[0] + "/").sorted()
+                    for page in comicPagesInsideDirectory {
+                        if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
+                            comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + comicPagesPath[0] + "/" + page)))
+                            break
+                        }
+                    }
+                } else{
+                    for page in comicPagesPath {
+                        if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
+                            comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
+                            break
+                        }
                     }
                 }
                 
@@ -426,11 +436,22 @@ class ComicFinder{
                     if extractResult {
                         let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/").sorted()
                         
-                        
+                        //MARK: LA GRAN CACA
                         //This for it's just to avoid hidden files in the folder
-                        for page in comicPagesPath {
-                            if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
-                                comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
+                        if comicPagesPath.count == 1{ //If it´s a directory, check inside the directory
+                            let comicPagesInsideDirectory = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/" + comicPagesPath[0] + "/").sorted()
+                            for page in comicPagesInsideDirectory {
+                                if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
+                                    comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + comicPagesPath[0] + "/" + page)))
+                                    
+                                }
+                            }
+                        } else{
+                            for page in comicPagesPath {
+                                if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
+                                    comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
+                                    
+                                }
                             }
                         }
                         

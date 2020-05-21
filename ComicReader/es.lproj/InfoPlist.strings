@@ -16,6 +16,15 @@
 /* (No Comment) */
 "Comic Book Zip Archive" = "Comic Book Zip Archive";
 
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "Para poder escanear cómics";
+
+/* (No Comment) */
+"Open Comic Scanner" = "Abrir el escáner";
+
+/* (No Comment) */
+"Open Last Comic" = "Abrir el último cómic abierto";
+
 /* (No Comment) */
 "RAR Archive" = "RAR Archive";
 
