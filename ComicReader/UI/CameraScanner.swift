@@ -77,7 +77,7 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         
         
         
-        navigationItem.title = NSLocalizedString("CreateComicTitle", comment: "")
+        navigationItem.title = NSLocalizedString("CreateComicTitle", comment: "Title at Scanner Comic View")
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
@@ -255,9 +255,9 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         SaveButton.isHidden = true
         DeleteComic.isHidden = true
         
-        let confirmAlert = UIAlertController(title: NSLocalizedString("ComicDeleted", comment: ""), message: "", preferredStyle: .alert)
+        let confirmAlert = UIAlertController(title: NSLocalizedString("ComicDeleted", comment: "Delete Comic alert title inside the scan comic view"), message: nil, preferredStyle: .alert)
         
-        confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+        confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .default, handler: nil))
         
         comicPages.removeAll()
         numPages = 0
@@ -266,23 +266,23 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     }
     
     @IBAction func saveComic(_ sender: Any) {
-        let alert = UIAlertController(title: NSLocalizedString("InputComicName", comment: ""), message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        let alert = UIAlertController(title: NSLocalizedString("InputComicName", comment: "Input title in the save comic's alert at Scan comic view"), message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel button inside the save comic alert at Scan comic view"), style: .cancel, handler: nil))
         
         alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "")
+            textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "Placeholder inside the enter comic name textfiled. Scan comic view")
         })
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .default, handler: { action in
             
             if let name = alert.textFields?.first?.text {
                 self.comicName = name
                 self.saveComicOperations()
                 self.SaveButton.isHidden=true
                 self.DeleteComic.isHidden=true
-                let confirmAlert = UIAlertController(title: NSLocalizedString("ComicSaved", comment: ""), message: "", preferredStyle: .alert)
+                let confirmAlert = UIAlertController(title: NSLocalizedString("ComicSaved", comment: "Comic saved message inside the Scan comic view"), message: nil, preferredStyle: .alert)
                     
-                confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+                confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .default, handler: nil))
                     
                 self.present(confirmAlert, animated: true)
             }

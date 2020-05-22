@@ -12,8 +12,8 @@ import CoreData
 class SettingTableViewController: UITableViewController {
     
     let sectionTitles = ["CollectionSettings","ScanComicSettings"]
-    let firstSection = [NSLocalizedString("CollectionOrder", comment: "")]
-    var secondSection = [NSLocalizedString("ExportQuality", comment: "")]
+    let firstSection = [NSLocalizedString("CollectionOrder", comment: "First title section inside the settings view")]
+    var secondSection = [NSLocalizedString("ExportQuality", comment: "Second title section inside the settings view")]
     
     lazy var persistentContainer: NSPersistentContainer = {
         
@@ -38,14 +38,14 @@ class SettingTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        navigationItem.title = NSLocalizedString("Settings", comment: "")
+        navigationItem.title = NSLocalizedString("Settings", comment: "Settings title inside the Settings View")
         //self.navigationController?.navigationBar.titleTextAttributes = [
         //    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         //]
         navigationItem.largeTitleDisplayMode = .always
         
         if #available(iOS 13, *){
-            secondSection.append(NSLocalizedString("ScaningMode", comment: ""))
+            secondSection.append(NSLocalizedString("ScaningMode", comment: "Scaning mode row inside the settings root options"))
         }
         
         settings = ComicReaderAppSettings(container: persistentContainer)

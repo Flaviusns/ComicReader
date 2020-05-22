@@ -13,8 +13,8 @@ class ExportQualitySettingsViewController: UIViewController,UITableViewDelegate,
     
     @IBOutlet var SettingsTable: UITableView!
     @IBOutlet var TextInfoLabel: UILabel!
-    let ExportOptions = [NSLocalizedString("VeryHighQualityName", comment: ""),NSLocalizedString("HighQualityName", comment: ""),NSLocalizedString("MediumQualityName", comment: ""),NSLocalizedString("LowQualityName", comment: "")]
-    let exportOptionsText = [NSLocalizedString("VeryHighQualityExportText", comment: ""),NSLocalizedString("HighQualityExportText", comment: ""),NSLocalizedString("MediumQualityExportText", comment: ""),NSLocalizedString("LowQualityExportText", comment: "")]
+    let ExportOptions = [NSLocalizedString("VeryHighQualityName", comment: "Text inside the row in the settings tab"),NSLocalizedString("HighQualityName", comment: "Text inside the row in the settings tab"),NSLocalizedString("MediumQualityName", comment: "Text inside the row in the settings tab"),NSLocalizedString("LowQualityName", comment: "Text inside the row in the settings tab")]
+    let exportOptionsText = [NSLocalizedString("VeryHighQualityExportText", comment: "Text describing the setting"),NSLocalizedString("HighQualityExportText", comment: "Text describing the setting"),NSLocalizedString("MediumQualityExportText", comment: "Text describing the setting"),NSLocalizedString("LowQualityExportText", comment: "Text describing the setting")]
     var settings:ComicReaderAppSettings!
     var selectedIndex = -1
     
@@ -25,7 +25,7 @@ class ExportQualitySettingsViewController: UIViewController,UITableViewDelegate,
         
         // Do any additional setup after loading the view.
         
-        navigationItem.title = NSLocalizedString("QualityExportSetting", comment: "")
+        navigationItem.title = NSLocalizedString("QualityExportSetting", comment: "QualityExport title for navigationbar in the settings tag")
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
@@ -40,7 +40,7 @@ class ExportQualitySettingsViewController: UIViewController,UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("QualityExportHeader", comment: "")
+        return NSLocalizedString("QualityExportHeader", comment: "Header for the settings rows")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,8 +69,8 @@ class ExportQualitySettingsViewController: UIViewController,UITableViewDelegate,
             selectedIndex = indexPath.item
             TextInfoLabel.text = exportOptionsText[selectedIndex]
         }else{
-            let alert = UIAlertController(title: NSLocalizedString("UnableToSetSetting", comment: ""), message: NSLocalizedString("UnableToSetSettingMessage", comment: ""), preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+            let alert = UIAlertController(title: NSLocalizedString("UnableToSetSetting", comment: "Unable to set settings title for the alert"), message: NSLocalizedString("UnableToSetSettingMessage", comment: "Unable to set settings subtitle large message for the alert"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay option inside the alert"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
         

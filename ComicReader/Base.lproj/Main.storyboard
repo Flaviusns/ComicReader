@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iYc-Gh-00O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iYc-Gh-00O">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -302,14 +302,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Setting" id="OhO-ag-0Ci" customClass="SettingTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
+                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OhO-ag-0Ci" id="KLH-jf-YzX">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sc2-7M-Ys6">
-                                            <rect key="frame" x="16" y="11" width="216" height="21"/>
+                                            <rect key="frame" x="16" y="11" width="216" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -362,14 +362,14 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderBySetting" id="PNZ-Vr-fa8" customClass="SettingRowTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PNZ-Vr-fa8" id="iVt-lX-ZMl">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdY-Cw-4iz">
-                                                    <rect key="frame" x="15" y="11" width="232" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="232" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -416,7 +416,7 @@
         <scene sceneID="FdI-7X-TLk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="req-sU-qSe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="EEV-XU-MDx"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsIcon" id="EEV-XU-MDx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="GKZ-oF-YBT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
@@ -471,14 +471,14 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExportQualitySetting" id="g4N-fZ-Y8j" customClass="SettingRowTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g4N-fZ-Y8j" id="eO3-0J-OgE">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vz-SD-Dmj">
-                                                    <rect key="frame" x="15" y="11" width="232" height="21.5"/>
+                                                    <rect key="frame" x="15" y="11" width="232" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -563,14 +563,14 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScanModeSetting" id="oZk-ua-aa1" customClass="SettingRowTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oZk-ua-aa1" id="OIU-ov-hqd">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCj-sd-ndo">
-                                                    <rect key="frame" x="15" y="11" width="232" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="232" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -636,6 +636,7 @@
         <image name="CameraToolBar" width="24" height="24"/>
         <image name="ComicCollectionIcon" width="23" height="23"/>
         <image name="FavUnselected" width="50" height="45"/>
+        <image name="SettingsIcon" width="24" height="24"/>
         <image name="Unselected" width="51" height="51"/>
     </resources>
 </document>

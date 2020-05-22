@@ -13,8 +13,8 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
     
     @IBOutlet var SettingsTable: UITableView!
     @IBOutlet var TextInfoLabel: UILabel!
-    let scanModeOptions = [NSLocalizedString("VisionKitName", comment: ""),NSLocalizedString("CameraName", comment: "")]
-    let scanModeText = [NSLocalizedString("CameraModeText", comment: ""),NSLocalizedString("VisionKitText", comment: "")]
+    let scanModeOptions = [NSLocalizedString("VisionKitName", comment: "Scan Mode name in the row"),NSLocalizedString("CameraName", comment: "Scan Mode name in the row")]
+    let scanModeText = [NSLocalizedString("CameraModeText", comment: "Scan Mode text explaining the row selected the row"),NSLocalizedString("VisionKitText", comment: "Scan Mode text explaining the row selected the row")]
     
     var settings:ComicReaderAppSettings!
     var selectedIndex = -1
@@ -26,7 +26,7 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
         
         // Do any additional setup after loading the view.
         
-        navigationItem.title = NSLocalizedString("QualityExportSetting", comment: "")
+        navigationItem.title = NSLocalizedString("QualityExportSetting", comment: "Quality Export title for the navigation bar")
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
@@ -41,7 +41,7 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("ScanningModeHeader", comment: "")
+        return NSLocalizedString("ScanningModeHeader", comment: "Header for the rows in Scannig mode")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,8 +72,8 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
             selectedIndex = indexPath.item
             TextInfoLabel.text = scanModeText[selectedIndex]
         }else{
-            let alert = UIAlertController(title: NSLocalizedString("UnableToSetSetting", comment: ""), message: NSLocalizedString("UnableToSetSettingMessage", comment: ""), preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+            let alert = UIAlertController(title: NSLocalizedString("UnableToSetSetting", comment: "Unable to set settings title for the alert"), message: NSLocalizedString("UnableToSetSettingMessage", comment: "Unable to set settings subtitle large message for the alert"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay option inside the alert"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
         

@@ -14,8 +14,8 @@ class OrderBySettingsController: UIViewController,UITableViewDelegate,UITableVie
     @IBOutlet var SettingsTable: UITableView!
     @IBOutlet var TextInfoLabel: UILabel!
     
-    let orderByOptions = [NSLocalizedString("OrderByName", comment: ""),NSLocalizedString("OrderByAdditionDate", comment: "")]
-    let orderByTextInfo = [NSLocalizedString("OrderByNameText", comment: ""),NSLocalizedString("OrderByAdditionText", comment: "")]
+    let orderByOptions = [NSLocalizedString("OrderByName", comment: "Order by Name row title"),NSLocalizedString("OrderByAdditionDate", comment: "Order by Addition date row title")]
+    let orderByTextInfo = [NSLocalizedString("OrderByNameText", comment: "Order by Name text describing information"),NSLocalizedString("OrderByAdditionText", comment: "Order by addition text describing information")]
     var settings:ComicReaderAppSettings!
     var selectedIndex = -1
     
@@ -26,7 +26,7 @@ class OrderBySettingsController: UIViewController,UITableViewDelegate,UITableVie
 
         // Do any additional setup after loading the view.
         
-        navigationItem.title = NSLocalizedString("OrderBySetting", comment: "")
+        navigationItem.title = NSLocalizedString("OrderBySetting", comment: "Order by settings title of the view order by settings")
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
@@ -47,7 +47,7 @@ class OrderBySettingsController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return NSLocalizedString("OrderByHeader", comment: "")
+        return NSLocalizedString("OrderByHeader", comment: "Order by header of the rows inside the order by setttings")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,8 +78,8 @@ class OrderBySettingsController: UIViewController,UITableViewDelegate,UITableVie
             selectedIndex = indexPath.item
             TextInfoLabel.text = orderByTextInfo[selectedIndex]
         }else{
-            let alert = UIAlertController(title: NSLocalizedString("UnableToSetSetting", comment: ""), message: NSLocalizedString("UnableToSetSettingMessage", comment: ""), preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: nil))
+            let alert = UIAlertController(title: NSLocalizedString("UnableToSetSetting", comment: "Unable to set settings title for the alert"), message: NSLocalizedString("UnableToSetSettingMessage", comment: "Unable to set settings subtitle large message for the alert"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay option inside the alert"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
         
