@@ -1,153 +1,161 @@
-/* No comment provided by engineer. */
+/* Add favourite text for the 3DTouch option */
 "AddFavourite" = "Añadir a favoritos";
 
-/* No comment provided by engineer. */
+/* Scan Mode text explaining the row selected the row */
 "CameraModeText" = "Utilizar la cámara es la opción por defecto en iOS 12. Seleccionando esta opción se usará directamente la cámara del dispositivo para escanear cómics.";
 
-/* No comment provided by engineer. */
+/* Scan Mode name in the row */
 "CameraName" = "Cámara";
 
-/* No comment provided by engineer. */
+/* Cancel button inside the save comic alert at Scan comic view */
 "Cancel" = "Cancelar";
 
-/* No comment provided by engineer. */
+/* First title section inside the settings view */
 "CollectionOrder" = "Orden en la colección";
 
-/* No comment provided by engineer. */
+/* Collection Setings Header */
+"CollectionSettings" = "Ajustes de colección";
+
+/* Delete Comic alert title inside the scan comic view */
 "ComicDeleted" = "Cómic borrado";
 
-/* No comment provided by engineer. */
+/* Comic saved message inside the Scan comic view */
 "ComicSaved" = "Cómic guardado";
 
-/* No comment provided by engineer. */
-"CreateComicTitle" = "Nombrar cómic";
+/* Title at Scanner Comic View */
+"CreateComicTitle" = "Escanear cómic";
 
-/* No comment provided by engineer. */
+/* Delete text for the 3DTouch option */
 "DeleteComic" = "Borrar comic";
 
-/* No comment provided by engineer. */
+/* Empty collection text as title when the main collection it's empty */
 "EmptyCollection" = "Tu colección de comics está vacía";
 
-/* No comment provided by engineer. */
+/* Empty collection text as message when the main collection it's empty */
 "EmptyCollectionMessage" = "Prueba a añadir más comics y observa como tu colección crece";
 
-/* No comment provided by engineer. */
+/* Error in file title in the alert */
 "ErrorInFile" = "Fallo en el archivo";
 
-/* No comment provided by engineer. */
+/* Second title section inside the settings view */
 "ExportQuality" = "Calidad de exportación";
 
-/* No comment provided by engineer. */
+/* Text describing the setting */
 "HighQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será alta.";
 
-/* No comment provided by engineer. */
+/* Text inside the row in the settings tab */
 "HighQualityName" = "Alta calidad";
 
-/* No comment provided by engineer. */
+/* Input title in the save comic's alert at Scan comic view */
 "InputComicName" = "Introduce un nombre para tu cómic";
 
-/* No comment provided by engineer. */
+/* Placeholder inside the enter comic name textfiled. Scan comic view */
 "InputNamePlaceHolder" = "Introduzca el nombre del cómic";
 
-/* No comment provided by engineer. */
+/* Error in file message in the alert */
 "InvalidFileMessage" = "Parece ser que hay varios archivos invalidos, por favor comprueba las instrucciones relacionadas con los archivos";
 
-/* No comment provided by engineer. */
+/* Text describing the setting */
 "LowQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será baja. No recomendada a menos que se quiera generar archivos muy ligeros.";
 
-/* No comment provided by engineer. */
+/* Text inside the row in the settings tab */
 "LowQualityName" = "Baja calidad";
 
-/* No comment provided by engineer. */
+/* Text describing the setting */
 "MediumQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será media. Opción recomendada.";
 
-/* No comment provided by engineer. */
+/* Text inside the row in the settings tab */
 "MediumQualityName" = "Calidad estándar";
 
-/* No comment provided by engineer. */
+/* More info button in the alert */
 "MoreInfo" = "Más información";
 
-/* No comment provided by engineer. */
+/* My comics title for the collection view */
 "MyComics" = "Mis Cómics";
 
-/* No comment provided by engineer. */
+/* No item match text as title when the search collection it's empty */
 "NoItemMatch" = "Ningún item concuerda";
 
-/* No comment provided by engineer. */
+/* No item match text as message when the search collection it's empty */
 "NoItemMatchMessage" = "Prueba con otra búsqueda";
 
-/* No comment provided by engineer. */
+/* Not favorite text as title when the favorite collection it's empty */
 "NotFavorites" = "No tienes ningún comic en favoritos";
 
-/* No comment provided by engineer. */
+/* Not favorite text as message when the favorite collection it's empty */
 "NotFavoritesMessage" = "Prueba a añadir comics a la lista de favoritos";
 
-/* No comment provided by engineer. */
+/* Okay inside the delete comic alert title. Scan comic view
+   Okay option inside the alert */
 "Ok" = "Ok";
 
-/* No comment provided by engineer. */
+/* Order by Addition date row title */
 "OrderByAdditionDate" = "Ordenar por fecha de creación";
 
-/* No comment provided by engineer. */
+/* Order by addition text describing information */
 "OrderByAdditionText" = "Esta opción ordenará los cómics de tu colección por orden de creación en la colección";
 
-/* No comment provided by engineer. */
+/* Order by header of the rows inside the order by setttings */
 "OrderByHeader" = "Ordenar por";
 
-/* No comment provided by engineer. */
+/* Order by Name row title */
 "OrderByName" = "Ordenar por nombre";
 
-/* No comment provided by engineer. */
+/* Order by Name text describing information */
 "OrderByNameText" = "Esta opción ordenará los cómics de tu colección por orden alfabético, sin importar la fecha de creación.";
 
-/* No comment provided by engineer. */
+/* Order by settings title of the view order by settings */
 "OrderBySetting" = "Ordenar por";
 
-/* No comment provided by engineer. */
+/* Header for the settings rows */
 "QualityExportHeader" = "Calidad de exportación";
 
-/* No comment provided by engineer. */
+/* Quality Export title for the navigation bar
+   QualityExport title for navigationbar in the settings tag */
 "QualityExportSetting" = "Calidad de exportación";
 
-/* No comment provided by engineer. */
+/* Remove Favourite text for the 3DTouch option */
 "RemoveFavourite" = "Borrar de favoritos";
 
-/* No comment provided by engineer. */
+/* Scan comic settings header for settings */
+"ScanComicSettings" = "Ajustes de escaneo";
+
+/* Scaning mode row inside the settings root options */
 "ScaningMode" = "Modo de escaneo";
 
-/* No comment provided by engineer. */
+/* Header for the rows in Scannig mode */
 "ScanningModeHeader" = "Modo de escaneo";
 
-/* No comment provided by engineer. */
+/* Search comic placeholder inside the collection view */
 "SearchComic" = "Buscar cómics";
 
-/* No comment provided by engineer. */
+/* Settings title inside the Settings View */
 "Settings" = "Ajustes";
 
-/* No comment provided by engineer. */
+/* Share text for the 3DTouch option */
 "Share" = "Compartir";
 
-/* No comment provided by engineer. */
+/* Unable to delete comic alert title */
 "UnableDelete" = "Incapaz de borrar";
 
-/* No comment provided by engineer. */
+/* Unable to delete comic alert message */
 "UnableDeleteMessage" = "La aplicación es incapaz de borrar el comic";
 
-/* No comment provided by engineer. */
+/* Unable to set settings title for the alert */
 "UnableToSetSetting" = "Incapaz de guardar la configuración";
 
-/* No comment provided by engineer. */
+/* Unable to set settings subtitle large message for the alert */
 "UnableToSetSettingMessage" = "La aplicación es incapaz de guardar la configuración";
 
-/* No comment provided by engineer. */
+/* Text describing the setting */
 "VeryHighQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será muy alta. Esto hará que los cómics exportados sean muy pesados.";
 
-/* No comment provided by engineer. */
+/* Text inside the row in the settings tab */
 "VeryHighQualityName" = "Muy alta calidad";
 
-/* No comment provided by engineer. */
+/* Scan Mode name in the row */
 "VisionKitName" = "VisionKit";
 
-/* No comment provided by engineer. */
+/* Scan Mode text explaining the row selected the row */
 "VisionKitText" = "Con esta opción seleccionada, se utilizará la tecnología de VisionKit de Apple para capturar las páginas del cómic.";
 

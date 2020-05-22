@@ -26,7 +26,7 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
         
         // Do any additional setup after loading the view.
         
-        navigationItem.title = NSLocalizedString("QualityExportSetting", comment: "Quality Export title for the navigation bar")
+        navigationItem.title = NSLocalizedString("ScanningModeSetting", comment: "Scanning mode title for the navigation bar")
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]

@@ -11,7 +11,7 @@ import CoreData
 
 class SettingTableViewController: UITableViewController {
     
-    let sectionTitles = ["CollectionSettings","ScanComicSettings"]
+    let sectionTitles = [NSLocalizedString("CollectionSettings", comment: "Collection Setings Header"),NSLocalizedString("ScanComicSettings", comment: "Scan comic settings header for settings")]
     let firstSection = [NSLocalizedString("CollectionOrder", comment: "First title section inside the settings view")]
     var secondSection = [NSLocalizedString("ExportQuality", comment: "Second title section inside the settings view")]
     

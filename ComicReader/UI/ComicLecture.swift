@@ -68,7 +68,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         
         PageIndicator.isHidden = false
         currentPage = comic?.lastPage ?? 0
-        PageIndicator.text = "\(currentPage + 1) of \((comic?.comicsPages!.count)!)"
+        PageIndicator.text = "\(currentPage + 1) \(NSLocalizedString("Of", comment: "Of keyword betwen the numbers of actual and total comic pages")) \((comic?.comicsPages!.count)!)"
         scrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.view.bounds.size.width),y: 0), animated: true)
         let subscrollView = self.bottomView.subviews[0] as! UIScrollView
         subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
