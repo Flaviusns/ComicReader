@@ -10,6 +10,7 @@
 		750626BF246EA03800825BA2 /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750626BE246EA03800825BA2 /* MainNavController.swift */; };
 		751D9A7A24214DDF00BBAC10 /* ComicFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751D9A7924214DDF00BBAC10 /* ComicFinder.swift */; };
 		751E477F2437740E008E73AA /* AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 751E477E2437740E008E73AA /* AppIcon.png */; };
+		7526471824801AAE0033ABD1 /* ComicReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7526471724801AAE0033ABD1 /* ComicReaderTests.swift */; };
 		753B063A2440B0DC002946A4 /* ComicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B06392440B0DC002946A4 /* ComicError.swift */; };
 		75545C2F2467E43300E988AC /* ExportQualitySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75545C2E2467E43300E988AC /* ExportQualitySettingsViewController.swift */; };
 		75545C312467E92000E988AC /* ScanModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75545C302467E92000E988AC /* ScanModeSettingViewController.swift */; };
@@ -37,6 +38,16 @@
 		C420559A14164B72FF1DF165 /* Pods_ComicReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9FFF9EED45EE518CFEBD01 /* Pods_ComicReader.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7526471A24801AAE0033ABD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75627F18242118D30006D08A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75627F1F242118D40006D08A;
+			remoteInfo = ComicReader;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		25E1B262260C0E1A166085B9 /* Pods-ComicReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComicReader.release.xcconfig"; path = "Target Support Files/Pods-ComicReader/Pods-ComicReader.release.xcconfig"; sourceTree = "<group>"; };
 		3C9F9D95C62A1BB06580A265 /* Pods-ComicReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComicReader.debug.xcconfig"; path = "Target Support Files/Pods-ComicReader/Pods-ComicReader.debug.xcconfig"; sourceTree = "<group>"; };
@@ -44,6 +55,9 @@
 		750626BE246EA03800825BA2 /* MainNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
 		751D9A7924214DDF00BBAC10 /* ComicFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicFinder.swift; sourceTree = "<group>"; };
 		751E477E2437740E008E73AA /* AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon.png; sourceTree = "<group>"; };
+		7526471524801AAE0033ABD1 /* ComicReaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComicReaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7526471724801AAE0033ABD1 /* ComicReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicReaderTests.swift; sourceTree = "<group>"; };
+		7526471924801AAE0033ABD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		753B06392440B0DC002946A4 /* ComicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicError.swift; sourceTree = "<group>"; };
 		75545C2E2467E43300E988AC /* ExportQualitySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportQualitySettingsViewController.swift; sourceTree = "<group>"; };
 		75545C302467E92000E988AC /* ScanModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModeSettingViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +92,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7526471224801AAE0033ABD1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75627F1D242118D40006D08A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,6 +117,15 @@
 				25E1B262260C0E1A166085B9 /* Pods-ComicReader.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		7526471624801AAE0033ABD1 /* ComicReaderTests */ = {
+			isa = PBXGroup;
+			children = (
+				7526471724801AAE0033ABD1 /* ComicReaderTests.swift */,
+				7526471924801AAE0033ABD1 /* Info.plist */,
+			);
+			path = ComicReaderTests;
 			sourceTree = "<group>";
 		};
 		75545C342467F1E500E988AC /* UI */ = {
@@ -134,6 +164,7 @@
 			children = (
 				751E477E2437740E008E73AA /* AppIcon.png */,
 				75627F22242118D40006D08A /* ComicReader */,
+				7526471624801AAE0033ABD1 /* ComicReaderTests */,
 				75627F21242118D40006D08A /* Products */,
 				344050060251F482F50DA589 /* Pods */,
 				791F4E708FE5E95F160EF403 /* Frameworks */,
@@ -144,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				75627F20242118D40006D08A /* ComicReader.app */,
+				7526471524801AAE0033ABD1 /* ComicReaderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,6 +212,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7526471424801AAE0033ABD1 /* ComicReaderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7526471E24801AAE0033ABD1 /* Build configuration list for PBXNativeTarget "ComicReaderTests" */;
+			buildPhases = (
+				7526471124801AAE0033ABD1 /* Sources */,
+				7526471224801AAE0033ABD1 /* Frameworks */,
+				7526471324801AAE0033ABD1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7526471B24801AAE0033ABD1 /* PBXTargetDependency */,
+			);
+			name = ComicReaderTests;
+			productName = ComicReaderTests;
+			productReference = 7526471524801AAE0033ABD1 /* ComicReaderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		75627F1F242118D40006D08A /* ComicReader */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75627F34242118D50006D08A /* Build configuration list for PBXNativeTarget "ComicReader" */;
@@ -205,10 +255,14 @@
 		75627F18242118D30006D08A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = flaviusstan;
 				TargetAttributes = {
+					7526471424801AAE0033ABD1 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 75627F1F242118D40006D08A;
+					};
 					75627F1F242118D40006D08A = {
 						CreatedOnToolsVersion = 11.3.1;
 						LastSwiftMigration = 1140;
@@ -230,11 +284,19 @@
 			projectRoot = "";
 			targets = (
 				75627F1F242118D40006D08A /* ComicReader */,
+				7526471424801AAE0033ABD1 /* ComicReaderTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7526471324801AAE0033ABD1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75627F1E242118D40006D08A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -293,6 +355,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7526471124801AAE0033ABD1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7526471824801AAE0033ABD1 /* ComicReaderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75627F1C242118D40006D08A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -322,6 +392,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7526471B24801AAE0033ABD1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75627F1F242118D40006D08A /* ComicReader */;
+			targetProxy = 7526471A24801AAE0033ABD1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		75627F29242118D40006D08A /* Main.storyboard */ = {
@@ -362,6 +440,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7526471C24801AAE0033ABD1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N997Q2Y7ME;
+				INFOPLIST_FILE = ComicReaderTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.flavius.ComicReaderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ComicReader.app/ComicReader";
+			};
+			name = Debug;
+		};
+		7526471D24801AAE0033ABD1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N997Q2Y7ME;
+				INFOPLIST_FILE = ComicReaderTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.flavius.ComicReaderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ComicReader.app/ComicReader";
+			};
+			name = Release;
+		};
 		75627F32242118D50006D08A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -528,6 +648,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7526471E24801AAE0033ABD1 /* Build configuration list for PBXNativeTarget "ComicReaderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7526471C24801AAE0033ABD1 /* Debug */,
+				7526471D24801AAE0033ABD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		75627F1B242118D30006D08A /* Build configuration list for PBXProject "ComicReader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -2,7 +2,7 @@
 "AddFavourite" = "Añadir a favoritos";
 
 /* Scan Mode text explaining the row selected the row */
-"CameraModeText" = "Utilizar la cámara es la opción por defecto en iOS 12. Seleccionando esta opción se usará directamente la cámara del dispositivo para escanear cómics.";
+"CameraModeText" = "Usar la cámara es la opción por defecto en iOS12. Seleccionando esta opción, la aplicación usará la cámara del dispositivo para escanear cómics.";
 
 /* Scan Mode name in the row */
 "CameraName" = "Cámara";
@@ -11,16 +11,16 @@
 "Cancel" = "Cancelar";
 
 /* First title section inside the settings view */
-"CollectionOrder" = "Orden en la colección";
+"CollectionOrder" = "Orden de la colección";
 
 /* Collection Setings Header */
-"CollectionSettings" = "Ajustes de colección";
+"CollectionSettings" = "Configuración de la colección";
 
 /* Delete Comic alert title inside the scan comic view */
 "ComicDeleted" = "Cómic borrado";
 
 /* Comic saved message inside the Scan comic view */
-"ComicSaved" = "Cómic guardado";
+"ComicSaved" = "Comic guardado";
 
 /* Title at Scanner Comic View */
 "CreateComicTitle" = "Escanear cómic";
@@ -41,31 +41,31 @@
 "ExportQuality" = "Calidad de exportación";
 
 /* Text describing the setting */
-"HighQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será alta.";
+"HighQualityExportText" = "Con esta opción seleccionada, la calidad de exportación del cómic será alta";
 
 /* Text inside the row in the settings tab */
 "HighQualityName" = "Alta calidad";
 
 /* Input title in the save comic's alert at Scan comic view */
-"InputComicName" = "Introduce un nombre para tu cómic";
+"InputComicName" = "Inserte el nombre del cómic";
 
 /* Placeholder inside the enter comic name textfiled. Scan comic view */
-"InputNamePlaceHolder" = "Introduzca el nombre del cómic";
+"InputNamePlaceHolder" = "Introduce el nombre del cómic";
 
 /* Error in file message in the alert */
 "InvalidFileMessage" = "Parece ser que hay varios archivos invalidos, por favor comprueba las instrucciones relacionadas con los archivos";
 
 /* Text describing the setting */
-"LowQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será baja. No recomendada a menos que se quiera generar archivos muy ligeros.";
+"LowQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de los cómics será baja. No recomendada a menos que quieras generar archivos pequeños.";
 
 /* Text inside the row in the settings tab */
 "LowQualityName" = "Baja calidad";
 
 /* Text describing the setting */
-"MediumQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será media. Opción recomendada.";
+"MediumQualityExportText" = "Con esta opción seleccionada, la calidad de exportación será media. Opción recomendada.";
 
 /* Text inside the row in the settings tab */
-"MediumQualityName" = "Calidad estándar";
+"MediumQualityName" = "Calidad media";
 
 /* More info button in the alert */
 "MoreInfo" = "Más información";
@@ -85,15 +85,18 @@
 /* Not favorite text as message when the favorite collection it's empty */
 "NotFavoritesMessage" = "Prueba a añadir comics a la lista de favoritos";
 
+/* Of keyword betwen the numbers of actual and total comic pages */
+"Of" = "de";
+
 /* Okay inside the delete comic alert title. Scan comic view
    Okay option inside the alert */
 "Ok" = "Ok";
 
 /* Order by Addition date row title */
-"OrderByAdditionDate" = "Ordenar por fecha de creación";
+"OrderByAdditionDate" = "Ordenar por fecha de insercción";
 
 /* Order by addition text describing information */
-"OrderByAdditionText" = "Esta opción ordenará los cómics de tu colección por orden de creación en la colección";
+"OrderByAdditionText" = "Esta opción ordenará los comics por fecha de inclusión en la colección.";
 
 /* Order by header of the rows inside the order by setttings */
 "OrderByHeader" = "Ordenar por";
@@ -102,29 +105,31 @@
 "OrderByName" = "Ordenar por nombre";
 
 /* Order by Name text describing information */
-"OrderByNameText" = "Esta opción ordenará los cómics de tu colección por orden alfabético, sin importar la fecha de creación.";
+"OrderByNameText" = "Esta opción ordenará los comics por nombre.";
 
 /* Order by settings title of the view order by settings */
 "OrderBySetting" = "Ordenar por";
 
 /* Header for the settings rows */
-"QualityExportHeader" = "Calidad de exportación";
+"QualityExportHeader" = "Calidad de la exportación";
 
-/* Quality Export title for the navigation bar
-   QualityExport title for navigationbar in the settings tag */
-"QualityExportSetting" = "Calidad de exportación";
+/* QualityExport title for navigationbar in the settings tag */
+"QualityExportSetting" = "Exportar";
 
 /* Remove Favourite text for the 3DTouch option */
 "RemoveFavourite" = "Borrar de favoritos";
 
 /* Scan comic settings header for settings */
-"ScanComicSettings" = "Ajustes de escaneo";
+"ScanComicSettings" = "opciones de escaneo";
 
 /* Scaning mode row inside the settings root options */
 "ScaningMode" = "Modo de escaneo";
 
 /* Header for the rows in Scannig mode */
 "ScanningModeHeader" = "Modo de escaneo";
+
+/* Scanning mode title for the navigation bar */
+"ScanningModeSetting" = "Modo de escaneo";
 
 /* Search comic placeholder inside the collection view */
 "SearchComic" = "Buscar cómics";
@@ -142,16 +147,16 @@
 "UnableDeleteMessage" = "La aplicación es incapaz de borrar el comic";
 
 /* Unable to set settings title for the alert */
-"UnableToSetSetting" = "Incapaz de guardar la configuración";
+"UnableToSetSetting" = " Incapaz de guardar la configuración";
 
 /* Unable to set settings subtitle large message for the alert */
-"UnableToSetSettingMessage" = "La aplicación es incapaz de guardar la configuración";
+"UnableToSetSettingMessage" = "La aplicación no es capaz de guardar la configuración";
 
 /* Text describing the setting */
-"VeryHighQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de las páginas del cómic será muy alta. Esto hará que los cómics exportados sean muy pesados.";
+"VeryHighQualityExportText" = "Con esta opción seleccionada la calidad de exportación de las páginas del comic será muy alta. Esto hará que los cómics exportados sean muy grandes.";
 
 /* Text inside the row in the settings tab */
-"VeryHighQualityName" = "Muy alta calidad";
+"VeryHighQualityName" = "Calidad muy alta";
 
 /* Scan Mode name in the row */
 "VisionKitName" = "VisionKit";

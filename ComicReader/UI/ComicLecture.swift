@@ -63,7 +63,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         comic?.comicsPages = ComicFinder.getComicPages(file: comic!)
         prepareScrollView()
         createthumbNails(width: self.view.bounds.size.width)
-        loadingIndicator.startAnimating()
+        loadingIndicator.stopAnimating()
         loadingIndicator.removeFromSuperview()
         
         PageIndicator.isHidden = false
