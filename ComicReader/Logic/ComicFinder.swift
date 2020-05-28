@@ -90,7 +90,6 @@ class ComicFinder{
         } catch {
             print("Error while enumerating files: \(error.localizedDescription)")
         }
-        
     }
     
     func decompressCBZ(fileName:String) -> Comic?{
@@ -251,8 +250,6 @@ class ComicFinder{
         } catch  {
             print("Error while cheking for removed files")
         }
-        
-        
     }
     
     
@@ -386,89 +383,110 @@ class ComicFinder{
     static func getComicPages(file: Comic)-> [Data]{
         
         var comicPages = [Data]()
-        let fileManager = FileManager.default
         let tempPath = getTempDirectory()
         let docPath = getDocumentsDirectory()
         let completePath = docPath.path + "/" + file.name + file.fileExtension
         
-        do {
             if file.fileExtension == ".cbz"{
-                try Zip.unzipFile(URL(fileURLWithPath: completePath), destination: tempPath, overwrite: true, password: nil) // Unzip
-                let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/").sorted()
-                
-                for page in comicPagesPath {
-                    if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){
-                        comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
-                    }
-                }
+                comicPages = getComicPagesFromZip(path: completePath, tempPath: tempPath, fileName: file.name)
             }
             else if file.fileExtension == ".cb7"{
-                let finalURL = URL(fileURLWithPath: tempPath.path + "/" + file.name + ".7z")
-                try fileManager.copyItem(at: URL(fileURLWithPath: completePath), to: finalURL)
-                let reader = LzmaSDKObjCReader(fileURL: finalURL)
-                var items = [LzmaSDKObjCItem]()  // Array with selected items.
-                try reader.open()
-                reader.iterate(handler: {
-                    (item: LzmaSDKObjCItem, error: Error?) -> Bool in
-                    items.append(item)
-                    return true
-                })
-                if reader.extract(items, toPath: tempPath.path, withFullPaths: true) {
-                    print("Extract failed: \(reader.lastError?.localizedDescription ?? "Dead Fail")")
-                }
-                
-                let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/").sorted()
-                
-                for page in comicPagesPath {
-                    if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){
-                        comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
-                    }
-                }
-                try fileManager.removeItem(at: finalURL)
+                comicPages = getComicPagesFrom7zip(path: completePath, tempPath: tempPath, fileName: file.name)
             }
             else if file.fileExtension == ".cbr"{
-                
-                let extractURL = tempPath.path + "/" + file.name
-                do {
-                    try fileManager.createDirectory(atPath: extractURL, withIntermediateDirectories: false, attributes: nil)
-                    let decompressRarClass = DecompressRar()
-                    let extractResult = decompressRarClass.extractFile(completePath, withSecond: extractURL)
-                    if extractResult {
-                        let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/").sorted()
-                        
-                        //MARK: LA GRAN CACA
-                        //This for it's just to avoid hidden files in the folder
-                        if comicPagesPath.count == 1{ //If it´s a directory, check inside the directory
-                            let comicPagesInsideDirectory = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + file.name + "/" + comicPagesPath[0] + "/").sorted()
-                            for page in comicPagesInsideDirectory {
-                                if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
-                                    comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + comicPagesPath[0] + "/" + page)))
-                                    
-                                }
-                            }
-                        } else{
-                            for page in comicPagesPath {
-                                if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
-                                    comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + file.name + "/" + page)))
-                                    
-                                }
-                            }
-                        }
-                        
-                    }
-                    
-                    try fileManager.removeItem(atPath: extractURL)
-                    
-                } catch {
-                    print("Error while enumerating files: \(error.localizedDescription)")
+                comicPages = getComicPagesFromCbr(path: completePath, tempPath: tempPath, fileName: file.name)
+            }
+        return comicPages
+    }
+    
+    static func getComicPagesFromZip(path: String,tempPath: URL, fileName: String) -> [Data]{
+        
+        var comicPages = [Data]()
+        let fileManager = FileManager.default
+        
+        do {
+            try Zip.unzipFile(URL(fileURLWithPath: path), destination: tempPath, overwrite: true, password: nil) // Unzip
+            let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
+            
+            for page in comicPagesPath {
+                if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){
+                    comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
                 }
             }
             
-        } catch let error{
-            print("Unable to get the comic pages" + error.localizedDescription)
+            return comicPages
+        } catch  {
+            return comicPages
         }
-        
-        return comicPages
+    }
+    
+    static func getComicPagesFrom7zip(path: String,tempPath: URL, fileName: String) -> [Data]{
+        var comicPages = [Data]()
+        let fileManager = FileManager.default
+        let finalURL = URL(fileURLWithPath: tempPath.path + "/" + fileName + ".7z")
+        do {
+            try fileManager.copyItem(at: URL(fileURLWithPath: path), to: finalURL)
+            let reader = LzmaSDKObjCReader(fileURL: finalURL)
+            var items = [LzmaSDKObjCItem]()  // Array with selected items.
+            try reader.open()
+            reader.iterate(handler: {
+                (item: LzmaSDKObjCItem, error: Error?) -> Bool in
+                items.append(item)
+                return true
+            })
+            if reader.extract(items, toPath: tempPath.path, withFullPaths: true) {
+                print("Extract failed: \(reader.lastError?.localizedDescription ?? "Dead Fail")")
+            }
+            
+            let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
+            
+            for page in comicPagesPath {
+                if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){
+                    comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
+                }
+            }
+            try fileManager.removeItem(at: finalURL)
+            return comicPages
+        } catch {
+            return comicPages
+        }
+    }
+    
+    static func getComicPagesFromCbr(path: String,tempPath: URL, fileName: String) -> [Data]{
+        var comicPages = [Data]()
+        let fileManager = FileManager.default
+        let extractURL = tempPath.path + "/" + fileName
+        do {
+            try fileManager.createDirectory(atPath: extractURL, withIntermediateDirectories: false, attributes: nil)
+            let decompressRarClass = DecompressRar()
+            let extractResult = decompressRarClass.extractFile(path, withSecond: extractURL)
+            if extractResult {
+                let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
+                
+                if comicPagesPath.count == 1{ //If it´s a directory, check inside the directory
+                    let comicPagesInsideDirectory = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/" + comicPagesPath[0] + "/").sorted()
+                    for page in comicPagesInsideDirectory {
+                        if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
+                            comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + comicPagesPath[0] + "/" + page)))
+                            
+                        }
+                    }
+                } else{
+                    for page in comicPagesPath {
+                        if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){ //Find the first image and break.
+                            comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
+                            
+                        }
+                    }
+                }
+                
+            }
+            
+            try fileManager.removeItem(atPath: extractURL)
+            return comicPages
+        } catch {
+            return comicPages
+        }
     }
     
     func removeComic(comicToRemove: Comic) -> Bool{
