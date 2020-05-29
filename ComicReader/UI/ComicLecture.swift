@@ -61,26 +61,39 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         comic?.comicsPages = ComicFinder.getComicPages(file: comic!)
-        prepareScrollView()
-        createthumbNails(width: self.view.bounds.size.width)
-        loadingIndicator.stopAnimating()
-        loadingIndicator.removeFromSuperview()
-        
-        PageIndicator.isHidden = false
-        currentPage = comic?.lastPage ?? 0
-        PageIndicator.text = "\(currentPage + 1) \(NSLocalizedString("Of", comment: "Of keyword betwen the numbers of actual and total comic pages")) \((comic?.comicsPages!.count)!)"
-        scrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.view.bounds.size.width),y: 0), animated: true)
-        let subscrollView = self.bottomView.subviews[0] as! UIScrollView
-        subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
-        self.view.bringSubviewToFront(PageIndicator)
-        
+        if comic?.comicsPages?.count ?? 0 > 0{
+            prepareScrollView()
+            createthumbNails(width: self.view.bounds.size.width)
+            loadingIndicator.stopAnimating()
+            loadingIndicator.removeFromSuperview()
+            
+            PageIndicator.isHidden = false
+            currentPage = comic?.lastPage ?? 0
+            PageIndicator.text = "\(currentPage + 1) \(NSLocalizedString("Of", comment: "Of keyword betwen the numbers of actual and total comic pages")) \((comic?.comicsPages!.count)!)"
+            scrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.view.bounds.size.width),y: 0), animated: true)
+            let subscrollView = self.bottomView.subviews[0] as! UIScrollView
+            subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
+            self.view.bringSubviewToFront(PageIndicator)
+        }else{
+            let alert = UIAlertController(title: NSLocalizedString("ComicNoLongerExistTitle", comment: "Alert title when the comic was erased"), message: NSLocalizedString("ComicNoLongerExistTitle", comment: "Alert message when the comic was erased"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay option inside the alert"), style: .default, handler: {(action:UIAlertAction!) in
+                _ = self.navigationController?.popViewController(animated: true)
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        comicFinder?.container = persistentContainer
-        comicFinder?.saveLastPage(comicName: comic!.name, lastPage: currentPage + 1 == (comic?.comicsPages!.count)! ? 0 : currentPage)
-        comicFinder?.setLastComicRead(comicName: comic!.name)
-        ComicFinder.removeTempComic(fileName: comic!.name)
+        if comic?.comicsPages?.count ?? 0 > 0{
+            comicFinder?.container = persistentContainer
+            comicFinder?.saveLastPage(comicName: comic!.name, lastPage: currentPage + 1 == (comic?.comicsPages!.count)! ? 0 : currentPage)
+            comicFinder?.setLastComicRead(comicName: comic!.name)
+            ComicFinder.removeTempComic(fileName: comic!.name)
+        }
+        
+        super.viewWillDisappear(true)
+        
     }
     
     func prepareScrollView(){
