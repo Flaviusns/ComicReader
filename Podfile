@@ -12,4 +12,9 @@ target 'ComicReader' do
   pod 'LzmaSDK-ObjC', :inhibit_warnings => true
   pod "UnrarKit"
 
+  target 'ComicReaderTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
 end
