@@ -23,7 +23,7 @@ class ComicFinder{
     init(){
         
     }
-    
+        
     static func checkIfSupportedFormat(_ file: String) -> Bool{
         if file.contains(".jpeg") || file.contains(".jpg") || file.contains(".png") || file.contains(".heic"){
             return true
