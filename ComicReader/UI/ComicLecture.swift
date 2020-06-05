@@ -71,8 +71,10 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
             currentPage = comic?.lastPage ?? 0
             PageIndicator.text = "\(currentPage + 1) \(NSLocalizedString("Of", comment: "Of keyword betwen the numbers of actual and total comic pages")) \((comic?.comicsPages!.count)!)"
             scrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.view.bounds.size.width),y: 0), animated: true)
-            let subscrollView = self.bottomView.subviews[0] as! UIScrollView
-            subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
+            if self.view.bounds.width < ((CGFloat((self.comic?.comicsPages!.count)! - 1)) * self.thumbnailWith){
+                let subscrollView = self.bottomView.subviews[0] as! UIScrollView
+                subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
+            }
             self.view.bringSubviewToFront(PageIndicator)
         }else{
             let alert = UIAlertController(title: NSLocalizedString("ComicNoLongerExistTitle", comment: "Alert title when the comic was erased"), message: NSLocalizedString("ComicNoLongerExistTitle", comment: "Alert message when the comic was erased"), preferredStyle: .alert)
@@ -151,6 +153,12 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
                 
                 bottomScrollView.addSubview(imageView)
             }
+        
+        if width >= ((CGFloat((self.comic?.comicsPages!.count)! - 1)) * self.thumbnailWith){
+            bottomScrollView.isDirectionalLockEnabled = true
+        }else{
+            bottomScrollView.isDirectionalLockEnabled = false
+        }
         
             
             self.bottomView.addSubview(bottomScrollView)
@@ -237,8 +245,10 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     func changeCurrentPage(currentPage: Int){
         PageIndicator.text = "\(currentPage + 1) of \((comic?.comicsPages!.count)!)"
-        let subscrollView = self.bottomView.subviews[0] as! UIScrollView
-        subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
+        if self.view.bounds.width < ((CGFloat((self.comic?.comicsPages!.count)! - 1)) * self.thumbnailWith){
+            let subscrollView = self.bottomView.subviews[0] as! UIScrollView
+            subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
+        }
     }
 }
 
