@@ -14,18 +14,18 @@ class ComicMiniature: UICollectionViewCell {
     @IBOutlet var ComicName: UILabel!
     @IBOutlet var FavButton: UIButton!
     @IBOutlet var SelectedButton: UIButton!
+    @IBOutlet weak var SelectedTick: UIImageView!
     
     override var isSelected: Bool {
         didSet{
             if !isSelected{
                 SelectedButton.setImage(UIImage(named: "Unselected"), for: .normal)
+                SelectedTick.isHidden = true
             }else{
                 SelectedButton.setImage(UIImage(named: "Selected"), for: .normal)
+                SelectedTick.isHidden = false
             }
             
         }
     }
-    
 }
-
-

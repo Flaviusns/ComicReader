@@ -44,6 +44,9 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectedTick" translatesAutoresizingMaskIntoConstraints="NO" id="YZO-hH-G7Y">
+                                            <rect key="frame" x="51" y="62" width="50" height="50"/>
+                                        </imageView>
                                         <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8e1-e8-JYX">
                                             <rect key="frame" x="19" y="10" width="25" height="25"/>
                                             <constraints>
@@ -62,8 +65,11 @@
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="B4f-sx-vag" firstAttribute="top" secondItem="YZO-hH-G7Y" secondAttribute="bottom" constant="67" id="3Z2-V3-2wc"/>
+                                        <constraint firstItem="YZO-hH-G7Y" firstAttribute="top" secondItem="Dhz-Qe-yoM" secondAttribute="top" constant="62" id="6aK-XN-lbg"/>
                                         <constraint firstAttribute="bottom" secondItem="B4f-sx-vag" secondAttribute="bottom" constant="4" id="6qB-gy-2qW"/>
                                         <constraint firstItem="8e1-e8-JYX" firstAttribute="top" secondItem="Dhz-Qe-yoM" secondAttribute="top" constant="10" id="AxL-Cn-55u"/>
+                                        <constraint firstAttribute="trailing" secondItem="YZO-hH-G7Y" secondAttribute="trailing" constant="52" id="DoP-Zr-sIO"/>
                                         <constraint firstItem="B4f-sx-vag" firstAttribute="leading" secondItem="Dhz-Qe-yoM" secondAttribute="leading" constant="14" id="EeU-vZ-1JQ"/>
                                         <constraint firstItem="B4f-sx-vag" firstAttribute="top" secondItem="5Fx-45-pGJ" secondAttribute="bottom" constant="8" id="UkM-8c-Ji2"/>
                                         <constraint firstItem="8e1-e8-JYX" firstAttribute="leading" secondItem="Dhz-Qe-yoM" secondAttribute="leading" constant="19" id="WlY-Se-xXI"/>
@@ -71,6 +77,7 @@
                                         <constraint firstAttribute="trailing" secondItem="5Fx-45-pGJ" secondAttribute="trailing" constant="14" id="ahm-jO-clG"/>
                                         <constraint firstItem="5Fx-45-pGJ" firstAttribute="leading" secondItem="Dhz-Qe-yoM" secondAttribute="leading" constant="14" id="djy-Cy-OUm"/>
                                         <constraint firstAttribute="trailing" secondItem="AHH-Hn-fsb" secondAttribute="trailing" constant="16" id="ebj-7W-Hwn"/>
+                                        <constraint firstItem="YZO-hH-G7Y" firstAttribute="leading" secondItem="Dhz-Qe-yoM" secondAttribute="leading" constant="51" id="fDl-O6-Oi1"/>
                                         <constraint firstItem="5Fx-45-pGJ" firstAttribute="top" secondItem="Dhz-Qe-yoM" secondAttribute="top" constant="8" id="pqM-dI-Mbs"/>
                                         <constraint firstItem="AHH-Hn-fsb" firstAttribute="top" secondItem="Dhz-Qe-yoM" secondAttribute="top" constant="10" id="yKz-3R-1lp"/>
                                     </constraints>
@@ -81,6 +88,7 @@
                                     <outlet property="ComicName" destination="B4f-sx-vag" id="jJl-0P-WMg"/>
                                     <outlet property="FavButton" destination="AHH-Hn-fsb" id="Rrp-bJ-KKU"/>
                                     <outlet property="SelectedButton" destination="8e1-e8-JYX" id="vYT-tt-Lao"/>
+                                    <outlet property="SelectedTick" destination="YZO-hH-G7Y" id="fXU-8G-1Mr"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -96,7 +104,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LfE-eP-Wxo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2644.9275362318845" y="117.85714285714285"/>
+            <point key="canvasLocation" x="2643.75" y="117.25352112676056"/>
         </scene>
         <!--Comic Lecture-->
         <scene sceneID="7ol-em-kXA">
@@ -302,14 +310,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Setting" id="OhO-ag-0Ci" customClass="SettingTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OhO-ag-0Ci" id="KLH-jf-YzX">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sc2-7M-Ys6">
-                                            <rect key="frame" x="16" y="11" width="216" height="21.5"/>
+                                            <rect key="frame" x="16" y="11" width="216" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -362,14 +370,14 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderBySetting" id="PNZ-Vr-fa8" customClass="SettingRowTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PNZ-Vr-fa8" id="iVt-lX-ZMl">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdY-Cw-4iz">
-                                                    <rect key="frame" x="15" y="11" width="232" height="21.5"/>
+                                                    <rect key="frame" x="15" y="11" width="232" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -471,14 +479,14 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExportQualitySetting" id="g4N-fZ-Y8j" customClass="SettingRowTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g4N-fZ-Y8j" id="eO3-0J-OgE">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Vz-SD-Dmj">
-                                                    <rect key="frame" x="15" y="11" width="232" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="232" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -563,14 +571,14 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScanModeSetting" id="oZk-ua-aa1" customClass="SettingRowTableViewCell" customModule="ComicReader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oZk-ua-aa1" id="OIU-ov-hqd">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCj-sd-ndo">
-                                                    <rect key="frame" x="15" y="11" width="232" height="21.5"/>
+                                                    <rect key="frame" x="15" y="11" width="232" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -633,10 +641,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CameraToolBar" width="24" height="24"/>
+        <image name="CameraToolBar" width="24" height="22"/>
         <image name="ComicCollectionIcon" width="23" height="23"/>
         <image name="FavUnselected" width="50" height="45"/>
-        <image name="SettingsIcon" width="24" height="24"/>
+        <image name="SelectedTick" width="50" height="50"/>
+        <image name="SettingsIcon" width="24" height="24.5"/>
         <image name="Unselected" width="51" height="51"/>
     </resources>
 </document>
