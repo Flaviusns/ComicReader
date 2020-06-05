@@ -25,7 +25,7 @@ class ComicFinder{
     }
         
     static func checkIfSupportedFormat(_ file: String) -> Bool{
-        if file.contains(".jpeg") || file.contains(".jpg") || file.contains(".png") || file.contains(".heic"){
+        if file.contains(".jpeg") || file.contains(".jpg") || file.contains(".png") || file.contains(".heic") || file.contains(".gif"){
             return true
         }
         return false
@@ -419,7 +419,7 @@ class ComicFinder{
             let comicPagesPath = try fileManager.contentsOfDirectory(atPath: tempPath.path + "/" + fileName + "/").sorted()
             
             for page in comicPagesPath {
-                if(page.contains(".jpg") || page.contains(".png") || page.contains(".jpeg")){
+                if(checkIfSupportedFormat(page)){
                     comicPages.append(try Data(contentsOf: URL(fileURLWithPath: tempPath.path + "/" + fileName + "/" + page)))
                 }
             }
