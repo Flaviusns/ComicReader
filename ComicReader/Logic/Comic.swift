@@ -9,11 +9,11 @@
 import Foundation
 
 
-class Comic :NSObject{
+class Comic :NSObject, Comparable{
     var name: String
     var path: String
     var comicsPages: [Data]?
-    var favorite: Bool
+    var favourite: Bool
     var fileExtension: String
     var lastPage: Int?
 
@@ -22,7 +22,7 @@ class Comic :NSObject{
         self.name = name
         self.path = path
         self.comicsPages = [cover]
-        self.favorite = fav
+        self.favourite = fav
         self.fileExtension = fileExt
         self.lastPage = lastPage
     }
@@ -32,8 +32,12 @@ class Comic :NSObject{
         self.name = name
         self.path = path
         self.comicsPages = cover
-        self.favorite = false
+        self.favourite = false
         self.fileExtension = fileExt
+    }
+    
+    static func <(lhs: Comic, rhs: Comic) -> Bool {
+        return lhs.name < rhs.name
     }
     
 }

@@ -18,8 +18,49 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        guard let myScene = (scene as? UIWindowScene) else { return }
+        
+        if let shortcutItem = connectionOptions.shortcutItem {
+            if shortcutItem.type == "com.flavius.ComicReader.openscancomic" {
+                print("ShourtCut")
+                if let tabBarController = myScene.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 1
+                }
+            }else if shortcutItem.type == "com.flavius.ComicReader.openlastcomic"{
+                
+                if let tabBarController = myScene.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 0
+                    for view in tabBarController.viewControllers!{
+                        if let mainViewController = view as? MainNavController{
+                            for subview in mainViewController.viewControllers{
+                                if let viewController = subview as? ViewController{
+                                    let comicsFinder = ComicFinder()
+                                    let comicName = comicsFinder.getLastComicRead()
+                                    if let comic = comicsFinder.getComicbyName(comicName: comicName){
+                                        
+                                        if let nextVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
+                                            nextVC.comic = comic
+                                            nextVC.comicFinder = comicsFinder
+                                            viewController.navigationController?.pushViewController(nextVC, animated: true)
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        
+        
+        
     }
+    
+    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -41,6 +82,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
@@ -48,6 +90,45 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    
+    
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+            if shortcutItem.type == "com.flavius.ComicReader.openscancomic" {
+                print("ShourtCut")
+                if let tabBarController = windowScene.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 1
+                }
+            }else if shortcutItem.type == "com.flavius.ComicReader.openlastcomic"{
+                
+                
+                
+                if let tabBarController = windowScene.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 0
+                    for view in tabBarController.viewControllers!{
+                        if let mainViewController = view as? MainNavController{
+                            for subview in mainViewController.viewControllers{
+                                if let viewController = subview as? ViewController{
+                                    let comicsFinder = ComicFinder()
+                                    let comicName = comicsFinder.getLastComicRead()
+                                    if let comic = comicsFinder.getComicbyName(comicName: comicName){
+                                        
+                                        if let nextVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
+                                            nextVC.comic = comic
+                                            nextVC.comicFinder = comicsFinder
+                                            viewController.navigationController?.pushViewController(nextVC, animated: true)
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+        }
+    }
+    
+    
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         
@@ -75,7 +156,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     if !FileManager.default.fileExists(atPath: pathToSave.path){
                         print("File not saved")
                     }
-                    try FileManager.default.removeItem(at: item.url)
+                    if let windowsScene = scene as? UIWindowScene{
+                        if let tabBarController = windowsScene.windows[0].rootViewController as? MainTabBarController{
+                            tabBarController.selectedIndex = 0
+                            for view in tabBarController.viewControllers!{
+                                if let mainViewController = view as? MainNavController{
+                                    for subview in mainViewController.viewControllers{
+                                        if let viewController = subview as? ViewController{
+                                            viewController.forceUpdate()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    
                 } catch {
                     print("Unable to save the comic: " + error.localizedDescription)
                     

@@ -1,6 +1,8 @@
 # Comic Reader
 
-Welcome to the Comic Reader App repository. This app reads [Comic Books files](https://en.wikipedia.org/wiki/Comic_book_archive) including CBR, CBZ and CB7 files. The app support devices from iOS 12.4 to iOS 13.4 right now.
+Welcome to the Comic Reader App repository. This app reads [Comic Books files](https://en.wikipedia.org/wiki/Comic_book_archive) including CBR, CBZ and CB7 files. The app support devices from iOS 12.4 to iOS 13.5 right now.
+
+The app also scans physical comics using your device camera. Depending of the version, you can use [VisionKit](https://developer.apple.com/documentation/visionkit) to scan your comics. With this option selected, the quality of the scanning improves.
 
 The app use three diferent libraries to decompress the files, in order of implementation:
 

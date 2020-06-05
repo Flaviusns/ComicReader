@@ -12,10 +12,87 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "ComicReaderModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        _ = ComicReaderAppSettings(container: persistentContainer)
+        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            if shortcutItem.type == "com.flavius.ComicReader.openscancomic" {
+                if let tabBarController = application.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 1
+                }
+            }else if shortcutItem.type == "com.flavius.ComicReader.openlastcomic"{
+                
+                if let tabBarController = application.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 0
+                    for view in tabBarController.viewControllers!{
+                        if let mainViewController = view as? MainNavController{
+                            for subview in mainViewController.viewControllers{
+                                if let viewController = subview as? ViewController{
+                                    let comicsFinder = ComicFinder()
+                                    let comicName = comicsFinder.getLastComicRead()
+                                    if let comic = comicsFinder.getComicbyName(comicName: comicName){
+                                        
+                                        if let nextVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
+                                            nextVC.comic = comic
+                                            nextVC.comicFinder = comicsFinder
+                                            viewController.navigationController?.pushViewController(nextVC, animated: true)
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
         return true
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        if shortcutItem.type == "com.flavius.ComicReader.openscancomic" {
+            if let tabBarController = application.windows[0].rootViewController as? MainTabBarController{
+                tabBarController.selectedIndex = 1
+            }
+        }else if shortcutItem.type == "com.flavius.ComicReader.openlastcomic"{
+            
+            if let tabBarController = application.windows[0].rootViewController as? MainTabBarController{
+                tabBarController.selectedIndex = 0
+                for view in tabBarController.viewControllers!{
+                    if let mainViewController = view as? MainNavController{
+                        for subview in mainViewController.viewControllers{
+                            if let viewController = subview as? ViewController{
+                                let comicsFinder = ComicFinder()
+                                let comicName = comicsFinder.getLastComicRead()
+                                if let comic = comicsFinder.getComicbyName(comicName: comicName){
+                                    
+                                    if let nextVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
+                                        nextVC.comic = comic
+                                        nextVC.comicFinder = comicsFinder
+                                        viewController.navigationController?.pushViewController(nextVC, animated: true)
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // MARK: UISceneSession Lifecycle
@@ -23,6 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
+        
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     @available(iOS 13.0, *)
@@ -32,20 +110,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
       
-        let persistentContainer: NSPersistentContainer = {
-            
-            let container = NSPersistentContainer(name: "ComicReaderModel")
-            container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-                if let error = error as NSError? {
-                    
-                    fatalError("Unresolved error \(error), \(error.userInfo)")
-                }
-            })
-            return container
-        }()
+        
         
         let name = url.lastPathComponent
         let documentsPath = ComicFinder.getDocumentsDirectory()
@@ -58,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if !FileManager.default.fileExists(atPath: pathToSave.path){
                         print("File not saved")
                     }
-                    try FileManager.default.removeItem(at: url)
+                    
                 } catch {
                     print("Unable to save the comic: " + error.localizedDescription)
                     

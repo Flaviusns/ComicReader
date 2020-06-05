@@ -1,0 +1,150 @@
+/* Add favourite text for the 3DTouch option */
+"AddFavourite" = "Add to favorite";
+
+/* Scan Mode text explaining the row selected the row */
+"CameraModeText" = "Using the camera it´s the defualt option in iOS 12. Selecting this option the app will use the device camera alone to scan comics.";
+
+/* Scan Mode name in the row */
+"CameraName" = "Camera";
+
+/* First title section inside the settings view */
+"CollectionOrder" = "Order of the collection";
+
+/* Collection Setings Header */
+"CollectionSettings" = "Collection Settings";
+
+/* Delete Comic alert title inside the scan comic view */
+"ComicDeleted" = "Comic deleted";
+
+/* Comic saved message inside the Scan comic view */
+"ComicSaved" = "Comic saved";
+
+/* Title at Scanner Comic View */
+"CreateComicTitle" = "Scan comic";
+
+/* Delete text for the 3DTouch option */
+"DeleteComic" = "Delete comic";
+
+/* Empty collection text as title when the main collection it's empty */
+"EmptyCollection" = "Your collection it's empty.";
+
+/* Empty collection text as message when the main collection it's empty */
+"EmptyCollectionMessage" = "Try to add some comics and see how your collection grows.";
+
+/* Error in file title in the alert */
+"ErrorInFile" = "Error in file";
+
+/* Second title section inside the settings view */
+"ExportQuality" = "Export quality";
+
+/* Text describing the setting */
+"HighQualityExportText" = "With this option selected, the export quality of the comic pages will be high";
+
+/* Text inside the row in the settings tab */
+"HighQualityName" = "High quality";
+
+/* Input title in the save comic's alert at Scan comic view */
+"InputComicName" = "Insert a name for your comic";
+
+/* Placeholder inside the enter comic name textfiled. Scan comic view */
+"InputNamePlaceHolder" = "Input the name of your comic";
+
+/* Error in file message in the alert */
+"InvalidFileMessage" = "It seems that some files are invalid files, please check the instruction with the files.";
+
+/* Text describing the setting */
+"LowQualityExportText" = "With this option selected, the export quality of the comic pages will be low. Not recomended at least you want to generate small files.";
+
+/* Text inside the row in the settings tab */
+"LowQualityName" = "Low quality";
+
+/* Text describing the setting */
+"MediumQualityExportText" = "With this option selected, the export quality will be medium. Recomended option.";
+
+/* Text inside the row in the settings tab */
+"MediumQualityName" = "Medium quality";
+
+/* More info button in the alert */
+"MoreInfo" = "More info";
+
+/* My comics title for the collection view */
+"MyComics" = "My Comics";
+
+/* No item match text as title when the search collection it's empty */
+"NoItemMatch" = "No item match";
+
+/* No item match text as message when the search collection it's empty */
+"NoItemMatchMessage" = "Try with other search.";
+
+/* Not favorite text as title when the favorite collection it's empty */
+"NotFavorites" = "You don't have any favourite comic";
+
+/* Not favorite text as message when the favorite collection it's empty */
+"NotFavoritesMessage" = "Try to add some comics to your favourite list.";
+
+/* Of keyword betwen the numbers of actual and total comic pages */
+"Of" = "of";
+
+/* Order by Addition date row title */
+"OrderByAdditionDate" = "Order by addition date";
+
+/* Order by addition text describing information */
+"OrderByAdditionText" = "This option will order the comics by addition day to the collection.";
+
+/* Order by header of the rows inside the order by setttings */
+"OrderByHeader" = "Order by";
+
+/* Order by Name row title */
+"OrderByName" = "Order by name";
+
+/* Order by Name text describing information */
+"OrderByNameText" = "This option will order the comics by name.";
+
+/* Order by settings title of the view order by settings */
+"OrderBySetting" = "Order by";
+
+/* Header for the settings rows */
+"QualityExportHeader" = "Quality export";
+
+/* QualityExport title for navigationbar in the settings tag */
+"QualityExportSetting" = "Export";
+
+/* Remove Favourite text for the 3DTouch option */
+"RemoveFavourite" = "Remove from favourite";
+
+/* Scan comic settings header for settings */
+"ScanComicSettings" = "Scan comic settings";
+
+/* Scaning mode row inside the settings root options */
+"ScaningMode" = "Scaning mode";
+
+/* Header for the rows in Scannig mode */
+"ScanningModeHeader" = "Scanning mode";
+
+/* Scanning mode title for the navigation bar */
+"ScanningModeSetting" = "Scanning mode";
+
+/* Search comic placeholder inside the collection view */
+"SearchComic" = "Search for comics";
+
+/* Unable to delete comic alert title */
+"UnableDelete" = "Unable to delete";
+
+/* Unable to delete comic alert message */
+"UnableDeleteMessage" = "The app cannot delete the comic.";
+
+/* Unable to set settings title for the alert */
+"UnableToSetSetting" = "Not able to save the settings";
+
+/* Unable to set settings subtitle large message for the alert */
+"UnableToSetSettingMessage" = "The app isn´t able to save the settings";
+
+/* Text describing the setting */
+"VeryHighQualityExportText" = "With this option selected, the export quality of the comic pages will be very high. This will make the exported comics very heavy.";
+
+/* Text inside the row in the settings tab */
+"VeryHighQualityName" = "Very high quality";
+
+/* Scan Mode name in the row */
+"VisionKitName" = "VisionKit";
+

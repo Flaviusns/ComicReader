@@ -1,0 +1,33 @@
+/* Class = "UILabel"; text = "Label"; ObjectID = "1Vz-SD-Dmj"; */
+"1Vz-SD-Dmj.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "2Ej-cP-Got"; */
+"2Ej-cP-Got.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Collection"; ObjectID = "155-nq-vww"; */
+"155-nq-vww.title" = "Colección";
+
+/* Class = "UIButton"; normalTitle = "Scan Page"; ObjectID = "aRk-45-Thz"; */
+"aRk-45-Thz.normalTitle" = "Escanear página";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "B4f-sx-vag"; */
+"B4f-sx-vag.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Comic Scanner"; ObjectID = "e3Z-sd-emW"; */
+"e3Z-sd-emW.title" = "Escáner";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "EEV-XU-MDx"; */
+"EEV-XU-MDx.title" = "Ajustes";
+
+/* Class = "UIButton"; normalTitle = "Save Comic"; ObjectID = "u85-3j-DsT"; */
+"u85-3j-DsT.normalTitle" = "Guardar cómic";
+
+/* Class = "UIButton"; normalTitle = "Delete Comic"; ObjectID = "wPV-W6-M0g"; */
+"wPV-W6-M0g.normalTitle" = "Borrar comic";
+
+/* Class = "UINavigationController"; title = "Collection"; ObjectID = "ym6-6K-UKS"; */
+"ym6-6K-UKS.title" = "Colección";
+
+/* Class = "UIViewController"; title = "Comic Scanner"; ObjectID = "zJI-rs-n6A"; */
+"zJI-rs-n6A.title" = "Escáner";
+

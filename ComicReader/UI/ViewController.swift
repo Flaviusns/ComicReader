@@ -8,9 +8,9 @@
 
 import UIKit
 import CoreData
+import SafariServices
 
-
-class ViewController: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+class ViewController: UICollectionViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating, SFSafariViewControllerDelegate {
     //MARK: View Variables
     var comics = [Comic]()
     var selectedComic : Comic? = nil
@@ -21,7 +21,6 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         let container = NSPersistentContainer(name: "ComicReaderModel")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
@@ -29,7 +28,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     }()
     
     var comicsFinder :ComicFinder!
-    
+
     var filtered:[Comic] = []
     var searchActive : Bool = false
     let searchController = UISearchController(searchResultsController: nil)
@@ -70,6 +69,31 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         }
     }
     
+    var settings:ComicReaderAppSettings!
+    
+    
+    var presentErrorinFile = false {
+        didSet{
+            if presentErrorinFile==true{
+                let alert = UIAlertController(title: NSLocalizedString("ErrorInFile", comment: "Error in file title in the alert"), message: NSLocalizedString("InvalidFileMessage", comment: "Error in file message in the alert"), preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: NSLocalizedString("MoreInfo", comment: "More info button in the alert"), style: .default, handler: {
+                    _ in
+                    let urlString = "https://www.apple.com/"
+                    
+                    if let url = URL(string: urlString) {
+                        let vc = SFSafariViewController(url: url)
+                        vc.delegate = self
+                        
+                        self.present(vc, animated: true)
+                    }
+                }))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay option inside the alert"), style: .default, handler: nil))
+                self.present(alert, animated: true)
+                }
+        }
+    }
+    
     //MARK: View Functions
     
     override func viewDidLoad() {
@@ -77,7 +101,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
-        navigationItem.title = "My Comics"
+        navigationItem.title = NSLocalizedString("MyComics", comment: "My comics title for the collection view")
         
         collectionView.allowsSelection = true
         comicsFinder = ComicFinder(container: persistentContainer)
@@ -91,7 +115,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         
         self.searchController.hidesNavigationBarDuringPresentation = true
         self.searchController.obscuresBackgroundDuringPresentation = true
-        searchController.searchBar.placeholder = "Search for comics"
+        searchController.searchBar.placeholder = NSLocalizedString("SearchComic", comment: "Search comic placeholder inside the collection view")
         searchController.searchBar.sizeToFit()
         
         searchController.searchBar.becomeFirstResponder()
@@ -106,6 +130,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         collectionView.addSubview(refresher)
         
         viewM = .view
+        
+        settings = ComicReaderAppSettings(container: persistentContainer)
     
     }
     
@@ -114,9 +140,38 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             self.comicsFinder.updateStorageComics()
             self.comicsFinder.removeComicsNoLongerExist()
             self.comics = self.comicsFinder.getSavedComics()
+            if self.settings.getValueFromKey(key: "orderby") == 0{
+                self.comics.sort()
+            }
             DispatchQueue.main.async {
+                if self.comicsFinder.getErrorInFile(){
+                    self.presentErrorinFile = true
+                }else{
+                    self.presentErrorinFile = false
+                }
                 self.collectionView.reloadData()
             }
+        }
+        self.tabBarController?.tabBar.isHidden = false
+
+    }
+    
+    func forceUpdate(){
+
+        self.comicsFinder.updateStorageComics()
+        self.comicsFinder.removeComicsNoLongerExist()
+        self.comics = self.comicsFinder.getSavedComics()
+        if self.settings.getValueFromKey(key: "orderby") == 0{
+            self.comics.sort()
+            
+            
+            if self.comicsFinder.getErrorInFile(){
+                self.presentErrorinFile = true
+            }else{
+                self.presentErrorinFile = false
+            }
+            self.collectionView.reloadData()
+            
         }
     }
     
@@ -124,10 +179,28 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     //MARK: override CollectionView
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searchActive {
+            if filtered.count == 0 {
+                collectionView.setEmptyView(title: NSLocalizedString("NoItemMatch", comment: "No item match text as title when the search collection it's empty"), message: NSLocalizedString("NoItemMatchMessage", comment: "No item match text as message when the search collection it's empty"))
+            } else {
+                collectionView.restore()
+            }
             return filtered.count
         }
         else
         {
+            if favSelected {
+                if comics.count == 0 {
+                    collectionView.setEmptyView(title: NSLocalizedString("NotFavorites", comment: "Not favorite text as title when the favorite collection it's empty"), message: NSLocalizedString("NotFavoritesMessage", comment: "Not favorite text as message when the favorite collection it's empty"))
+                } else {
+                    collectionView.restore()
+                }
+            }else{
+                if comics.count == 0 {
+                    collectionView.setEmptyView(title: NSLocalizedString("EmptyCollection", comment: "Empty collection text as title when the main collection it's empty"), message: NSLocalizedString("EmptyCollectionMessage", comment: "Empty collection text as message when the main collection it's empty"))
+                } else {
+                    collectionView.restore()
+                }
+            }
             return comics.count
         }
     }
@@ -150,14 +223,12 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         
         if viewM == .edit{
             cell.FavButton.isHidden = false
-            cell.SelectedButton.isHidden = false
         }else{
             cell.FavButton.isHidden = true
-            cell.SelectedButton.isHidden = true
         }
         
         cell.FavButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
-        cell.FavButton.setImage(comic.favorite ? UIImage(named: "FavSelected") : UIImage(named: "FavUnselected"), for: .normal)
+        cell.FavButton.setImage(comic.favourite ? UIImage(named: "FavSelected") : UIImage(named: "FavUnselected"), for: .normal)
         
         return cell
     }
@@ -235,12 +306,12 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         
         let comic = comics.first(where: {$0.name == comicCell.ComicName.text!})
         self.comicsFinder.toggleFavComic(comicName: comic!.name)
-        if comic!.favorite{
+        if comic!.favourite{
             sender.setImage(UIImage(named: "FavUnselected"), for: .normal)
         }else{
             sender.setImage(UIImage(named: "FavSelected"), for: .normal)
         }
-        comic?.favorite.toggle()
+        comic?.favourite.toggle()
     }
     
     @objc func getFavorites(){
@@ -303,6 +374,11 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         self.selectedComics.removeAll()
         self.comicsFinder.updateStorageComics()
         self.comics = self.comicsFinder.getSavedComics()
+        if self.comicsFinder.getErrorInFile(){
+            self.presentErrorinFile = true
+        }else{
+            self.presentErrorinFile = false
+        }
         collectionView.reloadData()
         collectionView.refreshControl?.endRefreshing()
     }
@@ -313,9 +389,19 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             self.comicsFinder.removeComicsNoLongerExist()
             self.comics = self.comicsFinder.getSavedComics()
             DispatchQueue.main.async {
+                if self.comicsFinder.getErrorInFile(){
+                    self.presentErrorinFile = true
+                }else{
+                    self.presentErrorinFile = false
+                }
                 self.collectionView.reloadData()
             }
         }
+    }
+    
+    //MARK: Safari view
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        dismiss(animated: true)
     }
     
     
@@ -338,13 +424,13 @@ extension ViewController{
     func makeContextMenu(comic: Comic) -> UIMenu {
         
         
-        let favorite = UIAction(title: comic.favorite ? "Remove from favorite" : "Add to favorite", image: comic.favorite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")) { action in
-            if comic.favorite{
+        let favourite = UIAction(title: comic.favourite ? NSLocalizedString("RemoveFavourite", comment: "Remove Favourite text for the 3DTouch option") : NSLocalizedString("AddFavourite", comment: "Add favourite text for the 3DTouch option"), image: comic.favourite ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")) { action in
+            if comic.favourite{
                 self.comicsFinder.toggleFavComic(comicName: comic.name)
-                comic.favorite = false
+                comic.favourite = false
             }else{
                 self.comicsFinder.toggleFavComic(comicName: comic.name)
-                comic.favorite = true
+                comic.favourite = true
             }
         }
         if let image = UIImage(named: "myImage") {
@@ -352,7 +438,7 @@ extension ViewController{
             present(vc, animated: true)
         }
         
-        let share = UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up")) { action in
+        let share = UIAction(title: NSLocalizedString("Share", comment: "Share text for the 3DTouch option"), image: UIImage(systemName: "square.and.arrow.up")) { action in
             let path = self.comicsFinder.getPathofComic(comicName: comic.name)
             
                 let url = NSURL.fileURL(withPath: path)
@@ -361,11 +447,11 @@ extension ViewController{
             
         }
         
-        let deleted = UIAction(title: "Delete Comic", image: UIImage(systemName: "trash")) { action in
+        let deleted = UIAction(title: NSLocalizedString("DeleteComic", comment: "Delete text for the 3DTouch option"), image: UIImage(systemName: "trash")) { action in
             // Show system share sheet
             if(!self.comicsFinder.removeComic(comicToRemove: comic)){
-                let alert = UIAlertController(title: "Unable to delete the comic", message: "The app cannot delete the comic.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                let alert = UIAlertController(title: NSLocalizedString("UnableDelete", comment: "Unable to delete comic alert title"), message: NSLocalizedString("UnableDeleteMessage", comment: "Unable to delete comic alert message"), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay option inside the alert"), style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }else{
                 let index = self.comics.firstIndex(of: comic)!
@@ -375,7 +461,38 @@ extension ViewController{
         }
         
         // Create and return a UIMenu with the share action
-        return UIMenu(title: comic.name, children: [favorite,share,deleted])
+        return UIMenu(title: comic.name, children: [favourite,share,deleted])
+    }
+}
+
+// MARK: UICollectionView extension
+extension UICollectionView {
+    func setEmptyView(title: String, message: String) {
+        let emptyView = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
+        let titleLabel = UILabel()
+        let messageLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textColor = .systemGray
+        titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        messageLabel.textColor = .systemGray
+        messageLabel.font = UIFont.systemFont(ofSize: 17, weight: .thin)
+        emptyView.addSubview(titleLabel)
+        emptyView.addSubview(messageLabel)
+        titleLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+        messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
+        messageLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 20).isActive = true
+        messageLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -20).isActive = true
+        titleLabel.text = title
+        messageLabel.text = message
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        
+        self.backgroundView = emptyView
+    }
+    func restore() {
+        self.backgroundView = nil
     }
 }
 

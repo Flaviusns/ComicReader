@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ComicAppSettings" representedClassName="ComicAppSettings" syncable="YES" codeGenerationType="class">
+        <attribute name="cameramode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="exportquality" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderby" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="ComicEntity" representedClassName="ComicEntity" syncable="YES" codeGenerationType="class">
         <attribute name="cover" optional="YES" attributeType="Binary"/>
         <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -8,7 +13,12 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="path" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="LastComicRead" representedClassName="LastComicRead" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
+        <element name="ComicAppSettings" positionX="-63" positionY="27" width="128" height="88"/>
         <element name="ComicEntity" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="LastComicRead" positionX="-63" positionY="27" width="128" height="58"/>
     </elements>
 </model>

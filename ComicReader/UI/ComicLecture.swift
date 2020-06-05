@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ComicLecture: UIViewController,UIScrollViewDelegate {
     
@@ -21,12 +22,27 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     @IBOutlet var bottomView: UIView!
     @IBOutlet var scrollView: UIScrollView!
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "ComicReaderModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.isHidden = true
         
-        navigationItem.title = comic?.name ?? "Nulo"
+        
+        
+        navigationItem.title = comic?.name ?? "Null"
+        navigationItem.largeTitleDisplayMode = .never
         
         
         loadingIndicator.startAnimating()
@@ -45,24 +61,41 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         comic?.comicsPages = ComicFinder.getComicPages(file: comic!)
-        prepareScrollView()
-        createthumbNails(width: self.view.bounds.size.width)
-        loadingIndicator.startAnimating()
-        loadingIndicator.removeFromSuperview()
-        
-        PageIndicator.isHidden = false
-        currentPage = comic?.lastPage ?? 0
-        PageIndicator.text = "\(currentPage + 1) of \((comic?.comicsPages!.count)!)"
-        scrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.view.bounds.size.width),y: 0), animated: true)
-        let subscrollView = self.bottomView.subviews[0] as! UIScrollView
-        subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
-        self.view.bringSubviewToFront(PageIndicator)
-        
+        if comic?.comicsPages?.count ?? 0 > 0{
+            prepareScrollView()
+            createthumbNails(width: self.view.bounds.size.width)
+            loadingIndicator.stopAnimating()
+            loadingIndicator.removeFromSuperview()
+            
+            PageIndicator.isHidden = false
+            currentPage = comic?.lastPage ?? 0
+            PageIndicator.text = "\(currentPage + 1) \(NSLocalizedString("Of", comment: "Of keyword betwen the numbers of actual and total comic pages")) \((comic?.comicsPages!.count)!)"
+            scrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.view.bounds.size.width),y: 0), animated: true)
+            if self.view.bounds.width < ((CGFloat((self.comic?.comicsPages!.count)! - 1)) * self.thumbnailWith){
+                let subscrollView = self.bottomView.subviews[0] as! UIScrollView
+                subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
+            }
+            self.view.bringSubviewToFront(PageIndicator)
+        }else{
+            let alert = UIAlertController(title: NSLocalizedString("ComicNoLongerExistTitle", comment: "Alert title when the comic was erased"), message: NSLocalizedString("ComicNoLongerExistTitle", comment: "Alert message when the comic was erased"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay option inside the alert"), style: .default, handler: {(action:UIAlertAction!) in
+                _ = self.navigationController?.popViewController(animated: true)
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        comicFinder?.saveLastPage(comicName: comic!.name, lastPage: currentPage + 1 == (comic?.comicsPages!.count)! ? 0 : currentPage)
-        ComicFinder.removeTempComic(fileName: comic!.name)
+        if comic?.comicsPages?.count ?? 0 > 0{
+            comicFinder?.container = persistentContainer
+            comicFinder?.saveLastPage(comicName: comic!.name, lastPage: currentPage + 1 == (comic?.comicsPages!.count)! ? 0 : currentPage)
+            comicFinder?.setLastComicRead(comicName: comic!.name)
+            ComicFinder.removeTempComic(fileName: comic!.name)
+        }
+        
+        super.viewWillDisappear(true)
+        
     }
     
     func prepareScrollView(){
@@ -120,6 +153,12 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
                 
                 bottomScrollView.addSubview(imageView)
             }
+        
+        if width >= ((CGFloat((self.comic?.comicsPages!.count)! - 1)) * self.thumbnailWith){
+            bottomScrollView.isDirectionalLockEnabled = true
+        }else{
+            bottomScrollView.isDirectionalLockEnabled = false
+        }
         
             
             self.bottomView.addSubview(bottomScrollView)
@@ -206,6 +245,10 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
     
     func changeCurrentPage(currentPage: Int){
         PageIndicator.text = "\(currentPage + 1) of \((comic?.comicsPages!.count)!)"
+        if self.view.bounds.width < ((CGFloat((self.comic?.comicsPages!.count)! - 1)) * self.thumbnailWith){
+            let subscrollView = self.bottomView.subviews[0] as! UIScrollView
+            subscrollView.setContentOffset(CGPoint(x: CGFloat(CGFloat(currentPage) * self.thumbnailWith),y: 0), animated: true)
+        }
     }
 }
 
