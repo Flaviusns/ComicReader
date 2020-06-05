@@ -136,6 +136,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         DispatchQueue.global(qos: .background).async {
             self.comicsFinder.updateStorageComics()
             self.comicsFinder.removeComicsNoLongerExist()
@@ -153,7 +154,6 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             }
         }
         self.tabBarController?.tabBar.isHidden = false
-
     }
     
     func forceUpdate(){
@@ -163,7 +163,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         self.comics = self.comicsFinder.getSavedComics()
         if self.settings.getValueFromKey(key: "orderby") == 0{
             self.comics.sort()
-            
+        }
             
             if self.comicsFinder.getErrorInFile(){
                 self.presentErrorinFile = true
@@ -172,7 +172,6 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             }
             self.collectionView.reloadData()
             
-        }
     }
     
     
@@ -209,13 +208,19 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComicMin", for: indexPath) as? ComicMiniature else {
             fatalError("Unable to dequeue PersonCell.")
         }
+        var comic:Comic? = nil
         
-        let comic = comics[indexPath.item]
+        if searchActive{
+            comic = filtered[indexPath.item]
+        }else{
+            comic = comics[indexPath.item]
+        }
         
-        cell.ComicName.text = comic.name
+        
+        cell.ComicName.text = comic?.name
         
         
-        cell.ComicImage.image = UIImage(data: comic.comicsPages![0])
+        cell.ComicImage.image = UIImage(data: (comic!.comicsPages![0]))
         
         cell.ComicImage.layer.borderColor = UIColor(white: 0, alpha: 0.3).cgColor
         cell.ComicImage.layer.borderWidth = 2
@@ -228,7 +233,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         }
         
         cell.FavButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
-        cell.FavButton.setImage(comic.favourite ? UIImage(named: "FavSelected") : UIImage(named: "FavUnselected"), for: .normal)
+        cell.FavButton.setImage(comic!.favourite ? UIImage(named: "FavSelected") : UIImage(named: "FavUnselected"), for: .normal)
         
         return cell
     }
@@ -342,7 +347,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         filtered = comics.filter({ (item) -> Bool in
             let comicName: NSString = item.name as NSString
             
-            return (comicName.range(of: searchString!, options: NSString.CompareOptions.caseInsensitive).location) != NSNotFound
+            let range = comicName.range(of: searchString!, options: NSString.CompareOptions.caseInsensitive).location != NSNotFound
+            return range
         })
         
         collectionView.reloadData()
@@ -351,7 +357,6 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true
-        collectionView.reloadData()
     }
     
     
@@ -374,6 +379,9 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         self.selectedComics.removeAll()
         self.comicsFinder.updateStorageComics()
         self.comics = self.comicsFinder.getSavedComics()
+        if self.settings.getValueFromKey(key: "orderby") == 0{
+            self.comics.sort()
+        }
         if self.comicsFinder.getErrorInFile(){
             self.presentErrorinFile = true
         }else{
@@ -388,6 +396,9 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             self.comicsFinder.updateStorageComics()
             self.comicsFinder.removeComicsNoLongerExist()
             self.comics = self.comicsFinder.getSavedComics()
+            if self.settings.getValueFromKey(key: "orderby") == 0{
+                self.comics.sort()
+            }
             DispatchQueue.main.async {
                 if self.comicsFinder.getErrorInFile(){
                     self.presentErrorinFile = true

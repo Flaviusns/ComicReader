@@ -42,6 +42,7 @@ class ComicFinder{
             print(documentsPath.path)
             let fileURLs = try fileManager.contentsOfDirectory(atPath: documentsPath.path)
             for item in fileURLs {
+                
                 if(item.contains(".cbz")){
                     let fileName = item.split(separator: ".")[0]
                     
@@ -98,6 +99,8 @@ class ComicFinder{
             print("Error while enumerating files: \(error.localizedDescription)")
         }
     }
+    
+
     
     func decompressCBZ(fileName:String) -> Comic?{
         let fileManager = FileManager.default

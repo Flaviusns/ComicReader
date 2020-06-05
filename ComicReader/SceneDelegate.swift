@@ -164,6 +164,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                     for subview in mainViewController.viewControllers{
                                         if let viewController = subview as? ViewController{
                                             viewController.forceUpdate()
+                                            break
                                         }
                                     }
                                 }
