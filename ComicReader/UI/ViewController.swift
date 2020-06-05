@@ -223,10 +223,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         
         if viewM == .edit{
             cell.FavButton.isHidden = false
-            cell.SelectedButton.isHidden = false
         }else{
             cell.FavButton.isHidden = true
-            cell.SelectedButton.isHidden = true
         }
         
         cell.FavButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)

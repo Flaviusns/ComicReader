@@ -47,14 +47,6 @@
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectedTick" translatesAutoresizingMaskIntoConstraints="NO" id="YZO-hH-G7Y">
                                             <rect key="frame" x="51" y="62" width="50" height="50"/>
                                         </imageView>
-                                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8e1-e8-JYX">
-                                            <rect key="frame" x="19" y="10" width="25" height="25"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="DKM-Ej-xoh"/>
-                                                <constraint firstAttribute="height" constant="25" id="KQI-vq-cut"/>
-                                            </constraints>
-                                            <state key="normal" image="Unselected"/>
-                                        </button>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHH-Hn-fsb">
                                             <rect key="frame" x="109" y="10" width="28" height="25"/>
                                             <constraints>
@@ -68,11 +60,9 @@
                                         <constraint firstItem="B4f-sx-vag" firstAttribute="top" secondItem="YZO-hH-G7Y" secondAttribute="bottom" constant="67" id="3Z2-V3-2wc"/>
                                         <constraint firstItem="YZO-hH-G7Y" firstAttribute="top" secondItem="Dhz-Qe-yoM" secondAttribute="top" constant="62" id="6aK-XN-lbg"/>
                                         <constraint firstAttribute="bottom" secondItem="B4f-sx-vag" secondAttribute="bottom" constant="4" id="6qB-gy-2qW"/>
-                                        <constraint firstItem="8e1-e8-JYX" firstAttribute="top" secondItem="Dhz-Qe-yoM" secondAttribute="top" constant="10" id="AxL-Cn-55u"/>
                                         <constraint firstAttribute="trailing" secondItem="YZO-hH-G7Y" secondAttribute="trailing" constant="52" id="DoP-Zr-sIO"/>
                                         <constraint firstItem="B4f-sx-vag" firstAttribute="leading" secondItem="Dhz-Qe-yoM" secondAttribute="leading" constant="14" id="EeU-vZ-1JQ"/>
                                         <constraint firstItem="B4f-sx-vag" firstAttribute="top" secondItem="5Fx-45-pGJ" secondAttribute="bottom" constant="8" id="UkM-8c-Ji2"/>
-                                        <constraint firstItem="8e1-e8-JYX" firstAttribute="leading" secondItem="Dhz-Qe-yoM" secondAttribute="leading" constant="19" id="WlY-Se-xXI"/>
                                         <constraint firstAttribute="trailing" secondItem="B4f-sx-vag" secondAttribute="trailing" constant="14" id="Yd1-cY-V4h"/>
                                         <constraint firstAttribute="trailing" secondItem="5Fx-45-pGJ" secondAttribute="trailing" constant="14" id="ahm-jO-clG"/>
                                         <constraint firstItem="5Fx-45-pGJ" firstAttribute="leading" secondItem="Dhz-Qe-yoM" secondAttribute="leading" constant="14" id="djy-Cy-OUm"/>
@@ -87,7 +77,6 @@
                                     <outlet property="ComicImage" destination="5Fx-45-pGJ" id="uVU-yr-lbc"/>
                                     <outlet property="ComicName" destination="B4f-sx-vag" id="jJl-0P-WMg"/>
                                     <outlet property="FavButton" destination="AHH-Hn-fsb" id="Rrp-bJ-KKU"/>
-                                    <outlet property="SelectedButton" destination="8e1-e8-JYX" id="vYT-tt-Lao"/>
                                     <outlet property="SelectedTick" destination="YZO-hH-G7Y" id="fXU-8G-1Mr"/>
                                 </connections>
                             </collectionViewCell>
@@ -646,6 +635,5 @@
         <image name="FavUnselected" width="50" height="45"/>
         <image name="SelectedTick" width="50" height="50"/>
         <image name="SettingsIcon" width="24" height="24.5"/>
-        <image name="Unselected" width="51" height="51"/>
     </resources>
 </document>
