@@ -239,9 +239,9 @@
 			productReference = 7526471524801AAE0033ABD1 /* ComicReaderTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		75627F1F242118D40006D08A /* ComicReader */ = {
+		75627F1F242118D40006D08A /* Tham! */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 75627F34242118D50006D08A /* Build configuration list for PBXNativeTarget "ComicReader" */;
+			buildConfigurationList = 75627F34242118D50006D08A /* Build configuration list for PBXNativeTarget "Tham!" */;
 			buildPhases = (
 				83FDB0F4350532EF32CE9950 /* [CP] Check Pods Manifest.lock */,
 				75627F1C242118D40006D08A /* Sources */,
@@ -253,7 +253,7 @@
 			);
 			dependencies = (
 			);
-			name = ComicReader;
+			name = "Tham!";
 			productName = ComicReader;
 			productReference = 75627F20242118D40006D08A /* Tham!.app */;
 			productType = "com.apple.product-type.application";
@@ -292,7 +292,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				75627F1F242118D40006D08A /* ComicReader */,
+				75627F1F242118D40006D08A /* Tham! */,
 				7526471424801AAE0033ABD1 /* ComicReaderTests */,
 			);
 		};
@@ -427,7 +427,7 @@
 /* Begin PBXTargetDependency section */
 		7526471B24801AAE0033ABD1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 75627F1F242118D40006D08A /* ComicReader */;
+			target = 75627F1F242118D40006D08A /* Tham! */;
 			targetProxy = 7526471A24801AAE0033ABD1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -645,8 +645,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.7;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flavius.ComicReader;
+				MARKETING_VERSION = 0.8;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flavius.Tham;
 				PRODUCT_NAME = "Tham!";
 				SWIFT_OBJC_BRIDGING_HEADER = "ComicReader/ComicReader-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -669,8 +669,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.7;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flavius.ComicReader;
+				MARKETING_VERSION = 0.8;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flavius.Tham;
 				PRODUCT_NAME = "Tham!";
 				SWIFT_OBJC_BRIDGING_HEADER = "ComicReader/ComicReader-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -699,7 +699,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		75627F34242118D50006D08A /* Build configuration list for PBXNativeTarget "ComicReader" */ = {
+		75627F34242118D50006D08A /* Build configuration list for PBXNativeTarget "Tham!" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75627F35242118D50006D08A /* Debug */,
