@@ -137,6 +137,29 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        /*
+        super.viewWillAppear(animated)
+        DispatchQueue.global(qos: .background).async {
+            self.comicsFinder.updateStorageComics()
+            self.comicsFinder.removeComicsNoLongerExist()
+            self.comics = self.comicsFinder.getSavedComics()
+            if self.settings.getValueFromKey(key: "orderby") == 0{
+                self.comics.sort()
+            }
+            DispatchQueue.main.async {
+                if self.comicsFinder.getErrorInFile(){
+                    self.presentErrorinFile = true
+                }else{
+                    self.presentErrorinFile = false
+                }
+                self.collectionView.reloadData()
+            }
+        }
+        self.tabBarController?.tabBar.isHidden = false*/
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         DispatchQueue.global(qos: .background).async {
             self.comicsFinder.updateStorageComics()
             self.comicsFinder.removeComicsNoLongerExist()

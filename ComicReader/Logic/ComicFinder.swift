@@ -43,55 +43,65 @@ class ComicFinder{
             let fileURLs = try fileManager.contentsOfDirectory(atPath: documentsPath.path)
             for item in fileURLs {
                 
-                if(item.contains(".cbz")){
-                    let fileName = item.split(separator: ".")[0]
-                    
-                    if !savedComics.contains(String(fileName)){
-                        
-                        if let newComic = decompressCBZ(fileName: String(fileName)){
-                            saveNewComic(comicToSave: newComic)
+                if !ComicFinder.checkIfFileIsDuplicate(fileName: item){
+                        if(item.contains(".cbz")){
+                            let fileName = item.split(separator: ".")[0]
                             
-                            //Remove the comic from the temp directory
-                            do{
-                                try fileManager.removeItem(at: URL(fileURLWithPath: tempPath.path + "/" + fileName))
-                            } catch {
-                                print("Unable to delete the temp folder")
+                            
+                            
+                            if !savedComics.contains(String(fileName)){
+                                
+                                if let newComic = decompressCBZ(fileName: String(fileName)){
+                                    saveNewComic(comicToSave: newComic)
+                                    
+                                    //Remove the comic from the temp directory
+                                    do{
+                                        try fileManager.removeItem(at: URL(fileURLWithPath: tempPath.path + "/" + fileName))
+                                    } catch {
+                                        print("Unable to delete the temp folder")
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-                else if(item.contains(".cb7")){
-                    let fileName = item.split(separator: ".")[0]
-                    
-                    if !savedComics.contains(String(fileName)){
-                        
-                        if let newComic = decompressCB7(fileName: String(fileName)){
-                            saveNewComic(comicToSave: newComic)
+                        else if(item.contains(".cb7")){
+                            let fileName = item.split(separator: ".")[0]
                             
-                            //Remove the comic from the temp directory
-                            do{
-                                try fileManager.removeItem(at: URL(fileURLWithPath: tempPath.path + "/" + fileName))
-                            } catch {
-                                print("Unable to delete the temp folder")
+                            if !savedComics.contains(String(fileName)){
+                                
+                                if let newComic = decompressCB7(fileName: String(fileName)){
+                                    saveNewComic(comicToSave: newComic)
+                                    
+                                    //Remove the comic from the temp directory
+                                    do{
+                                        try fileManager.removeItem(at: URL(fileURLWithPath: tempPath.path + "/" + fileName))
+                                    } catch {
+                                        print("Unable to delete the temp folder")
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-                else if(item.contains(".cbr")){
-                    let fileName = item.split(separator: ".")[0]
-                    
-                    if !savedComics.contains(String(fileName)){
-                        
-                        if let newComic = decompressCBR(fileName: String(fileName)){
-                            saveNewComic(comicToSave: newComic)
+                        else if(item.contains(".cbr")){
+                            let fileName = item.split(separator: ".")[0]
                             
-                            //Remove the comic from the temp directory
-                            do{
-                                try fileManager.removeItem(at: URL(fileURLWithPath: tempPath.path + "/" + fileName))
-                            } catch {
-                                print("Unable to delete the temp folder")
+                            if !savedComics.contains(String(fileName)){
+                                
+                                if let newComic = decompressCBR(fileName: String(fileName)){
+                                    saveNewComic(comicToSave: newComic)
+                                    
+                                    //Remove the comic from the temp directory
+                                    do{
+                                        try fileManager.removeItem(at: URL(fileURLWithPath: tempPath.path + "/" + fileName))
+                                    } catch {
+                                        print("Unable to delete the temp folder")
+                                    }
+                                }
                             }
                         }
+                }else{
+                    do {
+                        try fileManager.removeItem(atPath: documentsPath.path + "/" + item)
+                    } catch  {
+                        print("Error while enumerating files: \(error.localizedDescription)")
                     }
                 }
             }
@@ -805,5 +815,21 @@ class ComicFinder{
         } catch {
             
         }
+    }
+    
+    static func checkIfFileIsDuplicate(fileName: String) -> Bool{
+        
+        if fileName.contains(".cbz") || fileName.contains(".cbr") || fileName.contains(".cb7"){
+            let fileCharacters = Array(fileName)
+            let maxBound = fileCharacters.count - 5
+            for index in (0...maxBound).reversed(){
+                let char = Character(String(fileCharacters[index]))
+                if !char.isNumber && char == "-" && Character(String(fileCharacters[index + 1])).isNumber { //Is a duplicate
+                    return true
+                }
+            }
+            return false
+        }
+        return true
     }
 }

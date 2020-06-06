@@ -118,9 +118,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         let name = url.lastPathComponent
-        let documentsPath = ComicFinder.getDocumentsDirectory()
-        let pathToSave = documentsPath.appendingPathComponent(name)
-            
+        
+        if !ComicFinder.checkIfFileIsDuplicate(fileName: name){
+            let documentsPath = ComicFinder.getDocumentsDirectory()
+            let pathToSave = documentsPath.appendingPathComponent(name)
             if !FileManager.default.fileExists(atPath: pathToSave.path){
                 do {
                     //try data?.write(to: documentsPath)
@@ -128,6 +129,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if !FileManager.default.fileExists(atPath: pathToSave.path){
                         print("File not saved")
                     }
+                    
+                    if let tabBarController = app.windows[0].rootViewController as? MainTabBarController{
+                        tabBarController.selectedIndex = 0
+                        for view in tabBarController.viewControllers!{
+                            if let mainViewController = view as? MainNavController{
+                                for subview in mainViewController.viewControllers{
+                                    if let viewController = subview as? ViewController{
+                                        viewController.forceUpdate()
+                                        break
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    return true
                     
                 } catch {
                     print("Unable to save the comic: " + error.localizedDescription)
@@ -141,33 +158,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
-        
-        
-        do {
-            guard let superView = window?.rootViewController as? UINavigationController else{
-                throw ComicError.ViewNotMain
+        }else{
+            do{
+                try FileManager.default.removeItem(at: url)
+                if let tabBarController = app.windows[0].rootViewController as? MainTabBarController{
+                    tabBarController.selectedIndex = 0
+                    for view in tabBarController.viewControllers!{
+                        if let mainViewController = view as? MainNavController{
+                            for subview in mainViewController.viewControllers{
+                                if let viewController = subview as? ViewController{
+                                    viewController.presentErrorinFile = true
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+                return true
+            }catch {
+                return false
             }
-            /*
-             let alert = UIAlertController(title: "Comic Added", message: "Please refresh the collection", preferredStyle: .alert)
-             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-             superView.present(alert, animated: true, completion: nil)*/
-            guard let viewController = superView.viewControllers[0] as? ViewController else {
-                throw ComicError.ViewNotMain
-            }
-            let comicsFinder = ComicFinder(container: persistentContainer)
-            comicsFinder.updateStorageComics()
-            viewController.comics = comicsFinder.getSavedComics()
-            
-            viewController.reloadData()
-            /*
-             let alert = UIAlertController(title: "Comic Added", message: "The comic is now in your collection", preferredStyle: .alert)
-             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-             viewController.present(alert, animated: true, completion: nil)*/
-        } catch {
-            print("Unable to present the alert  " + error.localizedDescription)
-            return false
         }
-        
         return true
     }
 
