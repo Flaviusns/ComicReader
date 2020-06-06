@@ -127,6 +127,11 @@ class ComicFinder{
         } catch {
             print("Error while enumerating files: \(error.localizedDescription)")
             errorInFile = true
+            do {
+                try fileManager.removeItem(atPath: cbzPath)
+            } catch {
+                return nil
+            }
             return nil
         }
     }
@@ -181,6 +186,11 @@ class ComicFinder{
         } catch {
             errorInFile = true
             print("Error while enumerating files: \(error.localizedDescription)")
+            do {
+                try fileManager.removeItem(atPath: cbrPath)
+            } catch {
+                return nil
+            }
             return nil
         }
     }
@@ -224,6 +234,11 @@ class ComicFinder{
             } catch {
                 errorInFile = true
                 print("Error while enumerating files: \(error.localizedDescription)")
+                do {
+                    try fileManager.removeItem(atPath: cb7Path)
+                } catch {
+                    return nil
+                }
                 return nil
             }
         }
