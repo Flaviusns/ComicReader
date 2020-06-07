@@ -28,7 +28,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     }()
     
     var comicsFinder :ComicFinder!
-
+    
     var filtered:[Comic] = []
     var searchActive : Bool = false
     let searchController = UISearchController(searchResultsController: nil)
@@ -90,7 +90,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 }))
                 alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay option inside the alert"), style: .default, handler: nil))
                 self.present(alert, animated: true)
-                }
+            }
         }
     }
     
@@ -132,61 +132,42 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         viewM = .view
         
         settings = ComicReaderAppSettings(container: persistentContainer)
-    
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        /*
-        super.viewWillAppear(animated)
-        DispatchQueue.global(qos: .background).async {
-            self.comicsFinder.updateStorageComics()
-            self.comicsFinder.removeComicsNoLongerExist()
-            self.comics = self.comicsFinder.getSavedComics()
-            if self.settings.getValueFromKey(key: "orderby") == 0{
-                self.comics.sort()
-            }
-            DispatchQueue.main.async {
-                if self.comicsFinder.getErrorInFile(){
-                    self.presentErrorinFile = true
-                }else{
-                    self.presentErrorinFile = false
-                }
-                self.collectionView.reloadData()
-            }
-        }
-        self.tabBarController?.tabBar.isHidden = false*/
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         DispatchQueue.global(qos: .background).async {
-            self.comicsFinder.updateStorageComics()
-            self.comicsFinder.removeComicsNoLongerExist()
-            self.comics = self.comicsFinder.getSavedComics()
-            if self.settings.getValueFromKey(key: "orderby") == 0{
-                self.comics.sort()
-            }
-            DispatchQueue.main.async {
-                if self.comicsFinder.getErrorInFile(){
-                    self.presentErrorinFile = true
-                }else{
-                    self.presentErrorinFile = false
+            if self.comicsFinder.getNumOfSavedComics() != self.comicsFinder.getNumOfComicsInDocuments(){
+                self.comicsFinder.updateStorageComics()
+                self.comicsFinder.removeComicsNoLongerExist()
+                self.comics = self.comicsFinder.getSavedComics()
+                if self.settings.getValueFromKey(key: "orderby") == 0{
+                    self.comics.sort()
                 }
-                self.collectionView.reloadData()
+                DispatchQueue.main.async {
+                    if self.comicsFinder.getErrorInFile(){
+                        self.presentErrorinFile = true
+                    }else{
+                        self.presentErrorinFile = false
+                    }
+                    self.collectionView.reloadData()
+                }
             }
         }
         self.tabBarController?.tabBar.isHidden = false
     }
     
     func forceUpdate(){
-
-        self.comicsFinder.updateStorageComics()
-        self.comicsFinder.removeComicsNoLongerExist()
-        self.comics = self.comicsFinder.getSavedComics()
-        if self.settings.getValueFromKey(key: "orderby") == 0{
-            self.comics.sort()
-        }
+        
+        if self.comicsFinder.getNumOfSavedComics() != self.comicsFinder.getNumOfComicsInDocuments(){
+            self.comicsFinder.updateStorageComics()
+            self.comicsFinder.removeComicsNoLongerExist()
+            self.comics = self.comicsFinder.getSavedComics()
+            if self.settings.getValueFromKey(key: "orderby") == 0{
+                self.comics.sort()
+            }
             
             if self.comicsFinder.getErrorInFile(){
                 self.presentErrorinFile = true
@@ -194,7 +175,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 self.presentErrorinFile = false
             }
             self.collectionView.reloadData()
-            
+        }
     }
     
     
@@ -400,37 +381,21 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     //MARK: Refresher functions
     @objc func loadData() {
         self.selectedComics.removeAll()
-        self.comicsFinder.updateStorageComics()
-        self.comics = self.comicsFinder.getSavedComics()
-        if self.settings.getValueFromKey(key: "orderby") == 0{
-            self.comics.sort()
-        }
-        if self.comicsFinder.getErrorInFile(){
-            self.presentErrorinFile = true
-        }else{
-            self.presentErrorinFile = false
-        }
-        collectionView.reloadData()
-        collectionView.refreshControl?.endRefreshing()
-    }
-    
-    func reloadData(){
-        DispatchQueue.global(qos: .background).async {
+        
+        if self.comicsFinder.getNumOfSavedComics() != self.comicsFinder.getNumOfComicsInDocuments(){
             self.comicsFinder.updateStorageComics()
-            self.comicsFinder.removeComicsNoLongerExist()
             self.comics = self.comicsFinder.getSavedComics()
             if self.settings.getValueFromKey(key: "orderby") == 0{
                 self.comics.sort()
             }
-            DispatchQueue.main.async {
-                if self.comicsFinder.getErrorInFile(){
-                    self.presentErrorinFile = true
-                }else{
-                    self.presentErrorinFile = false
-                }
-                self.collectionView.reloadData()
+            if self.comicsFinder.getErrorInFile(){
+                self.presentErrorinFile = true
+            }else{
+                self.presentErrorinFile = false
             }
+            collectionView.reloadData()
         }
+        collectionView.refreshControl?.endRefreshing()
     }
     
     //MARK: Safari view
@@ -453,7 +418,7 @@ extension ViewController{
             return self.makeContextMenu(comic: self.comics[indexPath.row])
         })
     }
-
+    
     @available(iOS 13.0, *)
     func makeContextMenu(comic: Comic) -> UIMenu {
         
@@ -475,9 +440,9 @@ extension ViewController{
         let share = UIAction(title: NSLocalizedString("Share", comment: "Share text for the 3DTouch option"), image: UIImage(systemName: "square.and.arrow.up")) { action in
             let path = self.comicsFinder.getPathofComic(comicName: comic.name)
             
-                let url = NSURL.fileURL(withPath: path)
-                let vc = UIActivityViewController(activityItems: [url], applicationActivities: [])
-                self.present(vc, animated: true)
+            let url = NSURL.fileURL(withPath: path)
+            let vc = UIActivityViewController(activityItems: [url], applicationActivities: [])
+            self.present(vc, animated: true)
             
         }
         

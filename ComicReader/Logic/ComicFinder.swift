@@ -290,6 +290,7 @@ class ComicFinder{
     
     public static func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        print(paths[0])
         return paths[0]
     } 
     
@@ -389,6 +390,33 @@ class ComicFinder{
         }
         
         return savedComics
+    }
+    
+    func getNumOfSavedComics() -> Int{
+        do{
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ComicEntity")
+            request.returnsObjectsAsFaults = false
+            let result = try container.viewContext.fetch(request)
+            if result.isEmpty{
+                return 0
+            }
+            else{
+                return result.count
+            }
+        }catch {
+            return 0
+        }
+    }
+    
+    func getNumOfComicsInDocuments() -> Int{
+        let fileManager = FileManager.default
+        let documentsPath = ComicFinder.getDocumentsDirectory()
+        do{
+            let files = try fileManager.contentsOfDirectory(atPath: documentsPath.path)
+            return files.count
+        }catch{
+            return 0
+        }
     }
     
     static func getComicPages(fileName: String)-> [Data]{
