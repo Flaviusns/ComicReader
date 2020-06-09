@@ -88,7 +88,7 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         
         
         
-        SaveButton.isHidden = true
+        SaveButton.isHidden = false
         DeleteComic.isHidden = true
         
         
@@ -266,7 +266,7 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     }
     
     @IBAction func saveComic(_ sender: Any) {
-        let alert = UIAlertController(title: NSLocalizedString("InputComicName", comment: "Input title in the save comic's alert at Scan comic view"), message: nil, preferredStyle: .alert)
+        /*let alert = UIAlertController(title: NSLocalizedString("InputComicName", comment: "Input title in the save comic's alert at Scan comic view"), message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel button inside the save comic alert at Scan comic view"), style: .cancel, handler: nil))
         
         alert.addTextField(configurationHandler: { textField in
@@ -290,7 +290,10 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         ))
         
         self.present(alert, animated: true)
+        */
+        let newVC = SaveComicViewController()
         
+        present(newVC,animated: true,completion: nil)
     }
     
     private func errasePreviewFromScrollView(){

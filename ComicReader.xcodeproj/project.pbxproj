@@ -12,6 +12,7 @@
 		751E477F2437740E008E73AA /* AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 751E477E2437740E008E73AA /* AppIcon.png */; };
 		7526471824801AAE0033ABD1 /* ComicReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7526471724801AAE0033ABD1 /* ComicReaderTests.swift */; };
 		753B063A2440B0DC002946A4 /* ComicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B06392440B0DC002946A4 /* ComicError.swift */; };
+		75495C1A248EB4F7008200E5 /* SaveComicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75495C19248EB4F7008200E5 /* SaveComicViewController.swift */; };
 		75545C2F2467E43300E988AC /* ExportQualitySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75545C2E2467E43300E988AC /* ExportQualitySettingsViewController.swift */; };
 		75545C312467E92000E988AC /* ScanModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75545C302467E92000E988AC /* ScanModeSettingViewController.swift */; };
 		75545C332467ED4500E988AC /* ComicReaderAppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75545C322467ED4500E988AC /* ComicReaderAppSettings.swift */; };
@@ -63,6 +64,7 @@
 		7526471724801AAE0033ABD1 /* ComicReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicReaderTests.swift; sourceTree = "<group>"; };
 		7526471924801AAE0033ABD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		753B06392440B0DC002946A4 /* ComicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicError.swift; sourceTree = "<group>"; };
+		75495C19248EB4F7008200E5 /* SaveComicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveComicViewController.swift; sourceTree = "<group>"; };
 		75545C2E2467E43300E988AC /* ExportQualitySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportQualitySettingsViewController.swift; sourceTree = "<group>"; };
 		75545C302467E92000E988AC /* ScanModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModeSettingViewController.swift; sourceTree = "<group>"; };
 		75545C322467ED4500E988AC /* ComicReaderAppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicReaderAppSettings.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				75627F3B242124FC0006D08A /* ComicLecture.swift */,
 				7583920B246D843E00FD5BC6 /* MainTabBarController.swift */,
 				750626BE246EA03800825BA2 /* MainNavController.swift */,
+				75495C19248EB4F7008200E5 /* SaveComicViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				750626BF246EA03800825BA2 /* MainNavController.swift in Sources */,
 				75627F3C242124FC0006D08A /* ComicLecture.swift in Sources */,
 				75ECF94F2466DE4E00B3B6BA /* SettingTableViewCell.swift in Sources */,
+				75495C1A248EB4F7008200E5 /* SaveComicViewController.swift in Sources */,
 				75DA1A23245DC677000187E3 /* CameraScanner.swift in Sources */,
 				75627F3A24211C3F0006D08A /* Comic.swift in Sources */,
 				75ECF9532466E45900B3B6BA /* ExportSettings.swift in Sources */,
