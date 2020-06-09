@@ -21,6 +21,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate {
         
         addNavBar()
         addNameTextField()
+        addTableView()
 
         // Do any additional setup after loading the view.
     }
@@ -28,7 +29,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate {
     //MARK: UI Related Elementes
     func addNavBar(){
         
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 30))
+        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
         navBar.delegate = self
                 
         let navItem = UINavigationItem()
@@ -38,11 +39,19 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate {
         navBar.items = [navItem]
         
         self.view.addSubview(navBar)
+        navBar.translatesAutoresizingMaskIntoConstraints = false
+        navBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        navBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        navBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        navBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
+        
+        
     }
     
     func addNameTextField(){
         
-        let textField = UITextField(frame: CGRect(x: 0, y: 100, width: self.view.frame.width * 0.75, height: 45))
+        let textField = UITextField() //frame: CGRect(x: 0, y: 100, width: self.view.frame.width * 0.75, height: 45))
         textField.center.x = self.view.center.x
         textField.textAlignment = .center
         textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "Placeholder inside the enter comic name textfiled. Scan comic view")
@@ -55,9 +64,23 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate {
         textField.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         
         self.view.addSubview(textField)
-        
-        textField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: -50).isActive = true
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 100).isActive = true
+        textField.widthAnchor.constraint(equalToConstant: 250).isActive = true
         textField.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+    }
+    
+    func addTableView(){
+        
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(tableView)
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 170).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        
     }
     
     @objc func closeView(){
