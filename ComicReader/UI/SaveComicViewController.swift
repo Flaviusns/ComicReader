@@ -20,11 +20,12 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate {
         }
         
         addNavBar()
-                
+        addNameTextField()
 
         // Do any additional setup after loading the view.
     }
     
+    //MARK: UI Related Elementes
     func addNavBar(){
         
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 30))
@@ -37,6 +38,26 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate {
         navBar.items = [navItem]
         
         self.view.addSubview(navBar)
+    }
+    
+    func addNameTextField(){
+        
+        let textField = UITextField(frame: CGRect(x: 0, y: 100, width: self.view.frame.width * 0.75, height: 45))
+        textField.center.x = self.view.center.x
+        textField.textAlignment = .center
+        textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "Placeholder inside the enter comic name textfiled. Scan comic view")
+        textField.keyboardType = UIKeyboardType.default
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.autocapitalizationType = .words
+        textField.font = UIFont.systemFont(ofSize: 16,weight: .bold)
+        
+        self.view.addSubview(textField)
+        
+        textField.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: -50).isActive = true
+        textField.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
     }
     
     @objc func closeView(){
