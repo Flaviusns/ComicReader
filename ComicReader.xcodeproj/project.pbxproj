@@ -28,6 +28,7 @@
 		7583920C246D843E00FD5BC6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7583920B246D843E00FD5BC6 /* MainTabBarController.swift */; };
 		75924C45245D887B0022C6CA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75924C43245D887B0022C6CA /* Localizable.strings */; };
 		75924C48245D88970022C6CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75924C46245D88970022C6CA /* InfoPlist.strings */; };
+		7593877D2493CA8E00007183 /* ComicPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593877C2493CA8E00007183 /* ComicPageCell.swift */; };
 		759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */; };
 		75DA1A23245DC677000187E3 /* CameraScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA1A22245DC677000187E3 /* CameraScanner.swift */; };
 		75E1D912244AFFEC0016261D /* DecompressRar.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1D911244AFFEC0016261D /* DecompressRar.m */; };
@@ -85,6 +86,7 @@
 		75924C44245D887B0022C6CA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		75924C47245D88970022C6CA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		75924C49245D88970022C6CA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7593877C2493CA8E00007183 /* ComicPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicPageCell.swift; sourceTree = "<group>"; };
 		759B393E242F98F300D73586 /* ComicReaderModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ComicReaderModel.xcdatamodel; sourceTree = "<group>"; };
 		75DA1A22245DC677000187E3 /* CameraScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraScanner.swift; sourceTree = "<group>"; };
 		75E1D910244AFFEC0016261D /* ComicReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ComicReader-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				7583920B246D843E00FD5BC6 /* MainTabBarController.swift */,
 				750626BE246EA03800825BA2 /* MainNavController.swift */,
 				75495C19248EB4F7008200E5 /* SaveComicViewController.swift */,
+				7593877C2493CA8E00007183 /* ComicPageCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				75627F3824211A830006D08A /* ComicMiniature.swift in Sources */,
 				75627F28242118D40006D08A /* ViewController.swift in Sources */,
 				75545C2F2467E43300E988AC /* ExportQualitySettingsViewController.swift in Sources */,
+				7593877D2493CA8E00007183 /* ComicPageCell.swift in Sources */,
 				75E1D912244AFFEC0016261D /* DecompressRar.m in Sources */,
 				75ECF9572466F1C800B3B6BA /* OrderBySettingsController.swift in Sources */,
 				750626BF246EA03800825BA2 /* MainNavController.swift in Sources */,

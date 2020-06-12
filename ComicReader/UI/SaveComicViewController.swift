@@ -8,8 +8,11 @@
 
 import UIKit
 
-class SaveComicViewController: UIViewController, UINavigationBarDelegate {
-
+class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate {
+    
+    var characters = ["Link", "Zelda", "Ganondorf", "Midna"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,8 +48,6 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate {
         navBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         navBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
-        
-        
     }
     
     func addNameTextField(){
@@ -81,21 +82,54 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate {
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(ComicPageCell.self, forCellReuseIdentifier: "comicPageCell")
+        tableView.isEditing = true
     }
     
     @objc func closeView(){
         self.dismiss(animated: true, completion: nil)
     }
+
+}
+
+extension SaveComicViewController: UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+      return characters.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "comicPageCell", for: indexPath) as? ComicPageCell else {
+            fatalError("Unable to dequeue comicPageCell.")
+        }
+        cell.pageName.text = characters[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedObject = self.characters[sourceIndexPath.row]
+        characters.remove(at: sourceIndexPath.row)
+        characters.insert(movedObject, at: destinationIndexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
