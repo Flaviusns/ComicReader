@@ -15,6 +15,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     var names = ["Caca21","LaBidaNoEsFasi","Jamas","AntesMuertoQueSencillo"]
     let textField = UITextField()
     var exportQualityValue: CGFloat = 0.5
+    let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveAndExit))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,8 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         }else{
             self.view.backgroundColor = .white
         }
+        
+        doneButton.isEnabled = false
         
         addNavBar()
         addNameTextField()
@@ -40,7 +43,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
                 
         let navItem = UINavigationItem()
         navItem.title = NSLocalizedString("SaveNewComicViewControllerTitle", comment: "Title for the viewcontroller when you click save button")
-        navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveAndExit))
+        navItem.rightBarButtonItem = doneButton
 
         navBar.items = [navItem]
         
@@ -66,6 +69,8 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.autocapitalizationType = .words
         textField.font = UIFont.systemFont(ofSize: 16,weight: .bold)
+        
+        textField.addTarget(self, action: #selector(textFieldChange), for: .editingChanged)
         
         self.view.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -121,6 +126,17 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
             
         } catch {
             print("Error")
+        }
+    }
+    
+    @objc func textFieldChange(_ textField: UITextField){
+        
+        if let comicName = textField.text{
+            if comicName == ""{
+                doneButton.isEnabled = false
+            }else{
+                doneButton.isEnabled = true
+            }
         }
     }
 
