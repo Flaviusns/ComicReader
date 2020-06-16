@@ -82,12 +82,6 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
         
-        
-        
-        
-        
-        
-        
         SaveButton.isHidden = false
         DeleteComic.isHidden = true
         
@@ -292,7 +286,8 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         self.present(alert, animated: true)
         */
         let newVC = SaveComicViewController()
-        
+        newVC.comicPages = self.comicPages
+        newVC.exportQualityValue = self.exportQualityValue
         present(newVC,animated: true,completion: nil)
     }
     

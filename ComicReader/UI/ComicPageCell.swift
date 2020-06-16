@@ -17,6 +17,15 @@ class ComicPageCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    let pageImage : UIImageView = {
+        let image = UIImageView()
+        //image.image = UIImage(named: "P1")
+        image.contentMode = .scaleAspectFit
+        image.translatesAutoresizingMaskIntoConstraints = false
+        
+        return image
+    }()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,10 +35,21 @@ class ComicPageCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(pageName)
-        pageName.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        pageName.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor).isActive = true
-        pageName.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        pageName.centerXAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        self.addSubview(pageImage)
+
+        
+        NSLayoutConstraint.activate([
+            pageName.centerXAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.centerXAnchor),
+            pageName.centerYAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.centerYAnchor),
+            pageName.heightAnchor.constraint(equalToConstant: 45),
+            pageName.widthAnchor.constraint(equalToConstant: 100),
+            pageImage.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor, constant: 5),
+            pageImage.leadingAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leadingAnchor, constant: 5),
+            pageImage.heightAnchor.constraint(equalToConstant: 150),
+            pageImage.widthAnchor.constraint(equalToConstant: 75),
+            pageImage.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: 5),
+        ])
+        
     }
     
     required init?(coder: NSCoder) {

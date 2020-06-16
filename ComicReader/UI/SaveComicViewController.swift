@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Zip
 
 class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate {
     
-    var characters = ["Link", "Zelda", "Ganondorf", "Midna"]
-    
+    var comicPages = [UIImage]()
+    var names = ["Caca21","LaBidaNoEsFasi","Jamas","AntesMuertoQueSencillo"]
+    let textField = UITextField()
+    var exportQualityValue: CGFloat = 0.5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +40,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
                 
         let navItem = UINavigationItem()
         navItem.title = NSLocalizedString("SaveNewComicViewControllerTitle", comment: "Title for the viewcontroller when you click save button")
-        navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeView))
+        navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveAndExit))
 
         navBar.items = [navItem]
         
@@ -52,7 +55,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     
     func addNameTextField(){
         
-        let textField = UITextField() //frame: CGRect(x: 0, y: 100, width: self.view.frame.width * 0.75, height: 45))
+         //frame: CGRect(x: 0, y: 100, width: self.view.frame.width * 0.75, height: 45))
         textField.center.x = self.view.center.x
         textField.textAlignment = .center
         textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "Placeholder inside the enter comic name textfiled. Scan comic view")
@@ -91,27 +94,61 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     @objc func closeView(){
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func saveAndExit(){
+        saveComicOperations()
+    }
+    
+    private func saveComicOperations(){
+        let fileManager = FileManager.default
+        do {
+            var tempPath = FileManager.default.temporaryDirectory
+            tempPath.appendPathComponent(textField.text!)
+            //MARK: Check if the comic name exist already
+            try fileManager.createDirectory(at: tempPath, withIntermediateDirectories: true, attributes: nil)
+            for image in comicPages{
+                let imageURL = tempPath.path + "/" + "0\(comicPages.firstIndex(of: image)!).jpeg"
+                try image.jpegData(compressionQuality: exportQualityValue)?.write(to: URL(fileURLWithPath: imageURL))
+            }
+            var finalPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            finalPath.appendPathComponent("\(textField.text!).cbz")
+            try Zip.zipFiles(paths: [tempPath], zipFilePath: finalPath, password: nil, progress: nil)
+            
+            
+            try fileManager.removeItem(at: tempPath) //Remove temp file
+            
+            closeView()
+            
+        } catch {
+            print("Error")
+        }
+    }
 
 }
 
 extension SaveComicViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return characters.count
+      return comicPages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "comicPageCell", for: indexPath) as? ComicPageCell else {
             fatalError("Unable to dequeue comicPageCell.")
         }
-        cell.pageName.text = characters[indexPath.row]
+        cell.pageName.text = "Page \(indexPath.row)"
+        cell.pageImage.image = comicPages[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let movedObject = self.characters[sourceIndexPath.row]
-        characters.remove(at: sourceIndexPath.row)
-        characters.insert(movedObject, at: destinationIndexPath.row)
+        let movedObject = comicPages[sourceIndexPath.row]
+        comicPages.remove(at: sourceIndexPath.row)
+        comicPages.insert(movedObject, at: destinationIndexPath.row)
+        //let movedObject = names[sourceIndexPath.row]
+        //names.remove(at: sourceIndexPath.row)
+        //names.insert(movedObject, at: destinationIndexPath.row)
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
@@ -128,6 +165,10 @@ extension SaveComicViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 160
     }
     
 
