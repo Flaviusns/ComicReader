@@ -9,7 +9,7 @@
 import UIKit
 import Zip
 
-class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate {
+class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate,UIAdaptivePresentationControllerDelegate {
     
     var comicPages = [UIImage]()
     var names = ["Caca21","LaBidaNoEsFasi","Jamas","AntesMuertoQueSencillo"]
@@ -19,6 +19,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presentationController?.delegate = self
         
         if #available(iOS 13, *){
             self.view.backgroundColor = .systemBackground
@@ -44,7 +45,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         let navItem = UINavigationItem()
         navItem.title = NSLocalizedString("SaveNewComicViewControllerTitle", comment: "Title for the viewcontroller when you click save button")
         navItem.rightBarButtonItem = doneButton
-
+        navItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeView))
         navBar.items = [navItem]
         
         self.view.addSubview(navBar)
@@ -104,6 +105,33 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         saveComicOperations()
     }
     
+    @objc func triggerActionSheet(){
+        print("Swipe down")
+    }
+        
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return false
+    }
+    
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        
+        let dimissAlert = UIAlertController(title: "Hi", message: "Life is not easy", preferredStyle: .actionSheet)
+        
+        
+        let removeAll = UIAlertAction(title: NSLocalizedString("RemvoeAll", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .destructive, handler: { action in
+            print("Remove all clicked")
+            self.closeView()
+        })
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .cancel, handler: nil)
+        dimissAlert.addAction(removeAll)
+        dimissAlert.addAction(cancel)
+        
+        
+        self.present(dimissAlert, animated: true, completion: nil)
+    }
+    
+    
+    
     private func saveComicOperations(){
         let fileManager = FileManager.default
         do {
@@ -139,7 +167,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
             }
         }
     }
-
+        
 }
 
 extension SaveComicViewController: UITableViewDataSource{

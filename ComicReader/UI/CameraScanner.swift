@@ -288,7 +288,9 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         let newVC = SaveComicViewController()
         newVC.comicPages = self.comicPages
         newVC.exportQualityValue = self.exportQualityValue
-        present(newVC,animated: true,completion: nil)
+        //present(newVC,animated: true,completion: nil)
+        //pres
+        showDetailViewController(newVC, sender: self)
     }
     
     private func errasePreviewFromScrollView(){
