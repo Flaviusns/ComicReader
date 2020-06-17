@@ -16,6 +16,8 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     let textField = UITextField()
     var exportQualityValue: CGFloat = 0.5
     let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveAndExit))
+    var parentView : CameraScanner?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,14 +117,16 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         
-        let dimissAlert = UIAlertController(title: "Hi", message: "Life is not easy", preferredStyle: .actionSheet)
+        let dimissAlert = UIAlertController(title: nil, message: NSLocalizedString("MessageDiscardActionSheet", comment: "Message displaying the advise for the user"), preferredStyle: .actionSheet)
         
         
-        let removeAll = UIAlertAction(title: NSLocalizedString("RemvoeAll", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .destructive, handler: { action in
+        let removeAll = UIAlertAction(title: NSLocalizedString("DiscardComic", comment: "Discard button removing the entire new comic from the save screen"), style: .destructive, handler: { action in
             print("Remove all clicked")
+            self.parentView?.shouldRemove = true
             self.closeView()
         })
-        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .cancel, handler: nil)
+        
+        let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel the operation"), style: .cancel, handler: nil)
         dimissAlert.addAction(removeAll)
         dimissAlert.addAction(cancel)
         

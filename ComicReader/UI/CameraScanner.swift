@@ -49,7 +49,15 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     var numPages = 0
     var pageWidth: CGFloat = 0
     var pageHeight: CGFloat = 0
-    var comicName = "New Comic"
+    //var comicName = "New Comic"
+    var shouldRemove = false{
+        didSet{
+            if shouldRemove{
+                //self.errasePreviewFromScrollView()
+                print("Removing caca")
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -288,8 +296,8 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         let newVC = SaveComicViewController()
         newVC.comicPages = self.comicPages
         newVC.exportQualityValue = self.exportQualityValue
-        //present(newVC,animated: true,completion: nil)
-        //pres
+        newVC.parentView = self
+
         showDetailViewController(newVC, sender: self)
     }
     
@@ -302,7 +310,7 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             }
         }
     }
-    
+    /*
     private func saveComicOperations(){
         let fileManager = FileManager.default
         do {
@@ -326,7 +334,7 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         } catch {
             print("Error")
         }
-    }
+    }*/
     
 }
 @available(iOS 13.0, *)
