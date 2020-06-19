@@ -7,32 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "24044056-8352-4E72-ABAE-E7D46E938B10"
+            uuid = "E705DD5B-0300-4277-B1A1-6D050654F2EF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicReader/Logic/ComicFinder.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "854"
-            endingLineNumber = "854"
-            landmarkName = "checkIfFileIsDuplicate(fileName:)"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "updateStorageComics()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1B3C7BC5-4F7B-4934-A6A5-DA469F5459DF"
-            shouldBeEnabled = "No"
+            uuid = "293E549D-2229-49B4-B8DF-B9CAFB3D1C3E"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ComicReader/Logic/ComicFinder.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "853"
-            endingLineNumber = "853"
-            landmarkName = "checkIfFileIsDuplicate(fileName:)"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "updateStorageComics()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

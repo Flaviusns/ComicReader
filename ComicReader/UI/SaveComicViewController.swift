@@ -116,6 +116,10 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     }
     
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
         let dimissAlert: UIAlertController
         
         if UIDevice.current.userInterfaceIdiom == .pad{

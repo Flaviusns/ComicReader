@@ -856,6 +856,9 @@ class ComicFinder{
                     return true
                 }
             }
+            if maxBound == 0{
+                return true
+            }
             return false
         }
         return true
