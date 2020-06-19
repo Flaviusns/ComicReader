@@ -53,8 +53,8 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     var shouldRemove = false{
         didSet{
             if shouldRemove{
-                //self.errasePreviewFromScrollView()
-                print("Removing caca")
+                self.errasePreviewFromScrollView()
+                //print("Removing caca")
             }
         }
     }
@@ -90,7 +90,7 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
         
-        SaveButton.isHidden = false
+        SaveButton.isHidden = true
         DeleteComic.isHidden = true
         
         
@@ -268,31 +268,6 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     }
     
     @IBAction func saveComic(_ sender: Any) {
-        /*let alert = UIAlertController(title: NSLocalizedString("InputComicName", comment: "Input title in the save comic's alert at Scan comic view"), message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel button inside the save comic alert at Scan comic view"), style: .cancel, handler: nil))
-        
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "Placeholder inside the enter comic name textfiled. Scan comic view")
-        })
-        
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .default, handler: { action in
-            
-            if let name = alert.textFields?.first?.text {
-                self.comicName = name
-                self.saveComicOperations()
-                self.SaveButton.isHidden=true
-                self.DeleteComic.isHidden=true
-                let confirmAlert = UIAlertController(title: NSLocalizedString("ComicSaved", comment: "Comic saved message inside the Scan comic view"), message: nil, preferredStyle: .alert)
-                    
-                confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .default, handler: nil))
-                    
-                self.present(confirmAlert, animated: true)
-            }
-        }
-        ))
-        
-        self.present(alert, animated: true)
-        */
         let newVC = SaveComicViewController()
         newVC.comicPages = self.comicPages
         newVC.exportQualityValue = self.exportQualityValue
@@ -309,6 +284,9 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
                 }
             }
         }
+        comicPages.removeAll()
+        SaveButton.isHidden = true
+        DeleteComic.isHidden = true
     }
     /*
     private func saveComicOperations(){

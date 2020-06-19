@@ -9,10 +9,9 @@
 import UIKit
 import Zip
 
-class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate,UIAdaptivePresentationControllerDelegate {
+class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITableViewDelegate,UIAdaptivePresentationControllerDelegate,UITextFieldDelegate {
     
     var comicPages = [UIImage]()
-    var names = ["Caca21","LaBidaNoEsFasi","Jamas","AntesMuertoQueSencillo"]
     let textField = UITextField()
     var exportQualityValue: CGFloat = 0.5
     let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveAndExit))
@@ -66,12 +65,13 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         textField.textAlignment = .center
         textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "Placeholder inside the enter comic name textfiled. Scan comic view")
         textField.keyboardType = UIKeyboardType.default
-        textField.returnKeyType = UIReturnKeyType.done
+        textField.returnKeyType = .done
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.autocapitalizationType = .words
         textField.font = UIFont.systemFont(ofSize: 16,weight: .bold)
+        textField.delegate = self
         
         textField.addTarget(self, action: #selector(textFieldChange), for: .editingChanged)
         
@@ -100,7 +100,12 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     }
     
     @objc func closeView(){
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: { () -> Void
+            in
+            let confirmAlert = UIAlertController(title: NSLocalizedString("ComicSaved", comment: "Comic saved message inside the Scan comic view"), message: nil, preferredStyle: .alert)
+            confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .default, handler: nil))
+            self.present(confirmAlert, animated: true)
+        })
     }
     
     @objc func saveAndExit(){
@@ -161,7 +166,9 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
             
             
             try fileManager.removeItem(at: tempPath) //Remove temp file
+            self.parentView?.shouldRemove = true
             
+                
             closeView()
             
         } catch {
@@ -178,6 +185,11 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
                 doneButton.isEnabled = true
             }
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
         
 }
