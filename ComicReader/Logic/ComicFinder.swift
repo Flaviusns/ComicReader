@@ -849,7 +849,7 @@ class ComicFinder{
         
         if fileName.contains(".cbz") || fileName.contains(".cbr") || fileName.contains(".cb7"){
             let fileCharacters = Array(fileName)
-            let maxBound = fileCharacters.count - 5
+            let maxBound = fileCharacters.count > 5 ? fileCharacters.count - 5 : 0
             for index in (0...maxBound).reversed(){
                 let char = Character(String(fileCharacters[index]))
                 if !char.isNumber && char == "-" && Character(String(fileCharacters[index + 1])).isNumber { //Is a duplicate

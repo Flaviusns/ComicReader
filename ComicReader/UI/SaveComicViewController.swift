@@ -116,9 +116,13 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     }
     
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        let dimissAlert: UIAlertController
         
-        let dimissAlert = UIAlertController(title: nil, message: NSLocalizedString("MessageDiscardActionSheet", comment: "Message displaying the advise for the user"), preferredStyle: .actionSheet)
-        
+        if UIDevice.current.userInterfaceIdiom == .pad{
+            dimissAlert = UIAlertController(title: nil, message: NSLocalizedString("MessageDiscardActionSheet", comment: "Message displaying the advise for the user"), preferredStyle: .alert)
+        }else{
+          dimissAlert = UIAlertController(title: nil, message: NSLocalizedString("MessageDiscardActionSheet", comment: "Message displaying the advise for the user"), preferredStyle: .actionSheet)
+        }
         
         let removeAll = UIAlertAction(title: NSLocalizedString("DiscardComic", comment: "Discard button removing the entire new comic from the save screen"), style: .destructive, handler: { action in
             print("Remove all clicked")
