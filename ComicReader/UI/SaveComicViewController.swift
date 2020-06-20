@@ -102,9 +102,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     @objc func closeView(){
         self.dismiss(animated: true, completion: { () -> Void
             in
-            let confirmAlert = UIAlertController(title: NSLocalizedString("ComicSaved", comment: "Comic saved message inside the Scan comic view"), message: nil, preferredStyle: .alert)
-            confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .default, handler: nil))
-            self.present(confirmAlert, animated: true)
+            self.parentView?.shouldPresentSavedAlert = true
         })
     }
     

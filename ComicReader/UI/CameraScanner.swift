@@ -22,6 +22,8 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
     
     @IBOutlet var DeleteComic: UIButton!
     
+    let activityIndicator = UIActivityIndicatorView(style: .white)
+    
     lazy var persistentContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "ComicReaderModel")
@@ -58,7 +60,15 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             }
         }
     }
-    
+    var shouldPresentSavedAlert = false{
+        didSet{
+            if shouldPresentSavedAlert{
+                let confirmAlert = UIAlertController(title: NSLocalizedString("ComicSaved", comment: "Comic saved message inside the Scan comic view"), message: nil, preferredStyle: .alert)
+                confirmAlert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .default, handler: nil))
+                self.present(confirmAlert, animated: true)
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let width = self.view.bounds.width
@@ -81,10 +91,6 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
 
         self.view.addSubview(scrollView)
         
-        
-        
-        
-        
         navigationItem.title = NSLocalizedString("CreateComicTitle", comment: "Title at Scanner Comic View")
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
@@ -95,6 +101,17 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         
         
         settings = ComicReaderAppSettings(container: persistentContainer)
+        
+        self.view.addSubview(activityIndicator)
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .systemBlue
+        activityIndicator.topAnchor.constraint(equalTo: self.view.topAnchor, constant: height/3.5).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,7 +161,7 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             print("No image found")
             return
         }
-        
+        comicPages.append(image)
         addImageViewToPreview(imageToAdd: image)
         
     }
@@ -163,8 +180,6 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         
         imageView.image = imageToAdd
         imageView.contentMode = .scaleAspectFit
-        
-        comicPages.append(imageToAdd)
         
         numPages+=1
         
@@ -288,43 +303,24 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
         SaveButton.isHidden = true
         DeleteComic.isHidden = true
     }
-    /*
-    private func saveComicOperations(){
-        let fileManager = FileManager.default
-        do {
-            var tempPath = FileManager.default.temporaryDirectory
-            tempPath.appendPathComponent(comicName)
-            //MARK: Check if the comic name exist already
-            try fileManager.createDirectory(at: tempPath, withIntermediateDirectories: true, attributes: nil)
-            for image in comicPages{
-                let imageURL = tempPath.path + "/" + "0\(comicPages.firstIndex(of: image)!).jpeg"
-                try image.jpegData(compressionQuality: exportQualityValue)?.write(to: URL(fileURLWithPath: imageURL))
-            }
-            var finalPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            finalPath.appendPathComponent("\(comicName).cbz")
-            try Zip.zipFiles(paths: [tempPath], zipFilePath: finalPath, password: nil, progress: nil)
-            
-            
-            try fileManager.removeItem(at: tempPath) //Remove temp file
-            
-            errasePreviewFromScrollView()
-            
-        } catch {
-            print("Error")
-        }
-    }*/
+
     
 }
 @available(iOS 13.0, *)
 extension CameraScanner: VNDocumentCameraViewControllerDelegate{
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        activityIndicator.startAnimating()
         for i in 0 ..< scan.pageCount {
-            let img = scan.imageOfPage(at: i)
-
-            addImageViewToPreview(imageToAdd: img)
+            let  img = scan.imageOfPage(at: i)
+            comicPages.append(img)
         }
-        
-        controller.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: true, completion: {
+            for page in self.comicPages{
+                self.addImageViewToPreview(imageToAdd: page)
+                
+            }
+            self.activityIndicator.stopAnimating()
+        })
     }
 }
