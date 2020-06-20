@@ -16,6 +16,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     var exportQualityValue: CGFloat = 0.5
     let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveAndExit))
     var parentView : CameraScanner?
+    let invalidChars = ["/","\\","'",";",":","|"]
     
     
     override func viewDidLoad() {
@@ -64,7 +65,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         textField.center.x = self.view.center.x
         textField.textAlignment = .center
         textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "Placeholder inside the enter comic name textfiled. Scan comic view")
-        textField.keyboardType = UIKeyboardType.default
+        textField.keyboardType = .alphabet
         textField.returnKeyType = .done
         textField.borderStyle = UITextField.BorderStyle.roundedRect
         textField.autocorrectionType = UITextAutocorrectionType.no
@@ -110,9 +111,6 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         saveComicOperations()
     }
     
-    @objc func triggerActionSheet(){
-        print("Swipe down")
-    }
         
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
         return false
@@ -181,6 +179,16 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
                 doneButton.isEnabled = false
             }else{
                 doneButton.isEnabled = true
+                var chars = Array(comicName)
+                
+                if invalidChars.contains(String(chars[chars.count - 1])){
+                    let badCharacter = UIAlertController(title: NSLocalizedString("BadCharacter", comment: "Bad character title in alert"), message: nil, preferredStyle: .alert)
+                    badCharacter.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .default, handler: nil))
+                    self.present(badCharacter, animated: true)
+                    chars.removeLast()
+                    textField.text = String(chars)
+                }
+                
             }
         }
     }
@@ -189,6 +197,10 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         self.view.endEditing(true)
         return false
     }
+    
+    
+    
+
         
 }
 
