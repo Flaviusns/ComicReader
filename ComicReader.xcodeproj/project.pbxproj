@@ -37,6 +37,7 @@
 		75ECF9532466E45900B3B6BA /* ExportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9522466E45900B3B6BA /* ExportSettings.swift */; };
 		75ECF9552466E84800B3B6BA /* SettingRowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9542466E84800B3B6BA /* SettingRowTableViewCell.swift */; };
 		75ECF9572466F1C800B3B6BA /* OrderBySettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF9562466F1C800B3B6BA /* OrderBySettingsController.swift */; };
+		75FB7488249F6BAA00E455C0 /* LicensePrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FB7487249F6BAA00E455C0 /* LicensePrivacyViewController.swift */; };
 		B7A0FCDBA9916574C82BC9D3 /* Pods_ComicReaderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48ADBFA6EEAE590A7453DDE5 /* Pods_ComicReaderTests.framework */; };
 		C420559A14164B72FF1DF165 /* Pods_ComicReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9FFF9EED45EE518CFEBD01 /* Pods_ComicReader.framework */; };
 /* End PBXBuildFile section */
@@ -97,6 +98,7 @@
 		75ECF9522466E45900B3B6BA /* ExportSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettings.swift; sourceTree = "<group>"; };
 		75ECF9542466E84800B3B6BA /* SettingRowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRowTableViewCell.swift; sourceTree = "<group>"; };
 		75ECF9562466F1C800B3B6BA /* OrderBySettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBySettingsController.swift; sourceTree = "<group>"; };
+		75FB7487249F6BAA00E455C0 /* LicensePrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensePrivacyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				750626BE246EA03800825BA2 /* MainNavController.swift */,
 				75495C19248EB4F7008200E5 /* SaveComicViewController.swift */,
 				7593877C2493CA8E00007183 /* ComicPageCell.swift */,
+				75FB7487249F6BAA00E455C0 /* LicensePrivacyViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				75495C1A248EB4F7008200E5 /* SaveComicViewController.swift in Sources */,
 				75DA1A23245DC677000187E3 /* CameraScanner.swift in Sources */,
 				75627F3A24211C3F0006D08A /* Comic.swift in Sources */,
+				75FB7488249F6BAA00E455C0 /* LicensePrivacyViewController.swift in Sources */,
 				75ECF9532466E45900B3B6BA /* ExportSettings.swift in Sources */,
 				751D9A7A24214DDF00BBAC10 /* ComicFinder.swift in Sources */,
 				75ECF9552466E84800B3B6BA /* SettingRowTableViewCell.swift in Sources */,
