@@ -61,7 +61,6 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     
     func addNameTextField(){
         
-         //frame: CGRect(x: 0, y: 100, width: self.view.frame.width * 0.75, height: 45))
         textField.center.x = self.view.center.x
         textField.textAlignment = .center
         textField.placeholder = NSLocalizedString("InputNamePlaceHolder", comment: "Placeholder inside the enter comic name textfiled. Scan comic view")
@@ -72,16 +71,27 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         textField.clearButtonMode = UITextField.ViewMode.whileEditing
         textField.autocapitalizationType = .words
         textField.font = UIFont.systemFont(ofSize: 16,weight: .bold)
-        textField.delegate = self
         
+        let errorNameImg = UIImageView(image: UIImage(named: "BadName"))
+        errorNameImg.frame = CGRect(x: 13.5, y: 13.5, width: 27, height: 27)
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 54, height: 54))
+        rightView.addSubview(errorNameImg)
+        errorNameImg.contentMode = .scaleToFill
+    
+        textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldChange), for: .editingChanged)
         
         self.view.addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.heightAnchor.constraint(equalToConstant: 45).isActive = true
         textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 100).isActive = true
-        textField.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        textField.widthAnchor.constraint(equalToConstant: 260).isActive = true
         textField.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        
+        textField.rightView = rightView
+        textField.rightViewMode = .always
+        textField.rightView?.isHidden = true
+
     }
     
     func addTableView(){
@@ -177,18 +187,19 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         if let comicName = textField.text{
             if comicName == ""{
                 doneButton.isEnabled = false
+                textField.rightView?.isHidden = true
             }else{
                 doneButton.isEnabled = true
-                var chars = Array(comicName)
+                textField.rightView?.isHidden = true
                 
-                if invalidChars.contains(String(chars[chars.count - 1])){
-                    let badCharacter = UIAlertController(title: NSLocalizedString("BadCharacter", comment: "Bad character title in alert"), message: nil, preferredStyle: .alert)
-                    badCharacter.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "Okay inside the delete comic alert title. Scan comic view"), style: .default, handler: nil))
-                    self.present(badCharacter, animated: true)
-                    chars.removeLast()
-                    textField.text = String(chars)
+                let chars = Array(comicName)
+                for character in chars{
+                    if invalidChars.contains(String(character)){
+                        textField.rightView?.isHidden = false
+                        doneButton.isEnabled = false
+                        break
+                    }
                 }
-                
             }
         }
     }

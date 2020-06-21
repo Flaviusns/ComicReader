@@ -96,7 +96,7 @@ class CameraScanner: UIViewController,UINavigationControllerDelegate,UIImagePick
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
         
-        SaveButton.isHidden = false
+        SaveButton.isHidden = true
         DeleteComic.isHidden = true
         
         
