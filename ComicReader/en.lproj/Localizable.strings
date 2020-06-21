@@ -54,7 +54,7 @@
 "InputComicName" = "Insert a name for your comic";
 
 /* Placeholder inside the enter comic name textfiled. Scan comic view */
-"InputNamePlaceHolder" = "Input the name of your comic";
+"InputNamePlaceHolder" = "Name of the comic";
 
 /* Error in file message in the alert */
 "InvalidFileMessage" = "It seems that some files are invalid files, please check the instruction with the files.";

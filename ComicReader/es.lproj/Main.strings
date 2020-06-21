@@ -19,6 +19,24 @@
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "EEV-XU-MDx"; */
 "EEV-XU-MDx.title" = "Ajustes";
 
+/* Class = "UILabel"; text = "Hello Darkness"; ObjectID = "IA0-dI-KVJ"; */
+"IA0-dI-KVJ.text" = "Hola oscuridad";
+
+/* Class = "UILabel"; text = "Hello Darkness"; ObjectID = "jdr-zs-vaG"; */
+"jdr-zs-vaG.text" = "Hola oscuridad";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "kdY-Cw-4iz"; */
+"kdY-Cw-4iz.text" = "Label";
+
+/* Class = "UILabel"; text = "Hello Darkness"; ObjectID = "KSI-UM-wpC"; */
+"KSI-UM-wpC.text" = "Hola oscuridad";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Sc2-7M-Ys6"; */
+"Sc2-7M-Ys6.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "TCj-sd-ndo"; */
+"TCj-sd-ndo.text" = "Label";
+
 /* Class = "UIButton"; normalTitle = "Save Comic"; ObjectID = "u85-3j-DsT"; */
 "u85-3j-DsT.normalTitle" = "Guardar cómic";
 

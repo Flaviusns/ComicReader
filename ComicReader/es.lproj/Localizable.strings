@@ -19,6 +19,10 @@
 /* Delete Comic alert title inside the scan comic view */
 "ComicDeleted" = "Cómic borrado";
 
+/* Alert message when the comic was erased
+   Alert title when the comic was erased */
+"ComicNoLongerExistTitle" = "El cómic ya no existe";
+
 /* Comic saved message inside the Scan comic view */
 "ComicSaved" = "Comic guardado";
 
@@ -27,6 +31,9 @@
 
 /* Delete text for the 3DTouch option */
 "DeleteComic" = "Borrar comic";
+
+/* Discard button removing the entire new comic from the save screen */
+"DiscardComic" = "Descartar cambios";
 
 /* Empty collection text as title when the main collection it's empty */
 "EmptyCollection" = "Tu colección de comics está vacía";
@@ -50,7 +57,7 @@
 "InputComicName" = "Inserte el nombre del cómic";
 
 /* Placeholder inside the enter comic name textfiled. Scan comic view */
-"InputNamePlaceHolder" = "Introduce el nombre del cómic";
+"InputNamePlaceHolder" = "Nombre del cómic";
 
 /* Error in file message in the alert */
 "InvalidFileMessage" = "Parece ser que hay varios archivos invalidos, por favor comprueba las instrucciones relacionadas con los archivos";

@@ -4,8 +4,11 @@
 /* (No Comment) */
 "7z Comic Archive Archive" = "7z Comic Archive Archive";
 
+/* Bundle display name */
+"CFBundleDisplayName" = "Tham!";
+
 /* Bundle name */
-"CFBundleName" = "ComicReader";
+"CFBundleName" = "Tham!";
 
 /* (No Comment) */
 "Comic Book 7-Zip Archive" = "Comic Book 7-Zip Archive";
