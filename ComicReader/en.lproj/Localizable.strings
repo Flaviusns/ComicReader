@@ -16,6 +16,10 @@
 /* Delete Comic alert title inside the scan comic view */
 "ComicDeleted" = "Comic deleted";
 
+/* Alert message when the comic was erased
+   Alert title when the comic was erased */
+"ComicNoLongerExistTitle" = "Comic no longer exist";
+
 /* Comic saved message inside the Scan comic view */
 "ComicSaved" = "Comic saved";
 
@@ -24,6 +28,9 @@
 
 /* Delete text for the 3DTouch option */
 "DeleteComic" = "Delete comic";
+
+/* Discard button removing the entire new comic from the save screen */
+"DiscardComic" = "Discard changes";
 
 /* Empty collection text as title when the main collection it's empty */
 "EmptyCollection" = "Your collection it's empty.";
@@ -52,6 +59,9 @@
 /* Error in file message in the alert */
 "InvalidFileMessage" = "It seems that some files are invalid files, please check the instruction with the files.";
 
+/* License title section row inside the settings view */
+"LicenseStatement" = "License Statement";
+
 /* Text describing the setting */
 "LowQualityExportText" = "With this option selected, the export quality of the comic pages will be low. Not recomended at least you want to generate small files.";
 
@@ -63,6 +73,9 @@
 
 /* Text inside the row in the settings tab */
 "MediumQualityName" = "Medium quality";
+
+/* Message displaying the advise for the user */
+"MessageDiscardActionSheet" = "Are you sure to discard the comic?";
 
 /* More info button in the alert */
 "MoreInfo" = "More info";
@@ -103,6 +116,15 @@
 /* Order by settings title of the view order by settings */
 "OrderBySetting" = "Order by";
 
+/* Privacy And License Setings Header */
+"PrivacyAndLicense" = "Privacy and license";
+
+/* Privacy note for the privacy view */
+"PrivacyNote" = "This aplication does not recolect any type of data from your device. No data is send by the aplication to our servers.";
+
+/* Privacy title section row inside the settings view */
+"PrivacyStatement" = "Privacy statement";
+
 /* Header for the settings rows */
 "QualityExportHeader" = "Quality export";
 
@@ -111,6 +133,9 @@
 
 /* Remove Favourite text for the 3DTouch option */
 "RemoveFavourite" = "Remove from favourite";
+
+/* Title for the viewcontroller when you click save button */
+"SaveNewComicViewControllerTitle" = "Save comic";
 
 /* Scan comic settings header for settings */
 "ScanComicSettings" = "Scan comic settings";

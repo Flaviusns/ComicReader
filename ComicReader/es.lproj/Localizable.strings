@@ -7,7 +7,7 @@
 /* Scan Mode name in the row */
 "CameraName" = "Cámara";
 
-/* Cancel button inside the save comic alert at Scan comic view */
+/* Cancel the operation */
 "Cancel" = "Cancelar";
 
 /* First title section inside the settings view */
@@ -55,6 +55,12 @@
 /* Error in file message in the alert */
 "InvalidFileMessage" = "Parece ser que hay varios archivos invalidos, por favor comprueba las instrucciones relacionadas con los archivos";
 
+/* License title for the privacy note */
+"License" = "Licencia";
+
+/* License title section row inside the settings view */
+"LicenseStatement" = "Acuerto de licencia";
+
 /* Text describing the setting */
 "LowQualityExportText" = "Con esta opción seleccionada, la calidad de exportación de los cómics será baja. No recomendada a menos que quieras generar archivos pequeños.";
 
@@ -66,6 +72,9 @@
 
 /* Text inside the row in the settings tab */
 "MediumQualityName" = "Calidad media";
+
+/* Message displaying the advise for the user */
+"MessageDiscardActionSheet" = "¿Estás seguro de querer desechar tu comic?";
 
 /* More info button in the alert */
 "MoreInfo" = "Más información";
@@ -110,6 +119,18 @@
 /* Order by settings title of the view order by settings */
 "OrderBySetting" = "Ordenar por";
 
+/* Privacy title for the privacy note */
+"Privacy" = "Privacidad";
+
+/* Privacy And License Setings Header */
+"PrivacyAndLicense" = " Privacidad y licencia";
+
+/* Privacy note for the privacy view */
+"PrivacyNote" = "Esta aplicación no recopila ningún tipo de dato de tu dispositivo. Ningún dado es mandado por la aplicación a nuestros servidores.";
+
+/* Privacy title section row inside the settings view */
+"PrivacyStatement" = "Acuerdo de privacidad";
+
 /* Header for the settings rows */
 "QualityExportHeader" = "Calidad de la exportación";
 
@@ -118,6 +139,9 @@
 
 /* Remove Favourite text for the 3DTouch option */
 "RemoveFavourite" = "Borrar de favoritos";
+
+/* Title for the viewcontroller when you click save button */
+"SaveNewComicViewControllerTitle" = "Guardad cómic";
 
 /* Scan comic settings header for settings */
 "ScanComicSettings" = "opciones de escaneo";

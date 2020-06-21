@@ -146,7 +146,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         let removeAll = UIAlertAction(title: NSLocalizedString("DiscardComic", comment: "Discard button removing the entire new comic from the save screen"), style: .destructive, handler: { action in
             print("Remove all clicked")
             self.parentView?.shouldRemove = true
-            self.closeViewWithAlert()
+            self.closeView()
         })
         
         let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel the operation"), style: .cancel, handler: nil)
