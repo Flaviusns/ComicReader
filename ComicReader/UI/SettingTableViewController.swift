@@ -11,9 +11,12 @@ import CoreData
 
 class SettingTableViewController: UITableViewController {
     
-    let sectionTitles = [NSLocalizedString("CollectionSettings", comment: "Collection Setings Header"),NSLocalizedString("ScanComicSettings", comment: "Scan comic settings header for settings")]
+    let sectionTitles = [NSLocalizedString("CollectionSettings", comment: "Collection Setings Header"),NSLocalizedString("ScanComicSettings", comment: "Scan comic settings header for settings"),NSLocalizedString("PrivacyAndLicense", comment: "Privacy And License Setings Header")]
+    
     let firstSection = [NSLocalizedString("CollectionOrder", comment: "First title section inside the settings view")]
     var secondSection = [NSLocalizedString("ExportQuality", comment: "Second title section inside the settings view")]
+    let thirdSection = [NSLocalizedString("PrivacyStatement", comment: "Privacy title section row inside the settings view"),
+                        NSLocalizedString("LicenseStatement", comment: "License title section row inside the settings view")]
     
     lazy var persistentContainer: NSPersistentContainer = {
         
@@ -65,6 +68,8 @@ class SettingTableViewController: UITableViewController {
             return firstSection.count
         case 1:
             return secondSection.count
+        case 2:
+            return thirdSection.count
         default:
             return 0
         }
@@ -80,10 +85,11 @@ class SettingTableViewController: UITableViewController {
         }
         if indexPath.section == 0{
             cell.SettingName.text = firstSection[indexPath.item]
-        }else{
+        }else if indexPath.section == 1{
             cell.SettingName.text = secondSection[indexPath.item]
+        }else{
+            cell.SettingName.text = thirdSection[indexPath.item]
         }
-        
         
         cell.accessoryType = .disclosureIndicator
 
@@ -92,27 +98,28 @@ class SettingTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 0{
+        switch indexPath.section {
+        case 0:
             if let nextVC = storyboard?.instantiateViewController(withIdentifier: "CollectionOrderSetting") as? OrderBySettingsController {
                 nextVC.settings = self.settings
                 navigationController?.pushViewController(nextVC, animated: true)
             }
-        }
-        else if indexPath.section == 1{
-            if indexPath.item == 0{
+        case 1:
+            switch indexPath.item {
+            case 0:
                 if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ExportQualitySetting") as? ExportQualitySettingsViewController {
                     nextVC.settings = self.settings
                     navigationController?.pushViewController(nextVC, animated: true)
                 }
-            }else{
+            default:
                 if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ScaningModeSetting") as? ScanModeSettingViewController {
                     nextVC.settings = self.settings
                     navigationController?.pushViewController(nextVC, animated: true)
                 }
-                
             }
+        default:
+            print("Invalid row")
         }
-        
     }
     
 

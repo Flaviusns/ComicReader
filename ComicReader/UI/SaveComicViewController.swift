@@ -16,7 +16,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
     var exportQualityValue: CGFloat = 0.5
     let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(saveAndExit))
     var parentView : CameraScanner?
-    let invalidChars = ["/","\\","'",";",":","|"]
+    let invalidChars = ["/","\\","'",";",":","|","."]
     
     
     override func viewDidLoad() {
@@ -73,9 +73,9 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         textField.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         
         let errorNameImg = UIImageView(image: UIImage(named: "BadName"))
-        errorNameImg.frame = CGRect(x: 13.5, y: 13.5, width: 27, height: 27)
-        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 54, height: 54))
-        rightView.addSubview(errorNameImg)
+        errorNameImg.frame = CGRect(x: 2, y: 2, width: 28, height: 28)
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        leftView.addSubview(errorNameImg)
         errorNameImg.contentMode = .scaleToFill
     
         textField.delegate = self
@@ -88,9 +88,9 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         textField.widthAnchor.constraint(equalToConstant: 260).isActive = true
         textField.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         
-        textField.rightView = rightView
-        textField.rightViewMode = .always
-        textField.rightView?.isHidden = true
+        textField.leftView = leftView
+        textField.leftViewMode = .always
+        textField.leftView?.isHidden = true
 
     }
     
@@ -110,11 +110,15 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         tableView.isEditing = true
     }
     
-    @objc func closeView(){
+    @objc func closeViewWithAlert(){
         self.dismiss(animated: true, completion: { () -> Void
             in
             self.parentView?.shouldPresentSavedAlert = true
         })
+    }
+    
+    @objc func closeView(){
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func saveAndExit(){
@@ -142,7 +146,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         let removeAll = UIAlertAction(title: NSLocalizedString("DiscardComic", comment: "Discard button removing the entire new comic from the save screen"), style: .destructive, handler: { action in
             print("Remove all clicked")
             self.parentView?.shouldRemove = true
-            self.closeView()
+            self.closeViewWithAlert()
         })
         
         let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel the operation"), style: .cancel, handler: nil)
@@ -175,7 +179,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
             self.parentView?.shouldRemove = true
             
                 
-            closeView()
+            closeViewWithAlert()
             
         } catch {
             print("Error")
@@ -187,15 +191,15 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         if let comicName = textField.text{
             if comicName == ""{
                 doneButton.isEnabled = false
-                textField.rightView?.isHidden = true
+                textField.leftView?.isHidden = true
             }else{
                 doneButton.isEnabled = true
-                textField.rightView?.isHidden = true
+                textField.leftView?.isHidden = true
                 
                 let chars = Array(comicName)
                 for character in chars{
                     if invalidChars.contains(String(character)){
-                        textField.rightView?.isHidden = false
+                        textField.leftView?.isHidden = false
                         doneButton.isEnabled = false
                         break
                     }
