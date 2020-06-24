@@ -19,6 +19,11 @@ class LicensePrivacyViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.heavy)
         ]
+        if #available(iOS 13, *){
+            self.view.backgroundColor = .systemBackground
+        }else{
+            self.view.backgroundColor = .white
+        }
         
         navigationItem.title = myTitle
         
@@ -33,8 +38,8 @@ class LicensePrivacyViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textView)
         
-        textView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
-        textView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        textView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        textView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         textView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         textView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
