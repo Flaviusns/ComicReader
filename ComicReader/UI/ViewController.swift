@@ -27,6 +27,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         return container
     }()
     
+    lazy var supportedLangs=["en","es"]
+    
     var comicsFinder :ComicFinder!
     
     var filtered:[Comic] = []
@@ -79,7 +81,13 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 
                 alert.addAction(UIAlertAction(title: NSLocalizedString("MoreInfo", comment: "More info button in the alert"), style: .default, handler: {
                     _ in
-                    let urlString = "https://www.apple.com/"
+                    var local = Locale.current.languageCode ?? "None"
+                    
+                    if !self.supportedLangs.contains(local){
+                        local = "en"
+                    }
+                    
+                    let urlString = "https://flaviusns.github.io/\(local)/help/index.html"
                     
                     if let url = URL(string: urlString) {
                         let vc = SFSafariViewController(url: url)
@@ -132,8 +140,6 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         viewM = .view
         
         settings = ComicReaderAppSettings(container: persistentContainer)
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
