@@ -124,6 +124,13 @@ class SettingTableViewController: UITableViewController {
                 let nextVC = LicensePrivacyViewController()
                 
                 nextVC.textView.text = """
+                Every assest in this application, including the icon and the name of the aplicaction is property of Flavius Stan.
+
+                Copyright (c) 2020 Flavius Stan
+                You are prohibited from copying, modifying or resdistributing this content withour prior written permission from Flavius Stan.
+
+                Every code file (*.swift, *.m, *.h) is provided by MIT License
+                
                 MIT License
 
                 Copyright (c) 2020 Flavius Stan
