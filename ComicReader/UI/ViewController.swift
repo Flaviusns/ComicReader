@@ -246,16 +246,16 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         switch viewM {
         case .view:
             selectedComic = comics[indexPath[1]]
-            /*
+            
             if let nextVC = storyboard?.instantiateViewController(withIdentifier: "ComicLectureTop") as? ComicLecture {
                 nextVC.comic = selectedComic
                 nextVC.comicFinder = comicsFinder
                 navigationController?.pushViewController(nextVC, animated: true)
-            }*/
-            
+            }
+            /*
             let nextVC = ComicLectureViewController()
             nextVC.comic = selectedComic
-            navigationController?.pushViewController(nextVC, animated: true)
+            navigationController?.pushViewController(nextVC, animated: true)*/
         case .edit:
             let name = comics[indexPath[1]].name
             selectedComics.append(name)

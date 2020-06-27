@@ -67,18 +67,23 @@ class ComicLectureViewController: UIViewController, UIScrollViewDelegate {
         self.view.addSubview(thumbnailsScroll)
         
         NSLayoutConstraint.activate([
-            mainScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            mainScrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            mainScrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            
             thumbnailsScroll.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             thumbnailsScroll.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             thumbnailsScroll.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             thumbnailsScroll.heightAnchor.constraint(equalToConstant: 75),
             
+            mainScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            mainScrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            mainScrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            
             mainScrollView.bottomAnchor.constraint(equalTo: thumbnailsScroll.topAnchor)
         ])
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideNavigationItem))
+        
+        
+        mainScrollView.addGestureRecognizer(tap)
+
     }
     
     func addPagesToView(pages: [Data]){
@@ -127,6 +132,26 @@ class ComicLectureViewController: UIViewController, UIScrollViewDelegate {
         return nil
     }
     
+    @objc func hideNavigationItem(){
+        
+        hideNavBar.toggle()
+        navigationController?.setNavigationBarHidden(hideNavBar, animated: true)
+        thumbnailsScroll.isHidden = hideNavBar
+        //PageIndicator.isHidden = hideNavBar
+    }
+    
+   
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if(size.width > size.height){
+            mainScrollView.isPagingEnabled = false
+        }else{
+            mainScrollView.isPagingEnabled = true
+        }
+        
+        
+    }
 
     
 

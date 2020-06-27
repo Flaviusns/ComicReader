@@ -159,11 +159,7 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         }else{
             bottomScrollView.isDirectionalLockEnabled = false
         }
-        
-            
-            self.bottomView.addSubview(bottomScrollView)
-            
-        
+        self.bottomView.addSubview(bottomScrollView)
     }
     
     func loadPages(width: CGFloat,heigth: CGFloat){
@@ -174,6 +170,9 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
             }
             view.removeFromSuperview()
         }
+        
+        totalWidth = width * CGFloat((comic?.comicsPages!.count)!)
+        scrollView.contentSize = CGSize(width: totalWidth, height: heigth)
         
         for i in 0...((comic?.comicsPages!.count)! - 1){
             
@@ -230,6 +229,8 @@ class ComicLecture: UIViewController,UIScrollViewDelegate {
         super.viewWillTransition(to: size, with: coordinator)
         loadPages(width: size.width, heigth: size.height)
         createthumbNails(width: size.width)
+        
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
