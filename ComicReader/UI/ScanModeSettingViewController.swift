@@ -14,7 +14,7 @@ class ScanModeSettingViewController: UIViewController,UITableViewDelegate,UITabl
     @IBOutlet var SettingsTable: UITableView!
     @IBOutlet var TextInfoLabel: UILabel!
     let scanModeOptions = [NSLocalizedString("VisionKitName", comment: "Scan Mode name in the row"),NSLocalizedString("CameraName", comment: "Scan Mode name in the row")]
-    let scanModeText = [NSLocalizedString("CameraModeText", comment: "Scan Mode text explaining the row selected the row"),NSLocalizedString("VisionKitText", comment: "Scan Mode text explaining the row selected the row")]
+    let scanModeText = [NSLocalizedString("VisionKitText", comment: "Scan Mode text explaining the row selected the row"),NSLocalizedString("CameraModeText", comment: "Scan Mode text explaining the row selected the row")]
     
     var settings:ComicReaderAppSettings!
     var selectedIndex = -1
