@@ -31,6 +31,7 @@
 		75924C48245D88970022C6CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 75924C46245D88970022C6CA /* InfoPlist.strings */; };
 		7593877D2493CA8E00007183 /* ComicPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593877C2493CA8E00007183 /* ComicPageCell.swift */; };
 		759B393F242F98F300D73586 /* ComicReaderModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 759B393D242F98F300D73586 /* ComicReaderModel.xcdatamodeld */; };
+		75D7935024AE5A5A00989285 /* #1 Pepper & Carrot The Potion of Flight.cbz in Resources */ = {isa = PBXBuildFile; fileRef = 75D7934F24AE5A5A00989285 /* #1 Pepper & Carrot The Potion of Flight.cbz */; };
 		75DA1A23245DC677000187E3 /* CameraScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DA1A22245DC677000187E3 /* CameraScanner.swift */; };
 		75E1D912244AFFEC0016261D /* DecompressRar.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E1D911244AFFEC0016261D /* DecompressRar.m */; };
 		75ECF94F2466DE4E00B3B6BA /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECF94E2466DE4E00B3B6BA /* SettingTableViewCell.swift */; };
@@ -91,6 +92,7 @@
 		75924C49245D88970022C6CA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7593877C2493CA8E00007183 /* ComicPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicPageCell.swift; sourceTree = "<group>"; };
 		759B393E242F98F300D73586 /* ComicReaderModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ComicReaderModel.xcdatamodel; sourceTree = "<group>"; };
+		75D7934F24AE5A5A00989285 /* #1 Pepper & Carrot The Potion of Flight.cbz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "#1 Pepper & Carrot The Potion of Flight.cbz"; sourceTree = "<group>"; };
 		75DA1A22245DC677000187E3 /* CameraScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraScanner.swift; sourceTree = "<group>"; };
 		75E1D910244AFFEC0016261D /* ComicReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ComicReader-Bridging-Header.h"; sourceTree = "<group>"; };
 		75E1D911244AFFEC0016261D /* DecompressRar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DecompressRar.m; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 		75627F17242118D30006D08A = {
 			isa = PBXGroup;
 			children = (
+				75D7934F24AE5A5A00989285 /* #1 Pepper & Carrot The Potion of Flight.cbz */,
 				751E477E2437740E008E73AA /* AppIcon.png */,
 				75627F22242118D40006D08A /* ComicReader */,
 				7526471624801AAE0033ABD1 /* ComicReaderTests */,
@@ -328,6 +331,7 @@
 				75627F30242118D50006D08A /* LaunchScreen.storyboard in Resources */,
 				75627F2D242118D50006D08A /* Assets.xcassets in Resources */,
 				75627F2B242118D40006D08A /* Main.storyboard in Resources */,
+				75D7935024AE5A5A00989285 /* #1 Pepper & Carrot The Potion of Flight.cbz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

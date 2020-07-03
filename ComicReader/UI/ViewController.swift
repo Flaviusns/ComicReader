@@ -359,21 +359,27 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     {
         let searchString = searchController.searchBar.text
         
-        filtered = comics.filter({ (item) -> Bool in
-            let comicName: NSString = item.name as NSString
-            
-            let range = comicName.range(of: searchString!, options: NSString.CompareOptions.caseInsensitive).location != NSNotFound
-            return range
-        })
-        
-        collectionView.reloadData()
-        
+        DispatchQueue.global(qos: .background).async {
+            self.filtered = self.comics.filter({ (item) -> Bool in
+                let comicName: NSString = item.name as NSString
+                
+                let range = comicName.range(of: searchString!, options: NSString.CompareOptions.caseInsensitive).location != NSNotFound
+                return range
+            })
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false
