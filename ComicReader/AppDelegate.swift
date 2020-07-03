@@ -27,8 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         _ = ComicReaderAppSettings(container: persistentContainer)
-        let stringPath = Bundle.main.path(forResource: "#1 Pepper & Carrot The Potion of Flight", ofType: "cbz")
-        print(stringPath ?? "No encuentro nada")
+        
         if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             if shortcutItem.type == "com.flavius.ComicReader.openscancomic" {
                 if let tabBarController = application.windows[0].rootViewController as? MainTabBarController{
