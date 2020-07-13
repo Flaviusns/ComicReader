@@ -51,6 +51,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         let image = self.favSelected ? UIImage(named: "FavSelectedMini") : UIImage(named: "FavUnselectedMini")
         return UIBarButtonItem.init(image: image, style: .plain, target: self, action: #selector(getFavorites))
     }()
+    
+    
     enum viewMode {
         case view
         case edit
@@ -60,7 +62,10 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
         didSet{
             switch viewM {
             case .view:
-                navigationItem.rightBarButtonItem = filter
+                if #available(iOS 13, *){
+                    navigationItem.rightBarButtonItem = filter
+                }
+                
                 navigationItem.leftBarButtonItems = [edit]
                 collectionView.allowsMultipleSelection = false
             case .edit:
@@ -259,9 +264,9 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 navigationController?.pushViewController(nextVC, animated: true)
             }
             /*
-            let nextVC = ComicLectureViewController()
-            nextVC.comic = selectedComic
-            navigationController?.pushViewController(nextVC, animated: true)*/
+             let nextVC = ComicLectureViewController()
+             nextVC.comic = selectedComic
+             navigationController?.pushViewController(nextVC, animated: true)*/
         case .edit:
             let name = comics[indexPath[1]].name
             selectedComics.append(name)
