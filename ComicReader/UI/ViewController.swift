@@ -448,6 +448,13 @@ extension ViewController{
                 self.comicsFinder.toggleFavComic(comicName: comic.name)
                 comic.favourite = true
             }
+            
+            let newFavComics = self.comicsFinder.getFavComics()
+            
+            if newFavComics.count != self.comics.count{
+                self.comics = newFavComics
+                self.collectionView.reloadData()
+            }
         }
         if let image = UIImage(named: "myImage") {
             let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])

@@ -24,6 +24,8 @@
 			<string>RAR archive</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.rarlab.rar-archive</string>
@@ -45,6 +47,8 @@
 			<string>Comic Rar</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.macitbetter.cbr-archive</string>
@@ -70,6 +74,8 @@
 			<string>Comic 7-Zip</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.macitbetter.cb7-archive</string>
@@ -97,6 +103,8 @@
 			<string>7-Zip Archive</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>org.7-zip.7-zip-archive</string>
@@ -122,6 +130,8 @@
 			<string>ZIP archive</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.zip-archive</string>
@@ -143,6 +153,8 @@
 			<string>Comic Zip</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.macitbetter.cbz-archive</string>
@@ -170,7 +182,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
 	<string>Books</string>
 	<key>LSRequiresIPhoneOS</key>
