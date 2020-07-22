@@ -413,7 +413,14 @@ class ComicFinder{
         let documentsPath = ComicFinder.getDocumentsDirectory()
         do{
             let files = try fileManager.contentsOfDirectory(atPath: documentsPath.path)
-            return files.count
+            var count = 0
+            for file in files{
+                if file.contains(".cbz") || file.contains(".cbr") || file.contains(".cb7"){
+                    count += 1
+                }
+            }
+            
+            return count
         }catch{
             return 0
         }

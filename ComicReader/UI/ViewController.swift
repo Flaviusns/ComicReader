@@ -153,7 +153,12 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
             if self.comicsFinder.getNumOfSavedComics() != self.comicsFinder.getNumOfComicsInDocuments(){
                 self.comicsFinder.updateStorageComics()
                 self.comicsFinder.removeComicsNoLongerExist()
-                self.comics = self.comicsFinder.getSavedComics()
+                if self.favSelected{
+                    self.comics = self.comicsFinder.getFavComics()
+                }else{
+                    self.comics = self.comicsFinder.getSavedComics()
+                }
+                
                 if self.settings.getValueFromKey(key: "orderby") == 0{
                     self.comics.sort()
                 }
@@ -403,7 +408,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     //MARK: Refresher functions
     @objc func loadData() {
         self.selectedComics.removeAll()
-        
+        print(self.comicsFinder.getNumOfSavedComics())
+        print(self.comicsFinder.getNumOfComicsInDocuments())
         if self.comicsFinder.getNumOfSavedComics() != self.comicsFinder.getNumOfComicsInDocuments(){
             self.comicsFinder.updateStorageComics()
             self.comics = self.comicsFinder.getSavedComics()
@@ -456,7 +462,7 @@ extension ViewController{
             
             let newFavComics = self.comicsFinder.getFavComics()
             
-            if newFavComics.count != self.comics.count{
+            if newFavComics.count != self.comics.count && self.favSelected{
                 self.comics = newFavComics
                 self.collectionView.reloadData()
             }
