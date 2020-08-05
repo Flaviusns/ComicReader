@@ -39,8 +39,8 @@ class LicensePrivacyViewController: UIViewController {
         self.view.addSubview(textView)
         
         textView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        textView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        textView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        textView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 5).isActive = true
+        textView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 5).isActive = true
         textView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         
     }
