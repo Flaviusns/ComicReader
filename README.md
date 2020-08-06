@@ -10,6 +10,16 @@ The app also scans paper comics using your device camera. Depending of the versi
 
 ![SecondImage](AppStore2.png)
 
+You can download the app from the App Store from [here](https://apps.apple.com/us/app/id1522310540)
+
+## How to contribute
+
+Right now what we need is to have the app traslated to more languages, so you can create a pull request with the new language.
+
+This was my first app, so it's sure it has some mistakes or improvements to make, so please, feel free contribute to the code.
+
+## Special Thanks
+
 The app use three diferent libraries to decompress the files, in order of implementation:
 
 1. [marmelory/Zip](https://github.com/marmelroy/Zip)
