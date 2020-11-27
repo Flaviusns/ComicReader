@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         _ = ComicReaderAppSettings(container: persistentContainer)
         
+        #if !targetEnvironment(macCatalyst)
         if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             if shortcutItem.type == "com.flavius.ComicReader.openscancomic" {
                 if let tabBarController = application.windows[0].rootViewController as? MainTabBarController{
@@ -59,6 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
+        #endif
+        
+        
         
         return true
     }

@@ -164,7 +164,7 @@ class SaveComicViewController: UIViewController, UINavigationBarDelegate, UITabl
         do {
             var tempPath = FileManager.default.temporaryDirectory
             tempPath.appendPathComponent(textField.text!)
-            //MARK: Check if the comic name exist already
+            //Check if the comic name exist already
             try fileManager.createDirectory(at: tempPath, withIntermediateDirectories: true, attributes: nil)
             for image in comicPages{
                 let imageURL = tempPath.path + "/" + "0\(comicPages.firstIndex(of: image)!).jpeg"

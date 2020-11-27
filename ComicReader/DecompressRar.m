@@ -29,4 +29,18 @@
     return extractFilesSuccessful;
 }
 
+//- (NSMutableArray<NSData *> *)
+-(void) extractFileToMemory:(NSString *) path {
+    NSError *archiveError = nil;
+    URKArchive *archive = [[URKArchive alloc] initWithPath:path error:&archiveError];
+    NSError *error = nil;
+    
+    //NSData *extractedData = [archive extractDataFromFile: path
+                                                   //error:&error];
+    NSArray<NSString*> *filesInArchive = [archive listFilenames:&error];
+    for (NSString *name in filesInArchive) {
+        NSLog(@"Archived file: %@", name);
+    }
+}
+
 @end

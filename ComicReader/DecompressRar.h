@@ -15,6 +15,7 @@
 
 
 - (BOOL) extractFile:(NSString *) path withSecond:(NSString *) extractPath;
+- (void) extractFileToMemory: (NSString *) path;
 
 @end
 

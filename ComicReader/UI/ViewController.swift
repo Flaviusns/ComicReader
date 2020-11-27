@@ -149,6 +149,8 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        let newVC = WelcomeViewController()
+        showDetailViewController(newVC, sender: self)
         DispatchQueue.global(qos: .background).async {
             if self.comicsFinder.getNumOfSavedComics() != self.comicsFinder.getNumOfComicsInDocuments(){
                 self.comicsFinder.updateStorageComics()
@@ -268,10 +270,7 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
                 nextVC.comicFinder = comicsFinder
                 navigationController?.pushViewController(nextVC, animated: true)
             }
-            /*
-             let nextVC = ComicLectureViewController()
-             nextVC.comic = selectedComic
-             navigationController?.pushViewController(nextVC, animated: true)*/
+            
         case .edit:
             let name = comics[indexPath[1]].name
             selectedComics.append(name)

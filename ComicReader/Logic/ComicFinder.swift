@@ -204,6 +204,11 @@ class ComicFinder{
             return nil
         }
     }
+    //
+//    func checkCbr(){
+//        let decompressRarClass = DecompressRar()
+//
+//    }
     
     func decompressCB7(fileName:String) -> Comic?{
         let fileManager = FileManager.default
