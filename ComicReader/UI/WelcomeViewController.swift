@@ -17,6 +17,8 @@ class WelcomeViewController: UIViewController {
     var image2: UIStackView? = nil
     var image3: UIStackView? = nil
     
+    var comicFinder:ComicFinder? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if #available(iOS 13, *){
@@ -90,7 +92,7 @@ class WelcomeViewController: UIViewController {
         horizontalStack.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         
         let image = UIImage(named: imageName)
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        let imageView = UIImageView(frame: CGRect(x: 25, y: 0, width: 50, height: 50))
         
         if(imageName == "Transfer"){
             image1 = horizontalStack
@@ -166,6 +168,9 @@ class WelcomeViewController: UIViewController {
     }
     
     @objc func dismissViewController(){
+        if(comicFinder != nil){
+            comicFinder!.toggleWelcomePresented()
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

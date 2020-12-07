@@ -204,12 +204,7 @@ class ComicFinder{
             return nil
         }
     }
-    //
-//    func checkCbr(){
-//        let decompressRarClass = DecompressRar()
-//
-//    }
-    
+
     func decompressCB7(fileName:String) -> Comic?{
         let fileManager = FileManager.default
         let documentsPath = ComicFinder.getDocumentsDirectory()
@@ -874,5 +869,61 @@ class ComicFinder{
             return false
         }
         return true
+    }
+    
+    func getIfWelcomePresented() -> Bool{
+        let managedContext = container.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "WelcomePresented")
+        request.returnsObjectsAsFaults = false
+        do {
+            let result = try managedContext.fetch(request)
+            if result.isEmpty{
+                print("Empty Result")
+                let entity = NSEntityDescription.entity(forEntityName: "WelcomePresented", in: managedContext)!
+                let newSetting = NSManagedObject(entity: entity, insertInto: managedContext)
+                
+                newSetting.setValue(false, forKeyPath: "presented")
+                do{
+                    try managedContext.save()
+                } catch let error as NSError{
+                    print(error)
+                }
+                return false
+            }
+            else{
+                guard let entity = result[0] as? NSManagedObject else{
+                    fatalError("Unresolved error")
+                }
+                let welcomePresented = entity.value(forKey: "presented") as! Bool
+                return welcomePresented
+            }
+        } catch {
+            return false
+        }
+    }
+    
+    func toggleWelcomePresented(){
+        let managedContext = container.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "WelcomePresented")
+        request.returnsObjectsAsFaults = false
+       
+        do {
+            let result = try managedContext.fetch(request)
+            if result.isEmpty{
+                print("Empty Result")
+            }
+            else{
+                guard let entity = result[0] as? NSManagedObject else{
+                    fatalError("Unresolved error")
+                }
+                
+                entity.setValue(true, forKey: "presented")
+                
+                try managedContext.save()
+            }
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
     }
 }

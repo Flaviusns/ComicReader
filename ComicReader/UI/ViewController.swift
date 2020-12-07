@@ -149,8 +149,11 @@ class ViewController: UICollectionViewController,UIImagePickerControllerDelegate
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let newVC = WelcomeViewController()
-        showDetailViewController(newVC, sender: self)
+        if(!comicsFinder.getIfWelcomePresented()){
+            let newVC = WelcomeViewController()
+            newVC.comicFinder = comicsFinder
+            showDetailViewController(newVC, sender: self)
+        }
         DispatchQueue.global(qos: .background).async {
             if self.comicsFinder.getNumOfSavedComics() != self.comicsFinder.getNumOfComicsInDocuments(){
                 self.comicsFinder.updateStorageComics()
