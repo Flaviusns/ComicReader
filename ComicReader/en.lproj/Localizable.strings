@@ -131,6 +131,9 @@
 /* QualityExport title for navigationbar in the settings tag */
 "QualityExportSetting" = "Export";
 
+/* Read your comcis whetever you are */
+"ReadYourComcisTestWelcomeScreen" = "Read your comcis whetever you are";
+
 /* Remove Favourite text for the 3DTouch option */
 "RemoveFavourite" = "Remove from favourite";
 
@@ -149,8 +152,20 @@
 /* Scanning mode title for the navigation bar */
 "ScanningModeSetting" = "Scanning mode";
 
+/* Scan your paper comics and read it from your device */
+"ScanYourComicsTextWelcomeString" = "Scan your paper comics and read it from your device";
+
+/* Scan your comics */
+"ScanYourComicsTitleWelcomeString" = "Scan your comics";
+
 /* Search comic placeholder inside the collection view */
 "SearchComic" = "Search for comics";
+
+/* Transfer comics text for welcome string */
+"TransferComicsTextWelcomeScreen" = "Transfer your comics from your Mac";
+
+/* Transfer comics title for welcome string */
+"TransferComicsTitleWelcomeScreen" = "Transfer your comics";
 
 /* Unable to delete comic alert title */
 "UnableDelete" = "Unable to delete";
@@ -172,4 +187,7 @@
 
 /* Scan Mode name in the row */
 "VisionKitName" = "VisionKit";
+
+/* Welcome to Tham! */
+"WelcomeToTham" = "Welcome To Tham!";
 

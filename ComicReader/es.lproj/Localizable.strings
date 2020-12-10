@@ -26,6 +26,9 @@
 /* Comic saved message inside the Scan comic view */
 "ComicSaved" = "Comic guardado";
 
+/* Continue */
+"Continue" = "Continuar";
+
 /* Title at Scanner Comic View */
 "CreateComicTitle" = "Escanear cómic";
 
@@ -144,6 +147,12 @@
 /* QualityExport title for navigationbar in the settings tag */
 "QualityExportSetting" = "Exportar";
 
+/* Read your comcis whetever you are */
+"ReadYourComcisTestWelcomeScreen" = "Lee tus cómcis estés donde estés";
+
+/* Read your comics title for welcome screen */
+"ReadYourComcisTitleWelcomeScreen" = "Lee tus cómics";
+
 /* Remove Favourite text for the 3DTouch option */
 "RemoveFavourite" = "Borrar de favoritos";
 
@@ -162,6 +171,12 @@
 /* Scanning mode title for the navigation bar */
 "ScanningModeSetting" = "Modo de escaneo";
 
+/* Scan your paper comics and read it from your device */
+"ScanYourComicsTextWelcomeString" = "Escanea tus cómics en papel y leelos en tu dispositivos";
+
+/* Scan your comics */
+"ScanYourComicsTitleWelcomeString" = "Escanea tus cómics";
+
 /* Search comic placeholder inside the collection view */
 "SearchComic" = "Buscar cómics";
 
@@ -170,6 +185,12 @@
 
 /* Share text for the 3DTouch option */
 "Share" = "Compartir";
+
+/* Transfer comics text for welcome string */
+"TransferComicsTextWelcomeScreen" = "Transfiere tus cómics desde tu Mac";
+
+/* Transfer comics title for welcome string */
+"TransferComicsTitleWelcomeScreen" = "Transfiere tus cómics";
 
 /* Unable to delete comic alert title */
 "UnableDelete" = "Incapaz de borrar";
@@ -194,4 +215,7 @@
 
 /* Scan Mode text explaining the row selected the row */
 "VisionKitText" = "Con esta opción seleccionada, se utilizará la tecnología de VisionKit de Apple para capturar las páginas del cómic.";
+
+/* Welcome to Tham! */
+"WelcomeToTham" = "¡Bienvenido a Tham!";
 
