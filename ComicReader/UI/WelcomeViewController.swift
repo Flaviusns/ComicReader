@@ -30,9 +30,9 @@ class WelcomeViewController: UIViewController {
             constraints = [250,350,450]
         }
         addTitle()
-        addLabel(titleText: "Transfer your comics", text: "Send your comics from your Mac to your device", imageName: "Transfer", topConstraint: constraints[0])
-        addLabel(titleText: "Read your comics", text: "Read your comcis whetever you are", imageName: "ComicCollectionWelcome", topConstraint: constraints[1])
-        addLabel(titleText: "Scan your comics", text: "Scan your paper comics and read it from your device", imageName: "CameraWelcome", topConstraint: constraints[2])
+        addLabel(titleText: NSLocalizedString("TransferComicsTitleWelcomeScreen", comment: "Transfer comics title for welcome string"), text: NSLocalizedString("TransferComicsTextWelcomeScreen",comment: "Transfer comics text for welcome string"), imageName: "Transfer", topConstraint: constraints[0])
+        addLabel(titleText: NSLocalizedString("ReadYourComcisTitleWelcomeScreen", comment: "Read your comics title for welcome screen"), text: NSLocalizedString("ReadYourComcisTestWelcomeScreen", comment: "Read your comcis whetever you are"), imageName: "ComicCollectionWelcome", topConstraint: constraints[1])
+        addLabel(titleText: NSLocalizedString("ScanYourComicsTitleWelcomeString", comment: "Scan your comics"), text: NSLocalizedString("ScanYourComicsTextWelcomeString", comment: "Scan your paper comics and read it from your device"), imageName: "CameraWelcome", topConstraint: constraints[2])
         addContinueButton()
     }
     
@@ -67,7 +67,7 @@ class WelcomeViewController: UIViewController {
     func addTitle(){
         let title = UILabel()
         title.textAlignment = .center
-        title.text = "Welcome to Tham!"
+        title.text = NSLocalizedString("WelcomeToTham", comment: "Welcome to Tham!")
         title.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         title.adjustsFontSizeToFitWidth = true
         
@@ -153,7 +153,7 @@ class WelcomeViewController: UIViewController {
     func addContinueButton(){
         let continueButton = UIButton()
         continueButton.backgroundColor = .systemBlue
-        continueButton.setTitle("Continue", for: .normal)
+        continueButton.setTitle(NSLocalizedString("Continue", comment: "Continue"), for: .normal)
         continueButton.layer.cornerRadius = 16
         
         continueButton.addTarget(self, action: #selector(dismissViewController), for: .touchUpInside)
