@@ -1,4 +1,5 @@
 .*
-!/.gitignore
 *.xcconfig
 Pods/
+/Pods/
+!/.gitignore
